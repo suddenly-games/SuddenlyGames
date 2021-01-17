@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{63D35162-7D0F-4F43-8D01-AA9C98BB161A}</ProjectGuid>
+    <RootNamespace>GameEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>GameEngine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)CoreEngine\dependencies\include\fmod;$(SolutionDir)CoreEngine\dependencies\include\GL\;$(SolutionDir)CoreEngine\dependencies\include\lua\;$(SolutionDir)CoreEngine\dependencies\include\sdl\;$(SolutionDir)CoreEngine\dependencies\include\soil\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)CoreEngine\dependencies\lib\fmod\;$(SolutionDir)CoreEngine\dependencies\lib\glew\glew_release\Win32\;$(SolutionDir)CoreEngine\dependencies\lib\lua\msvs32\;$(SolutionDir)CoreEngine\dependencies\lib\sdl\x86\;$(SolutionDir)CoreEngine\dependencies\lib\soil\x86\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)CoreEngine\dependencies\include\fmod;$(SolutionDir)CoreEngine\dependencies\include\GL\;$(SolutionDir)CoreEngine\dependencies\include\lua\;$(SolutionDir)CoreEngine\dependencies\include\sdl\;$(SolutionDir)CoreEngine\dependencies\include\soil\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)CoreEngine\dependencies\lib\fmod\;$(SolutionDir)CoreEngine\dependencies\lib\glew\glew_release\Win32\;$(SolutionDir)CoreEngine\dependencies\lib\lua\msvs32\;$(SolutionDir)CoreEngine\dependencies\lib\sdl\x86\;$(SolutionDir)CoreEngine\dependencies\lib\soil\x86\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)CoreEngine\dependencies\include\GL\;$(SolutionDir)CoreEngine\dependencies\include\lua\;$(SolutionDir)CoreEngine\dependencies\include\sdl\;$(SolutionDir)CoreEngine\dependencies\include\soil\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)CoreEngine\dependencies\lib\glew\Release\x64\;$(SolutionDir)CoreEngine\dependencies\lib\lua\msvs64\;$(SolutionDir)CoreEngine\dependencies\lib\sdl\x64\;$(SolutionDir)CoreEngine\dependencies\lib\soil\x86\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)CoreEngine\dependencies\include\GL\;$(SolutionDir)CoreEngine\dependencies\include\lua\;$(SolutionDir)CoreEngine\dependencies\include\sdl\;$(SolutionDir)CoreEngine\dependencies\include\soil\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)CoreEngine\dependencies\lib\glew\Release\x64\;$(SolutionDir)CoreEngine\dependencies\lib\lua\msvs64\;$(SolutionDir)CoreEngine\dependencies\lib\sdl\x64\;$(SolutionDir)CoreEngine\dependencies\lib\soil\x86\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>fmod_vc.lib;lua53.lib;opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>fmod_vc.lib;lua53.lib;opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Aabb.cpp" />
+    <ClCompile Include="src\Aabb.meta.cpp" />
+    <ClCompile Include="src\AabbTree.cpp" />
+    <ClCompile Include="src\Appearance.cpp" />
+    <ClCompile Include="src\Appearance.meta.cpp" />
+    <ClCompile Include="src\BasicMeshes.cpp" />
+    <ClCompile Include="src\BlurOperation.cpp" />
+    <ClCompile Include="src\BlurOperation.meta.cpp" />
+    <ClCompile Include="src\BlurPassOperation.cpp" />
+    <ClCompile Include="src\BoundingCone.cpp" />
+    <ClCompile Include="src\BoundingSphere.cpp" />
+    <ClCompile Include="src\BoundingSphere.meta.cpp" />
+    <ClCompile Include="src\BoundingVolume.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Camera.meta.cpp" />
+    <ClCompile Include="src\CanvasStencil.cpp" />
+    <ClCompile Include="src\CanvasStencil.meta.cpp" />
+    <ClCompile Include="src\CellData.cpp" />
+    <ClCompile Include="src\CellData.meta.cpp" />
+    <ClCompile Include="src\Chunk.cpp" />
+    <ClCompile Include="src\Chunk.meta.cpp" />
+    <ClCompile Include="src\ChunkLoader.cpp" />
+    <ClCompile Include="src\ChunkLoader.meta.cpp" />
+    <ClCompile Include="src\ChunkLoadershapeEnum.meta.cpp" />
+    <ClCompile Include="src\ChunkStatusEnum.meta.cpp" />
+    <ClCompile Include="src\ChunkTree.cpp" />
+    <ClCompile Include="src\ColliderAsset.cpp" />
+    <ClCompile Include="src\ColliderAsset.meta.cpp" />
+    <ClCompile Include="src\Collider2D.cpp" />
+    <ClCompile Include="src\Collider2D.meta.cpp" />
+    <ClCompile Include="src\ColliderData.cpp" />
+    <ClCompile Include="src\CollisionGroup.cpp" />
+    <ClCompile Include="src\CollisionGroup.meta.cpp" />
+    <ClCompile Include="src\CoreTypeReflection.cpp" />
+    <ClCompile Include="src\CubeMap.meta.cpp" />
+    <ClCompile Include="src\DebugDraw.cpp" />
+    <ClCompile Include="src\DebugDraw.meta.cpp" />
+    <ClCompile Include="src\DeviceTransform.cpp" />
+    <ClCompile Include="src\DeviceTransform.meta.cpp" />
+    <ClCompile Include="src\DeviceVector.cpp" />
+    <ClCompile Include="src\DeviceVector.meta.cpp" />
+    <ClCompile Include="src\Dimensions.meta.cpp" />
+    <ClCompile Include="src\DrawSceneOperation.cpp" />
+    <ClCompile Include="src\DrawSceneOperation.meta.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Enum.cpp" />
+    <ClCompile Include="src\EnumTemplate.meta.cpp" />
+    <ClCompile Include="src\Environment.cpp" />
+    <ClCompile Include="src\Environment.meta.cpp" />
+    <ClCompile Include="src\Environments.cpp" />
+    <ClCompile Include="src\Environments.meta.cpp" />
+    <ClCompile Include="src\Font.cpp" />
+    <ClCompile Include="src\Font.meta.cpp" />
+    <ClCompile Include="src\Fonts.cpp" />
+    <ClCompile Include="src\Fonts.meta.cpp" />
+    <ClCompile Include="src\FrameBuffer.meta.cpp" />
+    <ClCompile Include="src\FrameBuffer.cpp" />
+    <ClCompile Include="src\Frustum.cpp" />
+    <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\GameWindow.meta.cpp" />
+    <ClCompile Include="src\GlowingSceneOperation.cpp" />
+    <ClCompile Include="src\GlowingSceneOperation.meta.cpp" />
+    <ClCompile Include="src\Graphics.cpp" />
+    <ClCompile Include="src\HalfBoundingVolume.cpp" />
+    <ClCompile Include="src\InheritedTemplate.meta.cpp" />
+    <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\InputData.meta.cpp" />
+    <ClCompile Include="src\InputEnums.cpp" />
+    <ClCompile Include="src\InputEnums.meta.cpp" />
+    <ClCompile Include="src\InputEvent.cpp" />
+    <ClCompile Include="src\InputInterface.cpp" />
+    <ClCompile Include="src\InputInterface.meta.cpp" />
+    <ClCompile Include="src\InterfaceDrawOperation.cpp" />
+    <ClCompile Include="src\InterfaceDrawOperation.meta.cpp" />
+    <ClCompile Include="src\JsonParser.cpp" />
+    <ClCompile Include="src\Light.cpp" />
+    <ClCompile Include="src\Light.meta.cpp" />
+    <ClCompile Include="src\LightBuffer.cpp" />
+    <ClCompile Include="src\LightType.meta.cpp" />
+    <ClCompile Include="src\Lua.cpp" />
+    <ClCompile Include="src\LuaBinding.cpp" />
+    <ClCompile Include="src\LuaEvent.cpp" />
+    <ClCompile Include="src\LuaInput.cpp" />
+    <ClCompile Include="src\LuaJson.cpp" />
+    <ClCompile Include="src\LuaObjectMetatable.cpp" />
+    <ClCompile Include="src\LuaScript.cpp" />
+    <ClCompile Include="src\LuaScript.meta.cpp" />
+    <ClCompile Include="src\LuaSource.cpp" />
+    <ClCompile Include="src\LuaSource.meta.cpp" />
+    <ClCompile Include="src\LuaThreadManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Material.cpp" />
+    <ClCompile Include="src\Material.meta.cpp" />
+    <ClCompile Include="src\Materials.cpp" />
+    <ClCompile Include="src\Materials.meta.cpp" />
+    <ClCompile Include="src\Matrix3.cpp" />
+    <ClCompile Include="src\Matrix3.meta.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\MeshData.cpp" />
+    <ClCompile Include="src\MeshLoader.cpp" />
+    <ClCompile Include="src\MeshLoader.meta.cpp" />
+    <ClCompile Include="src\Minkowski2D.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\Model.meta.cpp" />
+    <ClCompile Include="src\ModelAsset.cpp" />
+    <ClCompile Include="src\ModelAsset.meta.cpp" />
+    <ClCompile Include="src\OBB.cpp" />
+    <ClCompile Include="src\OBB.meta.cpp" />
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\Object.meta.cpp" />
+    <ClCompile Include="src\ObjectBase.meta.cpp" />
+    <ClCompile Include="src\ObjectReflection.cpp" />
+    <ClCompile Include="src\ObjectRegistration.cpp" />
+    <ClCompile Include="src\ObjectTemplate.meta.cpp" />
+    <ClCompile Include="src\ObjParser.cpp" />
+    <ClCompile Include="src\OcclusionTree.cpp" />
+    <ClCompile Include="src\ParticleEmitter.cpp" />
+    <ClCompile Include="src\ParticleEmitter.meta.cpp" />
+    <ClCompile Include="src\PCA.cpp" />
+    <ClCompile Include="src\PhysicsEnvironment.cpp" />
+    <ClCompile Include="src\PhysicsEnvironment.meta.cpp" />
+    <ClCompile Include="src\Plane.cpp" />
+    <ClCompile Include="src\PlyParser.cpp" />
+    <ClCompile Include="src\PointGenerator.cpp" />
+    <ClCompile Include="src\PointGenerator.meta.cpp" />
+    <ClCompile Include="src\PointMass.cpp" />
+    <ClCompile Include="src\PointMass.meta.cpp" />
+    <ClCompile Include="src\Quaternion.cpp" />
+    <ClCompile Include="src\Quaternion.meta.cpp" />
+    <ClCompile Include="src\Ray.cpp" />
+    <ClCompile Include="src\Ray.meta.cpp" />
+    <ClCompile Include="src\ReflectionData.cpp" />
+    <ClCompile Include="src\RenderOperation.cpp" />
+    <ClCompile Include="src\RenderOperation.meta.cpp" />
+    <ClCompile Include="src\RGBA.cpp" />
+    <ClCompile Include="src\RGBA.meta.cpp" />
+    <ClCompile Include="src\RigidBody.cpp" />
+    <ClCompile Include="src\RigidBody.meta.cpp" />
+    <ClCompile Include="src\Rope.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\Scene.meta.cpp" />
+    <ClCompile Include="src\SceneObject.meta.cpp" />
+    <ClCompile Include="src\ScreenCanvas.cpp" />
+    <ClCompile Include="src\ScreenCanvas.meta.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\ShaderLoader.cpp" />
+    <ClCompile Include="src\ShaderProgram.cpp" />
+    <ClCompile Include="src\ShaderPrograms.cpp" />
+    <ClCompile Include="src\ShadingOperation.cpp" />
+    <ClCompile Include="src\ShadingOperation.meta.cpp" />
+    <ClCompile Include="src\Simulation.cpp" />
+    <ClCompile Include="src\Simulation.meta.cpp" />
+    <ClCompile Include="src\TaskScheduler.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
+    <ClCompile Include="src\Terrain.meta.cpp" />
+    <ClCompile Include="src\Terrain2DCollider.cpp" />
+    <ClCompile Include="src\Terrain2DCollider.meta.cpp" />
+    <ClCompile Include="src\TerrainMaterial.cpp" />
+    <ClCompile Include="src\TerrainMaterial.meta.cpp" />
+    <ClCompile Include="src\TerrainTypes.cpp" />
+    <ClCompile Include="src\TextCanvas.cpp" />
+    <ClCompile Include="src\TextCanvas.meta.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Texture.meta.cpp" />
+    <ClCompile Include="src\TextureEnums.meta.cpp" />
+    <ClCompile Include="src\Textures.cpp" />
+    <ClCompile Include="src\Textures.meta.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Transform.meta.cpp" />
+    <ClCompile Include="src\TypeTemplate.meta.cpp" />
+    <ClCompile Include="src\Uniform.cpp" />
+    <ClCompile Include="src\UserInput.meta.cpp" />
+    <ClCompile Include="src\Vector3.cpp" />
+    <ClCompile Include="src\Vector3.meta.cpp" />
+    <ClCompile Include="src\VertexModeEnum.meta.cpp" />
+    <ClCompile Include="src\Voxel.cpp" />
+    <ClCompile Include="src\Voxel.meta.cpp" />
+    <ClCompile Include="src\VoxelIdentityTable.cpp" />
+    <ClCompile Include="src\VoxelTransformationTable.cpp" />
+    <ClCompile Include="src\VoxelTriangulation.cpp" />
+    <ClCompile Include="src\VoxelTriangulationTable.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Aabb.h" />
+    <ClInclude Include="src\AabbTree.h" />
+    <ClInclude Include="src\Appearance.h" />
+    <ClInclude Include="src\BoundingSphere.h" />
+    <ClInclude Include="src\CanvasStencil.h" />
+    <ClInclude Include="src\CellData.h" />
+    <ClInclude Include="src\Chunk.h" />
+    <ClInclude Include="src\ChunkLoader.h" />
+    <ClInclude Include="src\ChunkLoaderShapeEnum.h" />
+    <ClInclude Include="src\Dimensions.h" />
+    <ClInclude Include="src\LightBuffer.h" />
+    <ClInclude Include="src\Terrain2DCollider.h" />
+    <ClInclude Include="src\TerrainTypes.h" />
+    <ClInclude Include="src\ChunkStatusEnum.h" />
+    <ClInclude Include="src\ChunkTree.h" />
+    <ClInclude Include="src\ColliderAsset.h" />
+    <ClInclude Include="src\Collider2D.h" />
+    <ClInclude Include="src\ColliderData.h" />
+    <ClInclude Include="src\CollisionGroup.h" />
+    <ClInclude Include="src\Coordinates.h" />
+    <ClInclude Include="src\CoreMeshes.h" />
+    <ClInclude Include="src\BlurOperation.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\CoreTypeReflection.h" />
+    <ClInclude Include="src\CoreTypes.h" />
+    <ClInclude Include="src\CubeMap.h" />
+    <ClInclude Include="src\DebugDraw.h" />
+    <ClInclude Include="src\DeviceTransform.h" />
+    <ClInclude Include="src\DeviceVector.h" />
+    <ClInclude Include="src\DrawSceneOperation.h" />
+    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Enum.h" />
+    <ClInclude Include="src\EnumDeclaration.h" />
+    <ClInclude Include="src\EnumTemplate.h" />
+    <ClInclude Include="src\Environment.h" />
+    <ClInclude Include="src\Environments.h" />
+    <ClInclude Include="src\Font.h" />
+    <ClInclude Include="src\Fonts.h" />
+    <ClInclude Include="src\FrameBuffer.h" />
+    <ClInclude Include="src\Frustum.h" />
+    <ClInclude Include="src\GameModule.h" />
+    <ClInclude Include="src\GameScript.h" />
+    <ClInclude Include="src\GameWindow.h" />
+    <ClInclude Include="src\GlowingSceneOperation.h" />
+    <ClInclude Include="src\Graphics.h" />
+    <ClInclude Include="src\IdentifierHeap.h" />
+    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\InputEnums.h" />
+    <ClInclude Include="src\InputEvent.h" />
+    <ClInclude Include="src\InputInterface.h" />
+    <ClInclude Include="src\InterfaceDrawOperation.h" />
+    <ClInclude Include="src\JsonParser.h" />
+    <ClInclude Include="src\Light.h" />
+    <ClInclude Include="src\Lua.h" />
+    <ClInclude Include="src\LuaBinding.h" />
+    <ClInclude Include="src\LuaDataTypes.h" />
+    <ClInclude Include="src\LuaEvent.h" />
+    <ClInclude Include="src\LuaInput.h" />
+    <ClInclude Include="src\LuaJson.h" />
+    <ClInclude Include="src\LuaObjectMetatable.h" />
+    <ClInclude Include="src\LuaScript.h" />
+    <ClInclude Include="src\LuaSource.h" />
+    <ClInclude Include="src\LuaStackTypes.h" />
+    <ClInclude Include="src\LuaThreadManager.h" />
+    <ClInclude Include="src\Material.h" />
+    <ClInclude Include="src\Materials.h" />
+    <ClInclude Include="src\Matrix3.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\MeshData.h" />
+    <ClInclude Include="src\MeshLoader.h" />
+    <ClInclude Include="src\Minkowski2D.h" />
+    <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\ModelAsset.h" />
+    <ClInclude Include="src\OBB.h" />
+    <ClInclude Include="src\Object.h" />
+    <ClInclude Include="src\ObjectAllocator.h" />
+    <ClInclude Include="src\ObjectLuaType.h" />
+    <ClInclude Include="src\ObjectReflection.h" />
+    <ClInclude Include="src\ObjectRegistration.h" />
+    <ClInclude Include="src\ObjectTemplate.h" />
+    <ClInclude Include="src\ObjParser.h" />
+    <ClInclude Include="src\OcclusionTree.h" />
+    <ClInclude Include="src\PageAllocator.h" />
+    <ClInclude Include="src\ParticleEmitter.h" />
+    <ClInclude Include="src\PCA.h" />
+    <ClInclude Include="src\PhysicsEnvironment.h" />
+    <ClInclude Include="src\Plane.h" />
+    <ClInclude Include="src\PlyParser.h" />
+    <ClInclude Include="src\PointGenerator.h" />
+    <ClInclude Include="src\PointMass.h" />
+    <ClInclude Include="src\Quaternion.h" />
+    <ClInclude Include="src\Ray.h" />
+    <ClInclude Include="src\ReflectionData.h" />
+    <ClInclude Include="src\RenderOperation.h" />
+    <ClInclude Include="src\RGBA.h" />
+    <ClInclude Include="src\RigidBody.h" />
+    <ClInclude Include="src\Rope.h" />
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\ScreenCanvas.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\ShaderLoader.h" />
+    <ClInclude Include="src\ShaderProgram.h" />
+    <ClInclude Include="src\ShaderPrograms.h" />
+    <ClInclude Include="src\ShadingOperation.h" />
+    <ClInclude Include="src\Simulation.h" />
+    <ClInclude Include="src\TaskScheduler.h" />
+    <ClInclude Include="src\Terrain.h" />
+    <ClInclude Include="src\TerrainMaterial.h" />
+    <ClInclude Include="src\TextCanvas.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Textures.h" />
+    <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\TypeTemplate.h" />
+    <ClInclude Include="src\Uniform.h" />
+    <ClInclude Include="src\Vector3.h" />
+    <ClInclude Include="src\VertexModeEnum.h" />
+    <ClInclude Include="src\Voxel.h" />
+    <ClInclude Include="src\VoxelTriangulation.h" />
+    <ClInclude Include="src\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\json\assets.json" />
+    <None Include="assets\json\particleEffects\rain.json" />
+    <None Include="assets\json\particleEffects\shipEngine.json" />
+    <None Include="assets\scripts\particleFactory.lua" />
+    <None Include="game.lua" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

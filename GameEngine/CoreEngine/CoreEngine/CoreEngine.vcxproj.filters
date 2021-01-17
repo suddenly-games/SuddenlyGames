@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\LuaScripts">
+      <UniqueIdentifier>{fea39ede-1931-4f97-8c9f-695bea36007f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source">
+      <UniqueIdentifier>{e3334d08-dbc0-4806-9ce6-c696789060a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics">
+      <UniqueIdentifier>{1bfca254-7006-4a8d-ae2d-509f1517474a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Data">
+      <UniqueIdentifier>{036f9156-f825-41a0-a129-0b8d7573d768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects">
+      <UniqueIdentifier>{aa205fdd-685f-4082-a634-b20d311ffdf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\Core">
+      <UniqueIdentifier>{61425d42-d105-4068-be02-c81e24e9ac87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\SDL">
+      <UniqueIdentifier>{0aab5088-e6f7-4d32-9909-53121b619065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Lua">
+      <UniqueIdentifier>{37ebf1f0-40ce-4720-9371-7077f4cbd3d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine">
+      <UniqueIdentifier>{a97fb37c-6b71-466b-a66d-b9db73512f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Objects">
+      <UniqueIdentifier>{9df1503f-1faa-43d8-9ea7-4aafcdd3f4d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Input">
+      <UniqueIdentifier>{d321179b-c49f-407b-b624-37df82084072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Types">
+      <UniqueIdentifier>{43a071f4-e4b2-4dc9-b63a-dbb941f68a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Reflection">
+      <UniqueIdentifier>{afd9ef66-1a42-4621-ad4b-55180aa76001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Allocation">
+      <UniqueIdentifier>{e48a4100-4519-47d1-b09a-7121cb0bc5cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Scheduling">
+      <UniqueIdentifier>{2db5ef7b-a922-4427-9079-22c1967ff9db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\GUI">
+      <UniqueIdentifier>{14427417-261f-452f-aeff-1faacb4ee4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Engine\Structures">
+      <UniqueIdentifier>{52e30b87-a910-4941-8211-d1d5ccf577c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Lua\Binding">
+      <UniqueIdentifier>{97e7c90e-fa0b-4e01-875d-9f3c2b0ecb7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Lua\Reflection">
+      <UniqueIdentifier>{da40efd3-3861-47ec-b6a7-a13ea0ce4b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Lua\Objects">
+      <UniqueIdentifier>{c4cdd8a0-dc0e-4d88-ac15-ac141a60f97e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Meshes">
+      <UniqueIdentifier>{dedea052-d2ac-40f8-8ffc-862b47a75eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Templates">
+      <UniqueIdentifier>{dfc0a4fb-6374-4167-ba5a-1d7d62ff61cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\Scene">
+      <UniqueIdentifier>{b5c10b77-bcfe-4c87-8c3f-cad443b51e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\Operations">
+      <UniqueIdentifier>{60c77602-ab99-4bf3-b816-5055c33098bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\Assets">
+      <UniqueIdentifier>{494161de-dd3c-4fd0-af13-f1f627f21cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Physics">
+      <UniqueIdentifier>{d4d64b11-6df1-4a56-a0ce-aec7f71e6e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Physics\Objects">
+      <UniqueIdentifier>{cff70efd-2466-4f03-bd2b-f8c2084f9bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Physics\GJK">
+      <UniqueIdentifier>{a5bbf798-eac4-4424-8991-701f61abcdca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Json">
+      <UniqueIdentifier>{8ac46c74-1069-4d79-9a23-a77ab6407168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Json\ParticleEffects">
+      <UniqueIdentifier>{655756fc-6efa-4249-a92e-16df289a7aee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Debug">
+      <UniqueIdentifier>{f5806943-0ac5-48ad-a38f-4c348643ed95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Objects\Screen">
+      <UniqueIdentifier>{053a9d56-2476-4263-9d8c-2ec8bbc8e201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Terrain">
+      <UniqueIdentifier>{058ff53b-bf7d-4a2c-9054-d35a6220158a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Terrain\Objects">
+      <UniqueIdentifier>{02b90048-61a0-48f8-8f3d-979c26fe9be6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Terrain\Data">
+      <UniqueIdentifier>{31aaed90-0195-455e-b655-c6f793249c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Terrain\Types">
+      <UniqueIdentifier>{3be255b5-0ea4-4048-9d15-7bc848030728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Terrain\Enums">
+      <UniqueIdentifier>{f1bf92e4-cf12-4a0f-82b7-eee007fa64cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Lua\Enums">
+      <UniqueIdentifier>{8ee1dd0a-5aa5-4494-8b05-b91e52013c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Types">
+      <UniqueIdentifier>{2b08375f-6bce-4e95-9590-25db792f99e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Graphics\Enums">
+      <UniqueIdentifier>{58785a19-3434-4ba0-9936-459d0d76bd9f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics.cpp">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjParser.cpp">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BlurOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DrawSceneOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlowingSceneOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShadingOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderLoader.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Materials.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshData.cpp">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderProgram.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameBuffer.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Uniform.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderPrograms.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectBase.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputEnums.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputEvent.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RGBA.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RGBA.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector3.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector3.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quaternion.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quaternion.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Matrix3.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Matrix3.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectRegistration.cpp">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectReflection.cpp">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReflectionData.cpp">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enum.cpp">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TaskScheduler.cpp">
+      <Filter>Source Files\Source\Engine\Scheduling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceVector.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>Source Files\Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Materials.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshLoader.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Fonts.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Fonts.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Textures.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Textures.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneObject.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Environment.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Environment.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Environments.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Environments.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulation.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulation.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameBuffer.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BlurOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BlurPassOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DrawSceneOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlowingSceneOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShadingOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaInput.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputData.meta.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserInput.meta.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputEnums.meta.cpp">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameWindow.cpp">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameWindow.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CoreTypeReflection.cpp">
+      <Filter>Source Files\Source\Lua\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaObjectMetatable.cpp">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaBinding.cpp">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lua.cpp">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LightType.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HalfBoundingVolume.cpp">
+      <Filter>Source Files\Source\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BasicMeshes.cpp">
+      <Filter>Source Files\Source\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoundingVolume.cpp">
+      <Filter>Source Files\Source\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AabbTree.cpp">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aabb.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Frustum.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ray.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OcclusionTree.cpp">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaEvent.cpp">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JsonParser.cpp">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaJson.cpp">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoundingCone.cpp">
+      <Filter>Source Files\Source\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectTemplate.meta.cpp">
+      <Filter>Source Files\Templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TypeTemplate.meta.cpp">
+      <Filter>Source Files\Templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnumTemplate.meta.cpp">
+      <Filter>Source Files\Templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InheritedTemplate.meta.cpp">
+      <Filter>Source Files\Templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshLoader.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureEnums.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsBody.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsBody.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelAsset.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelAsset.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Font.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Font.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CubeMap.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioErrorCheck.cpp">
+      <Filter>Source Files\Source\Audio\SystemInternals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Listener.meta.cpp">
+      <Filter>Source Files\Source\Audio\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundEmitter.meta.cpp">
+      <Filter>Source Files\Source\Audio\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaThreadManager.cpp">
+      <Filter>Source Files\Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaScript.meta.cpp">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaScript.cpp">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaSource.meta.cpp">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaSource.cpp">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleEmitter.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleEmitter.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PointGenerator.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PointGenerator.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugDraw.cpp">
+      <Filter>Source Files\Source\Graphics\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugDraw.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceTransform.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceTransform.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceVector.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Appearance.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Appearance.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenCanvas.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenCanvas.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InterfaceDrawOperation.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InterfaceDrawOperation.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CanvasStencil.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputInterface.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputInterface.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CanvasStencil.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoundingSphere.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OBB.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PCA.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlyParser.cpp">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aabb.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoundingSphere.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OBB.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RigidBody.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RigidBody.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PointMass.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PointMass.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Minkowski2D.cpp">
+      <Filter>Source Files\Source\Physics\GJK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColliderData.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColliderAsset.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColliderAsset.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsEnvironment.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsEnvironment.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider2D.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider2D.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ray.meta.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionGroup.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionGroup.meta.cpp">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextCanvas.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextCanvas.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rope.cpp">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chunk.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chunk.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainMaterial.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainMaterial.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Voxel.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Voxel.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VoxelTriangulationTable.cpp">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VoxelIdentityTable.cpp">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VoxelTransformationTable.cpp">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VoxelTriangulation.cpp">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkTree.cpp">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkLoader.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkLoader.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CellData.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CellData.cpp">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkStatusEnum.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkLoadershapeEnum.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainTypes.cpp">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimensions.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LightBuffer.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VertexModeEnum.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain2DCollider.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain2DCollider.meta.cpp">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Graphics.h">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjParser.h">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BlurOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DrawSceneOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlowingSceneOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShadingOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderLoader.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Materials.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshData.h">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input.h">
+      <Filter>Source Files\Source\Graphics\Objects\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>Source Files\Source\Graphics\Objects\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderProgram.h">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameBuffer.h">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Uniform.h">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderPrograms.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CubeMap.h">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputEvent.h">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputEnums.h">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RGBA.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector3.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quaternion.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Matrix3.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectRegistration.h">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectReflection.h">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ReflectionData.h">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Constants.h">
+      <Filter>Source Files\Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enum.h">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PageAllocator.h">
+      <Filter>Source Files\Source\Engine\Allocation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectAllocator.h">
+      <Filter>Source Files\Source\Engine\Allocation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TaskScheduler.h">
+      <Filter>Source Files\Source\Engine\Scheduling</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DeviceVector.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine.h">
+      <Filter>Source Files\Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshLoader.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Fonts.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Textures.h">
+      <Filter>Source Files\Source\Graphics\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Environment.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Environments.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulation.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IdentifierHeap.h">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaInput.h">
+      <Filter>Source Files\Source\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameWindow.h">
+      <Filter>Source Files\Source\Graphics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CoreTypeReflection.h">
+      <Filter>Source Files\Source\Lua\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CoreTypes.h">
+      <Filter>Source Files\Source\Lua\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaDataTypes.h">
+      <Filter>Source Files\Source\Lua\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaStackTypes.h">
+      <Filter>Source Files\Source\Lua\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectLuaType.h">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaObjectMetatable.h">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaBinding.h">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lua.h">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaSource.h">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameScript.h">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameModule.h">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CoreMeshes.h">
+      <Filter>Source Files\Source\Graphics\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AabbTree.h">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Aabb.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Frustum.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ray.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plane.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OcclusionTree.h">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaEvent.h">
+      <Filter>Source Files\Source\Lua\Binding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JsonParser.h">
+      <Filter>Source Files\Source\Engine\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaJson.h">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectTemplate.h">
+      <Filter>Source Files\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TypeTemplate.h">
+      <Filter>Source Files\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnumTemplate.h">
+      <Filter>Source Files\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsBody.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModelAsset.h">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Material.h">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Font.h">
+      <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AudioErrorCheck.h">
+      <Filter>Source Files\Source\Audio\SystemInternals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaThreadManager.h">
+      <Filter>Source Files\Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaScript.h">
+      <Filter>Source Files\Source\Lua\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleEmitter.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PointGenerator.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DebugDraw.h">
+      <Filter>Source Files\Source\Graphics\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DeviceTransform.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Appearance.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScreenCanvas.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InterfaceDrawOperation.h">
+      <Filter>Source Files\Source\Graphics\Objects\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CanvasStencil.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputInterface.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoundingSphere.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OBB.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PCA.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlyParser.h">
+      <Filter>Source Files\Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RigidBody.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PointMass.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Minkowski2D.h">
+      <Filter>Source Files\Source\Physics\GJK</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColliderData.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColliderAsset.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsEnvironment.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collider2D.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionGroup.h">
+      <Filter>Source Files\Source\Physics\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextCanvas.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rope.h">
+      <Filter>Source Files\Source\Engine\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VoxelTriangulation.h">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Voxel.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chunk.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainMaterial.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChunkTree.h">
+      <Filter>Source Files\Source\Terrain\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChunkLoader.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CellData.h">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coordinates.h">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChunkStatusEnum.h">
+      <Filter>Source Files\Source\Terrain\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnumDeclaration.h">
+      <Filter>Source Files\Source\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChunkLoaderShapeEnum.h">
+      <Filter>Source Files\Source\Terrain\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainTypes.h">
+      <Filter>Source Files\Source\Terrain\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimensions.h">
+      <Filter>Source Files\Source\Graphics\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightBuffer.h">
+      <Filter>Source Files\Source\Graphics\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexModeEnum.h">
+      <Filter>Source Files\Source\Graphics\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain2DCollider.h">
+      <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game.lua">
+      <Filter>Source Files\LuaScripts</Filter>
+    </None>
+    <None Include="assets\scripts\particleFactory.lua">
+      <Filter>Source Files\LuaScripts</Filter>
+    </None>
+    <None Include="assets\json\assets.json">
+      <Filter>Source Files\Json</Filter>
+    </None>
+    <None Include="assets\json\particleEffects\shipEngine.json">
+      <Filter>Source Files\Json\ParticleEffects</Filter>
+    </None>
+    <None Include="assets\json\particleEffects\rain.json">
+      <Filter>Source Files\Json\ParticleEffects</Filter>
+    </None>
+  </ItemGroup>
+</Project>
