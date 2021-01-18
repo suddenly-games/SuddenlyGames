@@ -215,5 +215,11 @@ void main()
 	deferredAmbient = vec4(color.xyz * materialAmbient, 1);
 	deferredEmissive = vec4(materialEmissive, 1);
 	deferredGlow = vec4(glowColor, 1);
+
+	//if (textureEnabled)
+	//{
+	//	deferredDiffuse = vec4(uv.x, uv.y, 1, 1);
+	//}
+
 	//deferredHorizon = horizon;
 }

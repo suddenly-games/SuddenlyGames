@@ -13,8 +13,13 @@ sim.Parent = level
 local materials = GameObject("Materials")
 materials.Parent = level
 
-local defaultMaterial = GameObject("Material")
-defaultMaterial.Parent = materials
+local material = GameObject("Material")
+material.Shininess = 75
+material.Diffuse = RGBA(0.5, 0.5, 0.5, 0)
+material.Specular = RGBA(0, 0, 0, 0)
+material.Ambient = RGBA(0, 0, 0, 0)
+material.Emission = RGBA(0, 0, 0, 0)
+material.Parent = materials
 
 local scene = GameObject("Scene")
 scene.Parent = level
@@ -31,7 +36,7 @@ local defaultNear = 0.1
 local defaultFar = 10000
 
 camera:SetProperties(defaultWidth, defaultHeight, defaultProjection, defaultNear, defaultFar)
-camera:SetTransformation(Matrix3(0,0,5))
+camera:SetTransformation(Matrix3(0,0,1))
 
 scene.CurrentCamera = camera
 
@@ -58,18 +63,21 @@ textures.Parent = level
 
 -- Make a new Game Object
 
-local helloWorld = GameObject("Transform")
-helloWorld.Parent = sim
-
 local helloWorldTexture = textures:Create("./assets/helloworld/textures/HelloWorld.png")
 helloWorldTexture.Name = "HelloWorld"
 helloWorldTexture.Parent = textures
+
+local helloWorld = GameObject("Transform")
+helloWorld.Transformation = Matrix3.NewScale(1, helloWorldTexture:GetHeight()/helloWorldTexture:GetWidth(), 1)
+helloWorld.Parent = sim
 
 local helloWorldModel = GameObject("Model")
 helloWorldModel.Parent = helloWorld
 
 helloWorldModel.Asset = Engine.CoreMeshes.CoreSquare
-helloWorldModel.MaterialProperties = defaultMaterial
+helloWorldModel.MaterialProperties = material
 helloWorldModel.DiffuseTexture = helloWorldTexture
+helloWorldModel.UVScale = Vector3(1,-1)
+helloWorldModel.UVOffset = Vector3(0,1)
 
 scene:AddObject(helloWorldModel)
