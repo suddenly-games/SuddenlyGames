@@ -81,3 +81,11 @@ helloWorldModel.UVScale = Vector3(1,-1)
 helloWorldModel.UVOffset = Vector3(0,1)
 
 scene:AddObject(helloWorldModel)
+
+wait()
+
+while true do
+  local delta = wait()
+  helloWorld.Transformation = Matrix3.RollRotation(-0.2 * delta) * helloWorld.Transformation
+end
+ 
