@@ -435,12 +435,6 @@
     <ClCompile Include="src\TextureEnums.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\PhysicsBody.meta.cpp">
-      <Filter>Source Files\Source\Engine\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PhysicsBody.cpp">
-      <Filter>Source Files\Source\Engine\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\ModelAsset.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
     </ClCompile>
@@ -464,15 +458,6 @@
     </ClCompile>
     <ClCompile Include="src\CubeMap.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AudioErrorCheck.cpp">
-      <Filter>Source Files\Source\Audio\SystemInternals</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Listener.meta.cpp">
-      <Filter>Source Files\Source\Audio\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SoundEmitter.meta.cpp">
-      <Filter>Source Files\Source\Audio\Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\LuaThreadManager.cpp">
       <Filter>Source Files\Source\Lua</Filter>
@@ -923,9 +908,6 @@
     <ClInclude Include="src\EnumTemplate.h">
       <Filter>Source Files\Templates</Filter>
     </ClInclude>
-    <ClInclude Include="src\PhysicsBody.h">
-      <Filter>Source Files\Source\Engine\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="src\ModelAsset.h">
       <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
     </ClInclude>
@@ -934,9 +916,6 @@
     </ClInclude>
     <ClInclude Include="src\Font.h">
       <Filter>Source Files\Source\Graphics\Objects\Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AudioErrorCheck.h">
-      <Filter>Source Files\Source\Audio\SystemInternals</Filter>
     </ClInclude>
     <ClInclude Include="src\LuaThreadManager.h">
       <Filter>Source Files\Source\Lua</Filter>

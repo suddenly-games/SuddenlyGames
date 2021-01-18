@@ -1,0 +1,9 @@
+GameEngine/.vs 
+GameEngine/Debug 
+GameEngine/Release 
+GameEngine/CoreEngine/Debug 
+GameEngine/CoreEngine/Release
+GameEngine/CoreEngine/CoreEngine/x64
+GameEngine/CoreEngine/CoreEngine/x86
+GameEngine/CoreEngine/CoreEngine/Debug
+GameEngine/CoreEngine/CoreEngine/Release

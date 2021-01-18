@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 #include <limits>
+#include <memory>
 
 #include "IdentifierHeap.h"
 
