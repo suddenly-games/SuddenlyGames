@@ -21,6 +21,8 @@ namespace GraphicsEngine
 		static std::shared_ptr<Texture> Create(const std::string& fileName, GLint sampleType = GL_NEAREST, GLint wrapType = GL_REPEAT, GLenum dataType = GL_UNSIGNED_BYTE, GLint internalFormat = GL_RGBA, GLenum format = GL_RGBA);
 		static std::shared_ptr<Texture> Create(int width, int height, unsigned char* pixelData, GLint sampleType = GL_NEAREST, GLint wrapType = GL_REPEAT, GLenum dataType = GL_UNSIGNED_BYTE, GLint internalFormat = GL_RGBA, GLenum format = GL_RGBA, bool invertedY = false);
 
+		void LoadDirectory(const std::string& folderPath, GLint sampleType = GL_NEAREST, GLint wrapType = GL_REPEAT, GLenum dataType = GL_UNSIGNED_BYTE, GLint internalFormat = GL_RGBA, GLenum format = GL_RGBA);
+
 		void Add(const std::shared_ptr<Texture>& texture, const std::string& name);
 
 		Instantiable;
