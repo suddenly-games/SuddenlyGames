@@ -98,5 +98,37 @@ namespace GraphicsEngine
 				Bind_Parameters_No_Return(Add, texture, name);
 			);
 		);
+
+		Bind_Function(LoadDirectory,
+			Document("");
+			Function_Overload
+			(
+				Document("");
+				Returns_Nothing;
+
+				Overload_Parameters
+				(
+					Document("");
+					Function_Parameter(std::string, folderPath);
+
+					Document("");
+					Function_Parameter_Default(LuaEnum<Enum::SampleType>, sampleType, Enum::SampleType::Nearest);
+
+					Document("");
+					Function_Parameter_Default(LuaEnum<Enum::WrapType>, wrapType, Enum::WrapType::Repeat);
+
+					Document("");
+					Function_Parameter_Default(LuaEnum<Enum::DataType>, dataType, Enum::DataType::UnsignedByte);
+
+					Document("");
+					Function_Parameter_Default(LuaEnum<Enum::InternalFormat>, internalFormat, Enum::InternalFormat::RGBA);
+
+					Document("");
+					Function_Parameter_Default(LuaEnum<Enum::Format>, format, Enum::Format::RGBA);
+				);
+
+				Bind_Parameters_No_Return(LoadDirectory, folderPath, sampleType, wrapType, dataType, internalFormat, format);
+			);
+		);
 	);
 }

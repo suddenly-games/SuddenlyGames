@@ -1,5 +1,7 @@
 -- Boilerplate for every new lua script
 
+archetype = dofile("./game/util/archetype.lua")
+
 local env = GameObject("Environments")
 env.Parent = Engine
 
@@ -61,14 +63,12 @@ sceneDraw.RenderAutomatically = true
 local textures = GameObject("Textures")
 textures.Parent = level
 
+textures:LoadDirectory("./assets/images/")
+
 -- Make a new Game Object
 
-local helloWorldTexture = textures:Create("./assets/images/HelloWorld.png")
-helloWorldTexture.Name = "HelloWorld"
-helloWorldTexture.Parent = textures
-
 local helloWorld = GameObject("Transform")
-helloWorld.Transformation = Matrix3.NewScale(1, helloWorldTexture:GetHeight()/helloWorldTexture:GetWidth(), 1)
+helloWorld.Transformation = Matrix3.NewScale(1, textures.HelloWorld:GetHeight()/textures.HelloWorld:GetWidth(), 1)
 helloWorld.Parent = sim
 
 local helloWorldModel = GameObject("Model")
@@ -76,7 +76,7 @@ helloWorldModel.Parent = helloWorld
 
 helloWorldModel.Asset = Engine.CoreMeshes.CoreSquare
 helloWorldModel.MaterialProperties = material
-helloWorldModel.DiffuseTexture = helloWorldTexture
+helloWorldModel.DiffuseTexture = textures.HelloWorld
 helloWorldModel.UVScale = Vector3(1,-1)
 helloWorldModel.UVOffset = Vector3(0,1)
 
