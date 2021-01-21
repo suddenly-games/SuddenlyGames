@@ -200,11 +200,16 @@ namespace GraphicsEngine
 		Vector3 translation = Vector3(
 			2 * Position.X.Offset,
 			2 * Position.Y.Offset
+<<<<<<< Updated upstream
 		);
+=======
+		) - AnchorPoint.Calculate(Vector3(), AbsoluteSize);
+>>>>>>> Stashed changes
 
 		if (parent == nullptr)
 			parentSize = AbsoluteSize;
 
+<<<<<<< Updated upstream
 		if (AlignX == Enum::Alignment::Minimum)
 			translation.X += -(parentSize.X - AbsoluteSize.X);
 		else if (AlignX == Enum::Alignment::Maximum)
@@ -214,6 +219,17 @@ namespace GraphicsEngine
 			translation.Y += -(parentSize.Y - AbsoluteSize.Y);
 		else if (AlignY == Enum::Alignment::Maximum)
 			translation.Y += parentSize.Y - AbsoluteSize.Y;
+=======
+		//if (AlignX == Enum::Alignment::Minimum)
+		//	translation.X += -(parentSize.X - AbsoluteSize.X);
+		//else if (AlignX == Enum::Alignment::Maximum)
+		//	translation.X += parentSize.X - AbsoluteSize.X;
+		//
+		//if (AlignY == Enum::Alignment::Minimum)
+		//	translation.Y += -(parentSize.Y - AbsoluteSize.Y);
+		//else if (AlignY == Enum::Alignment::Maximum)
+		//	translation.Y += parentSize.Y - AbsoluteSize.Y;
+>>>>>>> Stashed changes
 
 		if (parentSize.X != 0)
 		{
@@ -227,7 +243,7 @@ namespace GraphicsEngine
 			translation.Y /= -parentSize.Y;
 		}
 
-		translation += 2 * Vector3(Position.X.Scale, -Position.Y.Scale);
+		translation += 2 * Vector3(Position.X.Scale - 0.5f, -Position.Y.Scale + 0.5f);
 
 		Transformation = Matrix3(translation) * Matrix3().Scale(scale);
 

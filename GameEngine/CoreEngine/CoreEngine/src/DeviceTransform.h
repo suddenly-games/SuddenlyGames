@@ -28,6 +28,10 @@ namespace GraphicsEngine
 		Alignment AlignY = Alignment::Minimum;
 		DeviceVector Size = DeviceVector(1, 0, 1, 0);
 		DeviceVector Position = DeviceVector(0, 0, 0, 0);
+<<<<<<< Updated upstream
+=======
+		DeviceVector AnchorPoint = DeviceVector(-0.5f, 0, -0.5f, 0);
+>>>>>>> Stashed changes
 
 		~DeviceTransform();
 
