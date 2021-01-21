@@ -32,17 +32,20 @@ namespace GraphicsEngine
 		Document("");
 		Archivable Class_Member(float, AspectRatio);
 		
-		Document("");
-		Archivable Class_Member(LuaEnum<Enum::Alignment>, AlignX);
-
-		Document("");
-		Archivable Class_Member(LuaEnum<Enum::Alignment>, AlignY);
+		//Document("");
+		//Archivable Class_Member(LuaEnum<Enum::Alignment>, AlignX);
+		//
+		//Document("");
+		//Archivable Class_Member(LuaEnum<Enum::Alignment>, AlignY);
 
 		Document("");
 		Archivable Class_Member(DeviceVector, Size);
 
 		Document("");
 		Archivable Class_Member(DeviceVector, Position);
+
+		Document("");
+		Archivable Class_Member(DeviceVector, AnchorPoint);
 
 		Bind_Function(GetTransformation,
 
