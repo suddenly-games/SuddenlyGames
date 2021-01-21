@@ -1,1 +1,1 @@
-dofile("./game/scenes/battlefield.lua")
+dofile("./game/scenes/helloworld.lua")
