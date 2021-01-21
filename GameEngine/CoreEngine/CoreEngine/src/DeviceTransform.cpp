@@ -200,20 +200,20 @@ namespace GraphicsEngine
 		Vector3 translation = Vector3(
 			2 * Position.X.Offset,
 			2 * Position.Y.Offset
-		);
+		) + AnchorPoint.Calculate(Vector3(), AbsoluteSize);
 
 		if (parent == nullptr)
 			parentSize = AbsoluteSize;
 
-		if (AlignX == Enum::Alignment::Minimum)
-			translation.X += -(parentSize.X - AbsoluteSize.X);
-		else if (AlignX == Enum::Alignment::Maximum)
-			translation.X += parentSize.X - AbsoluteSize.X;
-		
-		if (AlignY == Enum::Alignment::Minimum)
-			translation.Y += -(parentSize.Y - AbsoluteSize.Y);
-		else if (AlignY == Enum::Alignment::Maximum)
-			translation.Y += parentSize.Y - AbsoluteSize.Y;
+		//if (AlignX == Enum::Alignment::Minimum)
+		//	translation.X += (parentSize.X - AbsoluteSize.X);
+		//else if (AlignX == Enum::Alignment::Maximum)
+		//	translation.X += parentSize.X - AbsoluteSize.X;
+		//
+		//if (AlignY == Enum::Alignment::Minimum)
+		//	translation.Y += -(parentSize.Y - AbsoluteSize.Y);
+		//else if (AlignY == Enum::Alignment::Maximum)
+		//	translation.Y += parentSize.Y - AbsoluteSize.Y;
 
 		if (parentSize.X != 0)
 		{
