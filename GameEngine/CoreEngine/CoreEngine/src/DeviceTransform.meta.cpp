@@ -31,6 +31,9 @@ namespace GraphicsEngine
 
 		Document("");
 		Archivable Class_Member(float, AspectRatio);
+
+		Document("");
+		Archivable Class_Member(float, Rotation);
 		
 		//Document("");
 		//Archivable Class_Member(LuaEnum<Enum::Alignment>, AlignX);
@@ -46,6 +49,9 @@ namespace GraphicsEngine
 
 		Document("");
 		Archivable Class_Member(DeviceVector, AnchorPoint);
+
+		Document("");
+		Archivable Class_Member(DeviceVector, RotationAnchor);
 
 		Bind_Function(GetTransformation,
 

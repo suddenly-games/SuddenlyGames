@@ -138,7 +138,7 @@ namespace GraphicsEngine
 
 	bool DeviceTransform::HasMoved() const
 	{
-		if (Size != LastSize || Position != LastPosition)
+		if (Size != LastSize || Position != LastPosition || Rotation != LastRotation || AnchorPoint != LastAnchorPoint || RotationAnchor != LastRotationAnchor)
 			return true;
 
 		std::shared_ptr<DeviceTransform> parent = GetComponent<DeviceTransform>();
@@ -200,29 +200,32 @@ namespace GraphicsEngine
 		Vector3 translation = Vector3(
 			2 * Position.X.Offset,
 			2 * Position.Y.Offset
-		) - AnchorPoint.Calculate(Vector3(), AbsoluteSize);
+		) - (parentSize - AbsoluteSize);
+
+		translation = translation.Scale(1, -1, 1);
 
 		if (parent == nullptr)
 			parentSize = AbsoluteSize;
 
+		Vector3 scaling(1, 1, 1);
+
+		translation += Vector3(parentSize.X * (Position.X.Scale - 0.5f), parentSize.Y * (-Position.Y.Scale + 0.5f));
+
 		if (parentSize.X != 0)
-		{
-			scale.X /= parentSize.X;
-			translation.X /= parentSize.X;
-		}
+			scaling.X = 1 / parentSize.X;
 		
 		if (parentSize.Y != 0)
-		{
-			scale.Y /= parentSize.Y;
-			translation.Y /= -parentSize.Y;
-		}
+			scaling.Y = 1 / parentSize.Y;
 
-		translation += 2 * Vector3(Position.X.Scale - 0.5f, -Position.Y.Scale + 0.5f);
+		Vector3 offset = -2 * AnchorPoint.Calculate(Vector3(), AbsoluteSize).Scale(1, -1, 1);
+		Vector3 rotationOffset = -2 * RotationAnchor.Calculate(Vector3(), AbsoluteSize).Scale(1, -1, 1);
 
-		Transformation = Matrix3(translation) * Matrix3().Scale(scale);
+		Transformation = Matrix3().Scale(scaling) * Matrix3(translation) * Matrix3(offset - rotationOffset) * Matrix3().RotateRoll(Rotation) * Matrix3(rotationOffset) * Matrix3().Scale(scale);
 
 		if (parent != nullptr)
 			Transformation = parent->GetTransformation() * Transformation;
+
+		Transformation = Transformation;
 
 		InverseTransformation.Invert(Transformation);
 

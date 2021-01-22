@@ -171,3 +171,17 @@ DeviceVector operator*(float scalar, const DeviceVector& vector)
 {
 	return DeviceVector(scalar * vector.X, scalar * vector.Y);
 }
+
+std::ostream& operator<<(std::ostream& out, const DeviceAxis& axis)
+{
+	out << "[ " << (axis.Scale * 100) << "%, " << axis.Offset << " ]";
+
+	return out;
+}
+
+std::ostream& operator<<(std::ostream& out, const DeviceVector& vector)
+{
+	out << "{ " << vector.X << ", " << vector.Y << " }";
+
+	return out;
+}
