@@ -31,11 +31,17 @@ local characters = {
 
 local turnQueue = {}
 
-local DisplayActionBar = function(character, offset)
+local DisplayActionBar = function(character, position)
 
   local actionBar = scene.CreateSprite("UIActionBar")
-  actionBar.AnchorPoint = DeviceVector(0,0,0,0)
-  actionBar.Position = DeviceVector(0,20,0,offset)
+
+  if position > 3 then
+    actionBar.AnchorPoint = DeviceVector(1,0,0,0)
+    actionBar.Position = DeviceVector(0, 1900, 0, (position - 3) * 100)
+  else
+    actionBar.AnchorPoint = DeviceVector(0,0,0,0)
+    actionBar.Position = DeviceVector(0, 20, 0, position * 100)
+  end
 
   while true do
     actionBar.Size = DeviceVector(0, 5 + character.ATB/10000 * 300, 0, 20)
@@ -46,10 +52,8 @@ end
 
 local Initialize = function()
 
-  local offset = 100
-  for _, character in ipairs(characters) do
-    coroutine.wrap(DisplayActionBar)(character, offset)
-    offset = offset + 100
+  for position, character in ipairs(characters) do
+    coroutine.wrap(DisplayActionBar)(character, position)
   end
 end
 
