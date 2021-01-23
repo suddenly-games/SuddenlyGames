@@ -1,6 +1,10 @@
 local env = require("./game/environment")
 local scene = env.NewScene()
+
 local actionBar = scene.CreateSprite("UIActionBar")
+actionBar.AnchorPoint = DeviceVector(0,0,0,0)
+actionBar.Position = DeviceVector(0,20,0,100)
+
 local atb = 0
 wait()
 while true do
@@ -9,5 +13,5 @@ while true do
   if atb >= 10000 then
     atb = 0
   end
-  actionBar.Transformation = Matrix3.NewScale(atb/20, 20, 1)
+  actionBar.Size = DeviceVector(0,atb/10000 * 300,0,20)
 end
