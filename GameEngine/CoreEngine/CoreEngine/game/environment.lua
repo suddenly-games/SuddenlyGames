@@ -1,89 +1,54 @@
 local env = GameObject("Environments")
 env.Parent = Engine
 
-local level = GameObject("Environment")
-level.Parent = env
-
-local materials = GameObject("Materials")
-materials.Parent = level
-
-local material = GameObject("Material")
-material.Shininess = 75
-material.Diffuse = RGBA(0.5, 0.5, 0.5, 0)
-material.Specular = RGBA(0, 0, 0, 0)
-material.Ambient = RGBA(0, 0, 0, 0)
-material.Emission = RGBA(0, 0, 0, 0)
-material.Parent = materials
-
-local sceneDraw = GameObject("GlowingSceneOperation")
-sceneDraw.Parent = level
-
-local resolution = GameObject.FrameBuffer.WindowSize
-
-sceneDraw.Resolution = Vector3(resolution.Width, resolution.Height)
-sceneDraw.RenderAutomatically = true
-
 local textures = GameObject("Textures")
-textures.Parent = level
+textures.Parent = env
 
 textures:LoadDirectory("./assets/images/")
 
+--
+-- Scene
 return {
   NewScene = function()
-    local simulation = GameObject("Simulation")
-    simulation.Parent = level
-
-    local scene = GameObject("Scene")
-    scene.Parent = level
-
-    sceneDraw:Configure(resolution.Width, resolution.Height, scene)
-
-    local camera = GameObject("Camera")
-    camera.Parent = simulation
-
-    local aspectRatio = GameObject.FrameBuffer.WindowSize.Width / GameObject.FrameBuffer.WindowSize.Height
-    local size = 5 / 3
-    local defaultWidth = aspectRatio * size
-    local defaultHeight = size
-    local defaultProjection = 1
-    local defaultNear = 0.1
-    local defaultFar = 10000
-
-    camera:SetProperties(defaultWidth, defaultHeight, defaultProjection, defaultNear, defaultFar)
-    camera:SetTransformation(Matrix3(0,0,1))
-
-    scene.CurrentCamera = camera
-
-    local light = GameObject("Light")
-    light.Enabled = true
-    light.Direction = Vector3(0,0,-1)
-    light.Type = Enum.LightType.Directional
-    light.Parent = simulation
-
-    scene.GlobalLight = light
-
+    local level = GameObject("Environment")
+    level.Parent = env
+    
+    local resolution = GameObject.FrameBuffer.WindowSize
+    
+    local screen = GameObject("DeviceTransform")
+    screen.Size = DeviceVector(0, resolution.Width, 0, resolution.Height)
+    screen.Parent = level
+    
+    local ui = GameObject("InterfaceDrawOperation")
+    ui.CurrentScreen = screen
+    ui.RenderAutomatically = true
+    ui.Parent = screen
+    
+    --
+    -- Sprite
     return {
       CreateSprite = function(texture)
-    
-        local sprite = GameObject("Transform")
-        sprite.Transformation = Matrix3.NewScale(1, textures[texture]:GetHeight()/textures[texture]:GetWidth(), 1)
-        sprite.Parent = simulation
-        
-        local model = GameObject("Model")
-        model.Parent = sprite
-        
-        model.Asset = Engine.CoreMeshes.CoreSquare
-        model.MaterialProperties = material
-        model.DiffuseTexture = textures[texture]
-        model.UVScale = Vector3(1,-1)
-        model.UVOffset = Vector3(0,1)
-        
-        scene:AddObject(model)
-    
+        local sprite = GameObject("DeviceTransform")
+        sprite.Parent = screen
+        sprite.Size = DeviceVector(0, textures[texture]:GetWidth(), 0, textures[texture]:GetHeight())
+        sprite.AnchorPoint = DeviceVector(0.5, 0, 0.5, 0)
+
+        local appearance = GameObject("Appearance")
+        appearance.Name = texture
+        appearance.Parent = sprite
+        appearance.Color = RGBA(0,0,0,0)
+        appearance.Texture = textures[texture]
+        appearance.TextureColor = textureColor or RGBA(1, 1, 1, 1)
+        appearance.UVScale = Vector3(1, -1)
+        appearance.UVOffset = Vector3(0, 1)
+        appearance.BlendTexture = true
+
+        local canvas = GameObject("ScreenCanvas")
+        canvas.Appearance = appearance
+        canvas.Parent = sprite
+
         return sprite
-    
-      end, --CreateSprite
+      end --CreateSprite
     }
-    
-  end --CreateScene
+  end --NewScene
 }

@@ -74,6 +74,9 @@ namespace Engine
 DeviceVector operator*(float scalar, const DeviceVector& vector);
 
 
+std::ostream& operator<<(std::ostream& out, const DeviceAxis& axis);
+
+std::ostream& operator<<(std::ostream& out, const DeviceVector& vector);
 
 
 

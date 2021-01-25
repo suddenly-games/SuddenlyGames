@@ -85,7 +85,17 @@ Vector3& Vector3::Scale(const Vector3 & other)
   X *= other.X;
   Y *= other.Y;
   Z *= other.Z;
+
   return *this;
+}
+
+Vector3& Vector3::Scale(float x, float y, float z)
+{
+	X *= x;
+	Y *= y;
+	Z *= z;
+
+	return *this;
 }
 
 // negation

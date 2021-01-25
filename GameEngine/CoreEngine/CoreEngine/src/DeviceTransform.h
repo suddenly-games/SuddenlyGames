@@ -24,11 +24,13 @@ namespace GraphicsEngine
 		bool Enabled = true;
 		bool Visible = true;
 		float AspectRatio = 0;
+		float Rotation = 0;
 		//Alignment AlignX = Alignment::Minimum;
 		//Alignment AlignY = Alignment::Minimum;
 		DeviceVector Size = DeviceVector(1, 0, 1, 0);
 		DeviceVector Position = DeviceVector(0, 0, 0, 0);
-		DeviceVector AnchorPoint = DeviceVector(-0.5f, 0, -0.5f, 0);
+		DeviceVector AnchorPoint = DeviceVector(0, 0, 0, 0);
+		DeviceVector RotationAnchor = DeviceVector(0, 0, 0, 0);
 
 		~DeviceTransform();
 
@@ -69,8 +71,11 @@ namespace GraphicsEngine
 		void UpdateTransformation();
 
 	private:
+		float LastRotation = 0;
 		DeviceVector LastSize = DeviceVector(1, 0, 1, 0);
 		DeviceVector LastPosition = DeviceVector(0, 0, 0, 0);
+		DeviceVector LastAnchorPoint = DeviceVector(0, 0, 0, 0);
+		DeviceVector LastRotationAnchor = DeviceVector(0, 0, 0, 0);
 		Vector3 AbsoluteSize;
 		Matrix3 Transformation;
 		Matrix3 InverseTransformation;
