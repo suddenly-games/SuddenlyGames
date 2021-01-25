@@ -296,7 +296,7 @@ bool Lua::TypeMatches(lua_State* lua, int index, const ReflectionData* type)
 	switch (lua_type(lua, index))
 	{
 	case LUA_TNIL:
-		return type->ID == coreTypeIDs.Void;
+		return type->ID == coreTypeIDs.Void || type->IsClass;
 	case LUA_TNUMBER:
 		return (
 			type->ID == coreTypeIDs.Character ||

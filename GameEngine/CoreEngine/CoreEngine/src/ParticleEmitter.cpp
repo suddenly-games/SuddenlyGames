@@ -83,7 +83,7 @@ namespace GraphicsEngine
 
 	void ParticleEmitter::Draw(const std::shared_ptr<Camera>& camera)
 	{
-		const Mesh* mesh = ShaderProgram::GetCurrentProgram()->Meshes.GetMesh(Asset.lock()->GetMeshID());
+		const Mesh* mesh = ShaderProgram::GetCurrentProgram()->Meshes->GetMesh(Asset.lock()->GetMeshID());
 
 		if (mesh == nullptr)
 			return;

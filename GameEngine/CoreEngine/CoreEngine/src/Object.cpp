@@ -17,6 +17,7 @@ namespace Engine
 	void ObjectBase::Initialize()
 	{
 		ObjectID = ObjectIDs.RequestID(This);
+		OriginalID = ObjectID;
 	}
 
 	int ObjectBase::GetTypeID() const
@@ -59,6 +60,9 @@ namespace Engine
 			throw "Attempt to set ID";
 
 		ObjectID = id;
+
+		if (id != -1)
+			OriginalID = id;
 	}
 
 	int ObjectBase::GetObjectID() const
@@ -286,7 +290,7 @@ namespace Engine
 
 	void Object::SetParent(const std::shared_ptr<ObjectBase>& newParent)
 	{
-		if (IsAncestorOf(newParent))
+		if (newParent != nullptr && IsAncestorOf(newParent))
 			throw "Attempt to create circular reference: " + GetTypeName() + " '" + Name + "' is already an ancestor of " + newParent->GetTypeName() + " '" + newParent->Name + "'";
 
 		auto parent = Parent.lock();

@@ -54,12 +54,12 @@ namespace
 	T* init(T& program)
 	{
 		program.CoreMeshes = ShaderProgram::Primitives(
-			program.Meshes.GetMesh(GetCoreID("CoreSquare")),
-			program.Meshes.GetMesh(GetCoreID("CoreCube")),
-			program.Meshes.GetMesh(GetCoreID("CoreWireCube")),
-			program.Meshes.GetMesh(GetCoreID("CoreBoundingVolume")),
-			program.Meshes.GetMesh(GetCoreID("CoreHalfBoundingVolume")),
-			program.Meshes.GetMesh(GetCoreID("CoreCone"))
+			program.Meshes->GetMesh(GetCoreID("CoreSquare")),
+			program.Meshes->GetMesh(GetCoreID("CoreCube")),
+			program.Meshes->GetMesh(GetCoreID("CoreWireCube")),
+			program.Meshes->GetMesh(GetCoreID("CoreBoundingVolume")),
+			program.Meshes->GetMesh(GetCoreID("CoreHalfBoundingVolume")),
+			program.Meshes->GetMesh(GetCoreID("CoreCone"))
 		);
 
 		return &program;

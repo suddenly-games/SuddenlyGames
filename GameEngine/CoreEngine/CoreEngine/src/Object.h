@@ -67,6 +67,7 @@ namespace Engine
 		static FactoryCallbackMap FactoryFunctions;
 
 		int ObjectID = -1;
+		int OriginalID = -1;
 
 		NonInstantiable;
 

@@ -26,7 +26,6 @@ class ShaderProgram;
 class MeshLoader : public Engine::Object
 {
 public:
-	MeshLoader(const ShaderProgram* program);
 	~MeshLoader();
 
 	const Mesh* GetMesh(int id);
@@ -45,6 +44,8 @@ public:
 	static void LoadAsset(std::shared_ptr<Engine::ModelAsset> asset, const std::string& filePath, Enum::VertexMode mode = Enum::VertexMode::Seperate);
 
 	static void UnloadAsset(std::shared_ptr<Engine::ModelAsset> asset);
+
+	void SetProgram(const ShaderProgram* program);
 
 	static std::shared_ptr<Engine::ModelAsset> GetAsset(int id);
 	static bool IsMeshLoaded(int id);
@@ -93,7 +94,7 @@ private:
 
 	static void UnloadAsset(int id);
 
-	NonInstantiable;
+	Instantiable;
 
 	Inherits_Class(Engine::Object);
 

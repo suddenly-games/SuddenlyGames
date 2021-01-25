@@ -9,8 +9,10 @@
 typename MeshLoader::LoaderVector MeshLoader::MeshLoaders = LoaderVector();
 typename MeshLoader::MeshHeap MeshLoader::MeshContainer = MeshHeap();
 
-MeshLoader::MeshLoader(const ShaderProgram* program) : Program(program)
+void MeshLoader::SetProgram(const ShaderProgram* program)
 {
+	Program = program;
+
 	MeshLoaders.push_back(this);
 }
 

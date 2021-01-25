@@ -48,6 +48,8 @@ namespace Engine
 						return ObjectBase::GetObjectFromID(GetObjectID(lua_topointer(*LuaState, index)))->Cast<T>();
 					else if (HasDefaultValue && (lua_gettop(*LuaState) < index || !lua_isnil(*LuaState, index)))
 						return DefaultValue;
+					else if (lua_isnil(*LuaState, index))
+						return nullptr;
 					else
 						Lua::BadArgumentError(*LuaState, ArgumentNumber + 1, "Object", Lua::GetType(*LuaState, index));
 

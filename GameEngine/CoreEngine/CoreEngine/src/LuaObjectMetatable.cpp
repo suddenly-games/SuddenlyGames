@@ -103,12 +103,14 @@ namespace Engine
 				{
 					std::shared_ptr<Object> thisObject = object->Reference->Cast<Object>(); // note: Matrix3.Scale() fails
 
-					std::shared_ptr<Object> child = thisObject->GetByName(index)->Cast<Object>();
+					std::shared_ptr<ObjectBase> childObject = thisObject->GetByName(index);
 
-					if (child == nullptr)
+					if (childObject == nullptr)
 						Lua::BadMemberError(lua, 1, 2);
 					else
 					{
+						std::shared_ptr<Object> child = childObject->Cast<Object>();
+
 						lua_pushstring(lua, "Objects");
 
 						lua_gettable(lua, LUA_REGISTRYINDEX);

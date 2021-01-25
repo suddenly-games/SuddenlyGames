@@ -15,9 +15,9 @@ class Shader;
 class ShaderProgram
 {
 public:
-	MeshLoader Meshes;
+	std::shared_ptr<MeshLoader> Meshes = Engine::Create<MeshLoader>();
 
-	ShaderProgram() : Meshes(this) {}
+	ShaderProgram() { Meshes->SetProgram(this); }
 	~ShaderProgram();
 
 	GLint RegisterUniform(UniformBase* uniform);

@@ -171,6 +171,16 @@ namespace Engine
 
 					int print = lua_gettop(lua);
 
+					{
+						int top = lua_gettop(lua);
+						top += 0;
+					}
+
+					lua_pushcfunction(lua, Lua::Traceback);
+
+					int traceback = lua_gettop(lua);
+
+
 					std::string message;
 					int error = luaL_loadbuffer(lua, thread.Source.c_str(), thread.Source.size(), thread.Name.c_str());
 					{
@@ -206,8 +216,18 @@ namespace Engine
 						lua_pushvalue(lua, -2);
 
 						lua_call(lua, 1, 1);
+						{
+							int top = lua_gettop(lua);
+							top += 0;
+						}
 
-						error = lua_pcall(lua, 0, 1, 0);
+						error = lua_pcall(lua, 0, 1, traceback);
+
+						if (error)
+						{
+							if (lua_isstring(lua, -1))
+							std::cout << lua_tostring(lua, -1);
+						}
 
 						ThreadEnded(i);
 						{
@@ -215,14 +235,16 @@ namespace Engine
 							top += 0;
 						}
 
-						lua_pop(lua, 4);
+						lua_pop(lua, 6);
 					}
 					else
 					{
 						CheckError(lua, thread, error);
 
-						lua_pop(lua, 3);
+						lua_pop(lua, 4);
 					}
+
+					//lua_pop(lua, 1);
 
 					{
 						int top = lua_gettop(lua);

@@ -24,7 +24,7 @@ namespace GraphicsEngine
 
 		const ShaderProgram* program = ShaderProgram::GetCurrentProgram();
 
-		const Mesh* mesh = ShaderProgram::GetCurrentProgram()->Meshes.GetMesh(Asset.lock()->GetMeshID());
+		const Mesh* mesh = ShaderProgram::GetCurrentProgram()->Meshes->GetMesh(Asset.lock()->GetMeshID());
 
 		if (mesh != nullptr)
 		{
