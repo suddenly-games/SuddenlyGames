@@ -9,6 +9,9 @@ textures:LoadDirectory("./assets/images/")
 --
 -- Scene
 return {
+  GetTexture = function(texture)
+    return textures[texture]
+  end,
   NewScene = function()
     local level = GameObject("Environment")
     level.Parent = env
@@ -34,7 +37,7 @@ return {
         sprite.AnchorPoint = DeviceVector(0.5, 0, 0.5, 0)
 
         local appearance = GameObject("Appearance")
-        appearance.Name = texture
+        appearance.Name = "Appearance"
         appearance.Parent = sprite
         appearance.Color = RGBA(0,0,0,0)
         appearance.Texture = textures[texture]
