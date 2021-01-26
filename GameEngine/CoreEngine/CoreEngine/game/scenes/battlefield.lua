@@ -136,6 +136,41 @@ local DisplayActionBar = function(character, position)
 
 end
 
+local DisplayHand = function()
+
+  local cardImages = {}
+
+  for i = 1,5 do
+    local cardImage = scene.CreateSprite("Card-Test-1")
+    cardImage.Size = DeviceVector(0, 137, 0, 187)
+    cardImage.Position = DeviceVector(0, 500, 0, 500)
+    cardImage.AnchorPoint = DeviceVector(0,0,0,0)
+    table.insert(cardImages, cardImage)
+  end
+
+  while true do
+
+    local xOffset = 500
+
+    for _, cardImage in ipairs(cardImages) do
+      cardImage.Canvas.Visible = false
+    end
+
+    for i, card in ipairs(hand) do
+
+      local cardImage = cardImages[i]
+
+      cardImage.Appearance.Texture = env.GetTexture("Card-Test-"..card.Cost)
+      cardImage.Canvas.Visible = true
+      cardImage.Position = DeviceVector(0, 400 + i * 160, 0, resolution.Height - 210)
+
+    end
+
+    wait()
+
+  end
+end
+
 local Shuffle = function(list)
 	for i = #list, 2, -1 do
 		local j = math.random(i)
@@ -157,6 +192,7 @@ end
 
 local Initialize = function()
   coroutine.wrap(DisplayEnergyBar)()
+  coroutine.wrap(DisplayHand)()
   for position, character in ipairs(characters) do
     coroutine.wrap(DisplayActionBar)(character, position)
   end
@@ -171,8 +207,6 @@ local PlayerTurn = function(character)
   for i = 1,5 do
     table.insert(hand, DrawCard(character))
   end
-
-  print(format.Table(hand))
 
   while energyBar.Energy > 0 do
 
