@@ -1,4 +1,5 @@
 local env = require("./game/environment")
+local format = require("./game/util/format")
 local userInput = Engine.GameWindow.UserInput
 local resolution = GameObject.FrameBuffer.WindowSize
 local scene = env.NewScene()
@@ -8,36 +9,72 @@ local characters = {
     SPD = 100,
     ATB = 0,
     Stars = 3,
-
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
   {
     SPD = 146,
     ATB = 0,
-    Stars = 4
+    Stars = 4,
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
   {
     SPD = 173,
     ATB = 0,
-    Stars = 5
+    Stars = 5,
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
   {
     SPD = 82,
     ATB = 0,
     Stars = 3,
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
   {
     SPD = 97,
     ATB = 0,
     Stars = 4,
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
   {
     SPD = 123,
     ATB = 0,
     Stars = 5,
+    DiscardPile = {
+      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
+      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
+      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
+    },
+    Deck = {},
   },
 }
 
 local turnQueue = {}
+local hand = {}
 
 local energyBar = {
   Energy = 0,
@@ -99,6 +136,25 @@ local DisplayActionBar = function(character, position)
 
 end
 
+local Shuffle = function(list)
+	for i = #list, 2, -1 do
+		local j = math.random(i)
+		list[i], list[j] = list[j], list[i]
+	end
+end
+
+local DrawCard = function(character)
+
+  if next(character.Deck) == nil then
+    character.Deck = character.DiscardPile
+    Shuffle(character.Deck)
+    character.DiscardPile = {}
+  end
+
+  return table.remove(character.Deck,1)
+
+end
+
 local Initialize = function()
   coroutine.wrap(DisplayEnergyBar)()
   for position, character in ipairs(characters) do
@@ -112,6 +168,12 @@ local PlayerTurn = function(character)
   energyBar.MaxEnergy = character.Stars
   energyBar.Energy = character.Stars
 
+  for i = 1,5 do
+    table.insert(hand, DrawCard(character))
+  end
+
+  print(format.Table(hand))
+
   while energyBar.Energy > 0 do
 
     while not input:GetState() do 
@@ -124,6 +186,11 @@ local PlayerTurn = function(character)
 
   end
 
+  for _, card in ipairs(hand) do 
+    table.insert(character.DiscardPile, card)
+  end
+
+  hand = {}
   energyBar.MaxEnergy = 0  
 end
 
