@@ -68,8 +68,9 @@ local DisplayEnergyBar = function()
       end
 
       if i > energyBar.MaxEnergy then
-        star.Position = DeviceVector(0, -80, 0, -80) -- Replace with visibility toggle
+        star.Canvas.Visible = false
       else
+        star.Canvas.Visible = true
         star.Position = DeviceVector(0, xOffset + (i-1) * 80, 0, resolution.Height - 100)
       end
     end

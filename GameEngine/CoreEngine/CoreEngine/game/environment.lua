@@ -48,6 +48,7 @@ return {
 
         local canvas = GameObject("ScreenCanvas")
         canvas.Appearance = appearance
+        canvas.Name = "Canvas"
         canvas.Parent = sprite
 
         return sprite
