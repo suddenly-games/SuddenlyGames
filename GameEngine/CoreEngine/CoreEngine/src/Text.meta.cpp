@@ -1,6 +1,10 @@
 #include "Text.h"
 
 #include "Font.h"
+#include "Texture.h"
+#include "FrameBuffer.h"
+#include "Appearance.h"
+#include "ScreenCanvas.h"
 
 namespace GraphicsEngine
 {
@@ -50,6 +54,72 @@ namespace GraphicsEngine
 			
 			Property_Setters(
 				Bind_Setter(SetText, std::string);
+			);
+		);
+
+		Bind_Function(GetTexture,
+
+			Document("");
+			Function_Overload
+			(
+				Document("");
+				Overload_Returns(std::shared_ptr<Texture>);
+					
+				Overload_Parameters();
+
+				Bind_Parameters(GetTexture);
+			);
+		);
+
+		Bind_Function(GetBuffer,
+
+			Document("");
+			Function_Overload
+			(
+				Document("");
+				Overload_Returns(std::shared_ptr<FrameBuffer>);
+					
+				Overload_Parameters();
+
+				Bind_Parameters(GetBuffer);
+			);
+		);
+
+		Bind_Function(GetAppearance,
+
+			Document("");
+			Function_Overload
+			(
+				Document("");
+				Overload_Returns(std::shared_ptr<Appearance>);
+					
+				Overload_Parameters();
+
+				Bind_Parameters(GetAppearance);
+			);
+		);
+
+		Bind_Function(Create,
+
+			Document("");
+			Static Function_Overload
+			(
+				Document("");
+				Overload_Returns(std::shared_ptr<Text>);
+
+				Overload_Parameters
+				(
+					Document("");
+					Function_Parameter(std::shared_ptr<ScreenCanvas>, parent);
+
+					Document("");
+					Function_Parameter(std::string, name);
+
+					Document("");
+					Function_Parameter(std::string, text);
+				);
+
+				Bind_Parameters(Create, parent, name, text);
 			);
 		);
 	);
