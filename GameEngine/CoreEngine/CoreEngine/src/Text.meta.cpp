@@ -110,6 +110,9 @@ namespace GraphicsEngine
 				Overload_Parameters
 				(
 					Document("");
+					Function_Parameter(std::shared_ptr<Font>, font);
+
+					Document("");
 					Function_Parameter(std::shared_ptr<ScreenCanvas>, parent);
 
 					Document("");
@@ -119,7 +122,7 @@ namespace GraphicsEngine
 					Function_Parameter(std::string, text);
 				);
 
-				Bind_Parameters(Create, parent, name, text);
+				Bind_Parameters(Create, font, parent, name, text);
 			);
 		);
 	);

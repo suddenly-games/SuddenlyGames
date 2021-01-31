@@ -29,7 +29,7 @@ namespace GraphicsEngine
 		const std::shared_ptr<FrameBuffer>& GetBuffer() const;
 		const std::shared_ptr<Appearance>& GetAppearance() const;
 
-		static std::shared_ptr<Text> Create(const std::shared_ptr<ScreenCanvas>& parent, const std::string& name, const std::string& text);
+		static std::shared_ptr<Text> Create(const std::shared_ptr<Font>& font, const std::shared_ptr<ScreenCanvas>& parent, const std::string& name, const std::string& text);
 
 	private:
 		float LastFontSize = 0;

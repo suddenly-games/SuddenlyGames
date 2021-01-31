@@ -52,10 +52,12 @@ namespace GraphicsEngine
 		return ContentsAppearance;
 	}
 
-	std::shared_ptr<Text> Text::Create(const std::shared_ptr<ScreenCanvas>& parent, const std::string& name, const std::string& text)
+	std::shared_ptr<Text> Text::Create(const std::shared_ptr<Font>& font, const std::shared_ptr<ScreenCanvas>& parent, const std::string& name, const std::string& text)
 	{
 		std::shared_ptr<Text> textObject = Engine::Create<Text>();
+
 		textObject->Name = name;
+		textObject->FontData = font;
 		textObject->SetText(text);
 		textObject->SetParent(parent);
 
