@@ -8,7 +8,7 @@ namespace GraphicsEngine
 {
 	Font::Character::Character() : Value(0), TextOffset(), TextScale() {}
 
-	Font::Character::Character(char character, const Vector3& textOffset, const Vector3& textScale) : Value(character), TextOffset(textOffset), TextScale(textScale) {}
+	Font::Character::Character(char character, float aspectRatio, const Vector3& textOffset, const Vector3& textScale) : Value(character), AspectRatio(aspectRatio), TextOffset(textOffset), TextScale(textScale) {}
 
 
 	void Font::Load(const std::string& filePath, const std::string& textureName)
@@ -40,12 +40,14 @@ namespace GraphicsEngine
 
 			file >> character >> scale.X >> scale.Y >> offset.X >> offset.Y;
 
+			float aspectRatio = scale.X / scale.Y;
+
 			scale.X /= resolution.X;
 			scale.Y /= resolution.Y;
 			offset.X /= resolution.X;
 			offset.Y /= resolution.Y;
 
-			Characters[character] = Character(character, offset, scale);
+			Characters[character] = Character(character, aspectRatio, offset, scale);
 		}
 
 		file.close();

@@ -12,6 +12,15 @@ namespace GraphicsEngine
 		Document_Class("");
 
 		Document("");
+		Archivable Class_Member(RGBA, TextColor);
+
+		Document("");
+		Archivable Class_Member(bool, WrapText);
+
+		Document("");
+		Archivable Class_Member(DeviceAxis, LineSpacing);
+
+		Document("");
 		Archivable Class_Member(DeviceAxis, FontSize);
 
 		Document("");

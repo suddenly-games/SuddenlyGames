@@ -42,6 +42,9 @@ namespace GraphicsEngine
 				(
 					Document("");
 					Function_Parameter(char, character);
+
+					Document("");
+					Function_Parameter(float, aspectRatio);
 					
 					Document("");
 					Function_Parameter(Vector3, textOffset);
@@ -50,7 +53,7 @@ namespace GraphicsEngine
 					Function_Parameter(Vector3, textScale);
 				);
 			
-				Bind_Constructor(character, textOffset, textScale);
+				Bind_Constructor(character, aspectRatio, textOffset, textScale);
 			);
 		);
 	);
