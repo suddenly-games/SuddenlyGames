@@ -6,6 +6,14 @@ textures.Parent = env
 
 textures:LoadDirectory("./assets/images/")
 
+local fonts = GameObject("Fonts")
+fonts.Parent = env
+
+local font = GameObject("Font")
+font.Name = "Sans"
+font:Load("./assets/fonts/Sans", "Sans")
+font.Parent = fonts
+
 --
 -- Scene
 return {
@@ -23,9 +31,7 @@ return {
     ui.CurrentScreen = screen
     ui.RenderAutomatically = true
     ui.Parent = screen
-    
-    --
-    -- Sprite
+
     return {
       CreateSprite = function(texture)
         local sprite = GameObject("DeviceTransform")
@@ -48,7 +54,22 @@ return {
         canvas.Parent = sprite
 
         return sprite
-      end --CreateSprite
+      end, --CreateSprite
+      CreateText = function(contents)
+        local transform = GameObject("DeviceTransform")
+        transform.Parent = screen
+
+        local canvas = GameObject("ScreenCanvas")
+        canvas.Name = "Canvas"
+        canvas.Parent = transform
+
+        local text = GameObject("Text")
+        text.Name = "Text"
+        text.FontData = fonts.Sans
+        text.Contents = contents
+
+        return transform
+      end
     }
   end --NewScene
 }

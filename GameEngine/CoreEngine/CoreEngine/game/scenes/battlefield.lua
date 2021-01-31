@@ -55,6 +55,9 @@ local Initialize = function()
   for position, character in ipairs(characters) do
     coroutine.wrap(DisplayActionBar)(character, position)
   end
+
+  local hello = scene.CreateText("Hello World")
+
 end
 
 local PlayerTurn = function(character)
