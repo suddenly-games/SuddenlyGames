@@ -597,12 +597,6 @@
     <ClCompile Include="src\CollisionGroup.meta.cpp">
       <Filter>Source Files\Source\Physics\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextCanvas.cpp">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextCanvas.meta.cpp">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rope.cpp">
       <Filter>Source Files\Source\Engine\Types</Filter>
     </ClCompile>
@@ -680,6 +674,12 @@
     </ClCompile>
     <ClCompile Include="src\Terrain2DCollider.meta.cpp">
       <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -986,9 +986,6 @@
     <ClInclude Include="src\CollisionGroup.h">
       <Filter>Source Files\Source\Physics\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\TextCanvas.h">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="src\Rope.h">
       <Filter>Source Files\Source\Engine\Types</Filter>
     </ClInclude>
@@ -1042,6 +1039,9 @@
     </ClInclude>
     <ClInclude Include="src\Terrain2DCollider.h">
       <Filter>Source Files\Source\Terrain\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Text.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

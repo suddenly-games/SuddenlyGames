@@ -307,8 +307,8 @@
     <ClCompile Include="src\TerrainMaterial.cpp" />
     <ClCompile Include="src\TerrainMaterial.meta.cpp" />
     <ClCompile Include="src\TerrainTypes.cpp" />
-    <ClCompile Include="src\TextCanvas.cpp" />
-    <ClCompile Include="src\TextCanvas.meta.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+    <ClCompile Include="src\Text.meta.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Texture.meta.cpp" />
     <ClCompile Include="src\TextureEnums.meta.cpp" />
@@ -440,7 +440,7 @@
     <ClInclude Include="src\TaskScheduler.h" />
     <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\TerrainMaterial.h" />
-    <ClInclude Include="src\TextCanvas.h" />
+    <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Textures.h" />
     <ClInclude Include="src\Transform.h" />
