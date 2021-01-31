@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "Textures.h"
+#include "Texture.h"
 
 namespace GraphicsEngine
 {
@@ -23,7 +24,10 @@ namespace GraphicsEngine
 
 		std::getline(file, texturePath);
 
-		std::shared_ptr<Texture> texture;
+		std::shared_ptr<Texture> texture = Textures::Create(texturePath);
+
+		texture->Name = textureName;
+		texture->SetParent(This.lock());
 
 		// readd find texture
 
