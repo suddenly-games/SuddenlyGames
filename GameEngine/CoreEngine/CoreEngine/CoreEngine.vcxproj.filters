@@ -681,6 +681,18 @@
     <ClCompile Include="src\Text.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="src\InputContext.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputContext.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputSubscriber.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputSubscriber.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics.h">
@@ -1042,6 +1054,15 @@
     </ClInclude>
     <ClInclude Include="src\Text.h">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputContext.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputSubscriber.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Alignment.h">
+      <Filter>Source Files\Source\Graphics\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

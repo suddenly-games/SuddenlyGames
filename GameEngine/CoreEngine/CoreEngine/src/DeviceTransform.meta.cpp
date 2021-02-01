@@ -30,6 +30,9 @@ namespace GraphicsEngine
 		Archivable Class_Member(bool, Visible);
 
 		Document("");
+		Archivable Class_Member(bool, InheritTransformation);
+
+		Document("");
 		Archivable Class_Member(float, AspectRatio);
 
 		Document("");

@@ -56,8 +56,7 @@ local Initialize = function()
     coroutine.wrap(DisplayActionBar)(character, position)
   end
 
-  local hello = scene.CreateText("Hello World")
-
+   hello = scene.CreateText("Hello World")
 end
 
 local PlayerTurn = function(character)

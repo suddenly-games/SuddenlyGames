@@ -3,6 +3,7 @@
 #include "ScreenCanvas.h"
 #include "CanvasStencil.h"
 #include "Text.h"
+#include "FrameBuffer.h"
 
 namespace GraphicsEngine
 {
@@ -183,7 +184,7 @@ namespace GraphicsEngine
 		Vector3 parentSize;
 		Matrix3 parentTransformation;
 
-		std::shared_ptr<DeviceTransform> parent = GetComponent<DeviceTransform>();
+		std::shared_ptr<DeviceTransform> parent = InheritTransformation ? GetComponent<DeviceTransform>() : nullptr;
 
 		if (parent != nullptr)
 		{
@@ -261,7 +262,7 @@ namespace GraphicsEngine
 			else if (child->IsA<Text>())
 			{
 				if (!updateStencils && child->GetComponent<DeviceTransform>() == This.lock())
-					child->Cast<Text>()->Draw();
+					child->Cast<Text>()->Draw(FrameBuffer::GetAttachedBuffer());
 				
 				Draw(child, updateStencils);
 			}

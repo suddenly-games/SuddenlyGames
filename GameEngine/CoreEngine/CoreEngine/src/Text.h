@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "DeviceVector.h"
 #include "RGBA.h"
+#include "Alignment.h"
 
 namespace GraphicsEngine
 {
@@ -18,10 +19,10 @@ namespace GraphicsEngine
 	public:
 		RGBA TextColor;
 		bool WrapText = true;
-		//Enum::Alignment AlignX = Enum::Alignment::Minimum;
-		//Enum::Alignment AlignY = Enum::Alignment::Minimum;
-		DeviceAxis LineSpacing = DeviceAxis(0, 2);
-		DeviceAxis FontSize = DeviceAxis(0, 14);
+		Enum::Alignment AlignX = Enum::Alignment::Minimum;
+		Enum::Alignment AlignY = Enum::Alignment::Minimum;
+		DeviceAxis LineSpacing = DeviceAxis(0, 4);
+		DeviceAxis FontSize = DeviceAxis(0, 25);
 		std::weak_ptr<Font> FontData;
 
 		void Initialize();
@@ -44,12 +45,13 @@ namespace GraphicsEngine
 		float LastLineSpacing = 0;
 		std::string Contents;
 		Vector3 LastAbsoluteSize;
-		//Enum::Alignment LastAlignX = Enum::Alignment::Minimum;
-		//Enum::Alignment LastAlignY = Enum::Alignment::Minimum;
+		Enum::Alignment LastAlignX = Enum::Alignment::Minimum;
+		Enum::Alignment LastAlignY = Enum::Alignment::Minimum;
 
 		std::shared_ptr<Texture> ContentsTexture;
 		std::shared_ptr<FrameBuffer> ContentsBuffer;
 		std::shared_ptr<Appearance> ContentsAppearance;
+		std::shared_ptr<DeviceTransform> TextTransform;
 		std::shared_ptr<DeviceTransform> CharacterTransform;
 
 		int GetWordEnd(int start) const;

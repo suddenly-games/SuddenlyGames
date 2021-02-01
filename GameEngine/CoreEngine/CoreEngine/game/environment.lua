@@ -9,10 +9,15 @@ textures:LoadDirectory("./assets/images/")
 local fonts = GameObject("Fonts")
 fonts.Parent = env
 
-local font = GameObject("Font")
-font.Name = "Sans"
-font:Load("./assets/fonts/Sans", "Sans")
-font.Parent = fonts
+local sans = GameObject("Font")
+sans.Name = "Sans"
+sans:Load("./assets/fonts/Sans", "Sans")
+sans.Parent = fonts
+
+local ruiFont = GameObject("Font")
+ruiFont.Name = "Sans"
+ruiFont:Load("./assets/fonts/Rui", "Rui")
+ruiFont.Parent = fonts
 
 --
 -- Scene
@@ -58,15 +63,13 @@ return {
       CreateText = function(contents)
         local transform = GameObject("DeviceTransform")
         transform.Parent = screen
+		transform.Size = DeviceVector(0, 250, 0, 200)
 
         local canvas = GameObject("ScreenCanvas")
         canvas.Name = "Canvas"
         canvas.Parent = transform
-
-        local text = GameObject("Text")
-        text.Name = "Text"
-        text.FontData = fonts.Sans
-        text.Contents = contents
+		
+		local text = GameObject.Text.Create(ruiFont, canvas, "Text", contents)
 
         return transform
       end

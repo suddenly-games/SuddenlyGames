@@ -22,11 +22,18 @@ namespace GraphicsEngine
 		ContentsAppearance = Engine::Create<Appearance>();
 		ContentsAppearance->Name = "ContentsAppearance";
 		ContentsAppearance->Texture = ContentsTexture;
+		ContentsAppearance->Color = RGBA(0, 0, 0, 0);
+		//ContentsAppearance->TextureColor = RGBA(0, 0, 0, 0);
 		ContentsAppearance->SetParent(This.lock());
+
+		TextTransform = Engine::Create<DeviceTransform>();
+		TextTransform->Name = "TextTransform";
+		TextTransform->InheritTransformation = false;
+		TextTransform->SetParent(This.lock());
 
 		CharacterTransform = Engine::Create<DeviceTransform>();
 		CharacterTransform->Name = "CharacterTransform";
-		CharacterTransform->SetParent(This.lock());
+		CharacterTransform->SetParent(TextTransform);
 	}
 
 	void Text::Draw(const std::shared_ptr<FrameBuffer> output)
@@ -45,8 +52,10 @@ namespace GraphicsEngine
 		float fontSize = FontSize.Calculate(0, absoluteSize.Y);
 		float lineSpacing = LineSpacing.Calculate(0, absoluteSize.Y);
 
-		if (!TextChanged && fontSize == LastFontSize && absoluteSize == LastAbsoluteSize)// && AlignX == LastAlignX && AlignY == LastAlignY)
+		if (!TextChanged && fontSize == LastFontSize && absoluteSize == LastAbsoluteSize && AlignX == LastAlignX && AlignY == LastAlignY)
 			return;
+
+		TextTransform->Size = DeviceVector(0, absoluteSize.X, 0, absoluteSize.Y);
 
 		if (LastAbsoluteSize != absoluteSize)
 			ContentsBuffer->Resize(Dimensions(absoluteSize));
@@ -66,9 +75,46 @@ namespace GraphicsEngine
 
 		ContentsBuffer->DrawTo();
 
+		Graphics::SetClearColor(RGBA(0, 0, 0, 0)); CheckGLErrors();
+		Graphics::ClearScreen(GL_COLOR_BUFFER_BIT); CheckGLErrors();
+		CharacterTransform->AnchorPoint = DeviceVector(0, 0, 0, 0);
 		CharacterTransform->Position = DeviceVector(0, 0, 0, 0);
 
-		for (int i = SkipWhiteSpace(0); i < int(Contents.size()); i = SkipWhiteSpace(i))
+		Vector3 offsetScale(1, 1);
+
+		if (AlignX == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.X.Scale = 0;
+			CharacterTransform->Position.X.Scale = 0;
+		}
+		else if (AlignX == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.X.Scale = 0.5f;
+			CharacterTransform->Position.X.Scale = 0.5f;
+		}
+		else if (AlignX == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.X.Scale = 1;
+			CharacterTransform->Position.X.Scale = 1;
+		}
+
+		if (AlignY == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.Y.Scale = 0;
+			CharacterTransform->Position.Y.Scale = 0;
+		}
+		else if (AlignY == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.Y.Scale = 0.5f;
+			CharacterTransform->Position.Y.Scale = 0.5f;
+		}
+		else if (AlignY == Enum::Alignment::Minimum)
+		{
+			CharacterTransform->AnchorPoint.Y.Scale = 1;
+			CharacterTransform->Position.Y.Scale = 1;
+		}
+
+		for (int i = SkipWhiteSpace(0); i < int(Contents.size()); i)
 		{
 			int wordEnd = GetWordEnd(i);
 			float wordWidth = GetWordWidth(font, i, wordEnd);
@@ -78,21 +124,39 @@ namespace GraphicsEngine
 				CharacterTransform->Position.X.Offset = 0;
 				CharacterTransform->Position.Y.Offset += fontSize + lineSpacing;
 			}
+			
+			for (i; i < wordEnd; ++i)
+			{
+				const Font::Character& data = font->GetCharacter(Contents[i]);
 
-			const Font::Character& data = font->GetCharacter(Contents[i]);
+				CharacterTransform->Size = DeviceVector(0, data.AspectRatio * fontSize, 0, fontSize);
+				CharacterTransform->UpdateTransformation();
 
-			CharacterTransform->Size = DeviceVector(0, data.AspectRatio * fontSize, 0, fontSize);
-			CharacterTransform->UpdateTransformation();
+				Programs::Screen->uvScale.Set(data.TextScale);
+				Programs::Screen->uvOffset.Set(data.TextOffset);
+				Programs::Screen->transform.Set(CharacterTransform->GetTransformation());
 
-			Programs::Screen->uvScale.Set(data.TextScale);
-			Programs::Screen->uvOffset.Set(data.TextOffset);
-			Programs::Screen->transform.Set(CharacterTransform->GetTransformation());
+				Programs::Screen->CoreMeshes.Square->Draw();
 
-			Programs::Screen->CoreMeshes.Square->Draw();
+				CharacterTransform->Position.X.Offset += CharacterTransform->Size.X.Offset;
+			}
 
-			CharacterTransform->Position.X.Offset += CharacterTransform->Size.X.Offset;
+			for (i; i < SkipWhiteSpace(i); ++i)
+			{
+				if (Contents[i] == ' ')
+					CharacterTransform->Position.X.Offset += font->SpaceWidth * fontSize;
+				else if (Contents[i] == '\t')
+				{
+					float tabSize = font->TabSpaces * font->SpaceWidth * fontSize;
 
-			i = wordEnd;
+					CharacterTransform->Position.X.Offset += (std::floorf(CharacterTransform->Position.X.Offset / tabSize) + 1) * tabSize;
+				}
+				else if (Contents[i] == '\r' || Contents[i] == '\n')
+				{
+					CharacterTransform->Position.X.Offset = 0;
+					CharacterTransform->Position.Y.Offset += fontSize + lineSpacing;
+				}
+			}
 		}
 
 		if (output != nullptr)

@@ -34,8 +34,13 @@ namespace GraphicsEngine
 		Glyphs = texture;
 
 		Vector3 resolution;
+		std::string flipTextureFlag;
+		std::string flipCharacterFlag;
 
-		file >> resolution.X >> resolution.Y;
+		file >> resolution.X >> resolution.Y >> flipTextureFlag >> flipCharacterFlag;
+
+		bool flipY = flipTextureFlag == "true";
+		bool flipCharacterY = flipCharacterFlag == "true";
 
 		while (!file.eof())
 		{
@@ -50,6 +55,18 @@ namespace GraphicsEngine
 			scale.Y /= resolution.Y;
 			offset.X /= resolution.X;
 			offset.Y /= resolution.Y;
+
+			if (flipY)
+			{
+				scale.Y *= -1;
+				offset.Y = 1 - offset.Y;
+			}
+
+			if (flipCharacterY)
+			{
+				offset.Y += scale.Y;
+				scale.Y *= -1;
+			}
 
 			Characters[character] = Character(character, aspectRatio, offset, scale);
 		}
