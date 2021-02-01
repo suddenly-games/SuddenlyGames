@@ -24,7 +24,7 @@ namespace GraphicsEngine
 
 		std::getline(file, texturePath);
 
-		std::shared_ptr<Texture> texture = Textures::Create(texturePath);
+		std::shared_ptr<Texture> texture = Textures::Create(texturePath, Enum::SampleType::Linear);
 
 		texture->Name = textureName;
 		texture->SetParent(This.lock());
