@@ -139,7 +139,7 @@ namespace GraphicsEngine
 
 				Programs::Screen->CoreMeshes.Square->Draw();
 
-				CharacterTransform->Position.X.Offset += CharacterTransform->Size.X.Offset - fontSize * (data.KerningLeft + data.KerningRight);
+				CharacterTransform->Position.X.Offset += CharacterTransform->Size.X.Offset - fontSize * data.KerningRight;
 			}
 
 			for (i; i < SkipWhiteSpace(i); ++i)
