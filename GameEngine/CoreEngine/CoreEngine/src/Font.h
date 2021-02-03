@@ -20,11 +20,12 @@ namespace GraphicsEngine
 			float AspectRatio = 1;
 			float KerningLeft = 0;
 			float KerningRight = 0;
+			float VerticalOffset = 0;
 			Vector3 TextOffset;
 			Vector3 TextScale;
 
 			Character();
-			Character(char character, float aspectRatio, const Vector3& textOffset, const Vector3& textScale, float kerningLeft, float kerningRight);
+			Character(char character, float aspectRatio, const Vector3& textOffset, const Vector3& textScale, float kerningLeft, float kerningRight, float verticalOffset);
 
 			Base_Class;
 

@@ -130,6 +130,7 @@ namespace GraphicsEngine
 				const Font::Character& data = font->GetCharacter(Contents[i]);
 
 				CharacterTransform->Position.X.Offset -= data.KerningLeft * fontSize;
+				CharacterTransform->Position.Y.Offset += data.VerticalOffset * fontSize;
 				CharacterTransform->Size = DeviceVector(0, data.AspectRatio * fontSize, 0, fontSize);
 				CharacterTransform->UpdateTransformation();
 
@@ -140,6 +141,7 @@ namespace GraphicsEngine
 				Programs::Screen->CoreMeshes.Square->Draw();
 
 				CharacterTransform->Position.X.Offset += CharacterTransform->Size.X.Offset - fontSize * data.KerningRight;
+				CharacterTransform->Position.Y.Offset -= data.VerticalOffset * fontSize;
 			}
 
 			for (i; i < SkipWhiteSpace(i); ++i)
