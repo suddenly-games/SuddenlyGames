@@ -51,9 +51,15 @@ namespace GraphicsEngine
 					
 					Document("");
 					Function_Parameter(Vector3, textScale);
+
+					Document("");
+					Function_Parameter(float, kerningLeft);
+
+					Document("");
+					Function_Parameter(float, kerningRight);
 				);
 			
-				Bind_Constructor(character, aspectRatio, textOffset, textScale);
+				Bind_Constructor(character, aspectRatio, textOffset, textScale, kerningLeft, kerningRight);
 			);
 		);
 	);
