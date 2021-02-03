@@ -19,6 +19,7 @@ public:
 	Event<InputObject*> Ended;
 
 	bool GetState() const;
+	Enum::InputState GetStateEnum(Enum::InputCode code) const;
 	bool GetStateChanged() const;
 	const Vector3& GetPosition() const;
 	const Vector3& GetDelta() const;
@@ -35,7 +36,7 @@ private:
 	Vector3 Delta;
 	Enum::InputType Type;
 	Enum::InputCode Code;
-	const char* Name;
+	const char* Name = nullptr;
 };
 
 class MouseInput
@@ -67,6 +68,7 @@ class InputHandler
 public:
 	bool GetState(Enum::InputCode code) const;
 	bool GetStateChanged(Enum::InputCode code) const;
+	Enum::InputState GetStateEnum(Enum::InputCode code) const;
 	const Vector3& GetPosition(Enum::InputCode code) const;
 	const Vector3& GetDelta(Enum::InputCode code) const;
 	Enum::InputType GetType(Enum::InputCode code) const;

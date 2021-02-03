@@ -20,7 +20,9 @@ struct InputTypeEnum
 	enum InputType
 	{
 		Button,
-		Point
+		Point,
+
+		None
 	};
 };
 
@@ -141,6 +143,7 @@ struct InputCodeEnum
 		Y = 'y',
 		Z = 'z',
 
+		None,
 		Codes
 	};
 };

@@ -9,7 +9,35 @@ namespace Engine
 	Declare_Enum(InputType);
 	Declare_Enum(InputState);
 
-	class InputData : public Object
+	class InputBase : public Object
+	{
+	public:
+		void Initialize() {}
+		void Update(float) {}
+
+		virtual bool GetState() { return false; }
+		virtual bool GetStateChanged() { return false; }
+		virtual const Vector3& GetPosition() { return Nope; }
+		virtual const Vector3& GetDelta() { return Nope; }
+		virtual Enum::InputType GetType() { return Enum::InputType::None; }
+		virtual Enum::InputCode GetCode() { return Enum::InputCode::None; }
+		virtual std::string GetName() { return ""; }
+
+		Event<std::shared_ptr<InputBase>> Began;
+		Event<std::shared_ptr<InputBase>> Changed;
+		Event<std::shared_ptr<InputBase>> Ended;
+
+	private:
+		static Vector3 Nope;
+
+		Instantiable;
+
+		Inherits_Class(Object);
+
+		Reflected(InputBase);
+	};
+
+	class InputData : public InputBase
 	{
 	public:
 		void Initialize();
@@ -25,10 +53,6 @@ namespace Engine
 		Enum::InputCode GetCode();
 		std::string GetName();
 
-		Event<std::shared_ptr<InputData>> Began;
-		Event<std::shared_ptr<InputData>> Changed;
-		Event<std::shared_ptr<InputData>> Ended;
-
 		static std::shared_ptr<Object> CreateInput(InputObject* input);
 
 		friend class UserInput;
@@ -40,7 +64,7 @@ namespace Engine
 
 		Instantiable;
 
-		Inherits_Class(Object);
+		Inherits_Class(InputBase);
 
 		Reflected(InputData);
 	};

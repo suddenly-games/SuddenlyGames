@@ -41,7 +41,6 @@
 #include "Appearance.h"
 #include "ScreenCanvas.h"
 #include "InterfaceDrawOperation.h"
-#include "InputInterface.h"
 #include "CanvasStencil.h"
 #include "Aabb.h"
 #include "OBB.h"
@@ -101,6 +100,7 @@ namespace Engine
 		Register_Enum(InputCode);
 		Register_Enum(InputType);
 		Register_Enum(InputState);
+		Register_Class(InputBase);
 		Register_Class(InputData);
 		Register_Class(UserInput);
 		Register_Class(GraphicsEngine::GameWindow);
@@ -165,7 +165,6 @@ namespace Engine
 		Register_Class(GraphicsEngine::Appearance);
 		Register_Class(GraphicsEngine::ScreenCanvas);
 		Register_Class(GraphicsEngine::DeviceTransform);
-		Register_Class(GraphicsEngine::InputInterface);
 		Register_Class(GraphicsEngine::CanvasStencil);
 		Register_Class(GraphicsEngine::InterfaceDrawOperation);
 		Register_Class(GraphicsEngine::Text);

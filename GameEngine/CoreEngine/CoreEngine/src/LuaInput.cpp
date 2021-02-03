@@ -2,6 +2,8 @@
 
 namespace Engine
 {
+	Vector3 InputData::Nope = Vector3();
+
 	void InputData::Initialize()
 	{
 	}

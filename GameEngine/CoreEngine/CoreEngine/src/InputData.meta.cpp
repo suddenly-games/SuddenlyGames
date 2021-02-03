@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	Reflect_Inherited(InputData, Object,
+	Reflect_Inherited(InputBase, Object,
 		Document_Class("");
 
 		Bind_Function(GetState,
@@ -102,5 +102,9 @@ namespace Engine
 				Bind_Parameters(GetName);
 			);
 		);
+	);
+
+	Reflect_Inherited(InputData, InputBase,
+		Document_Class("");
 	);
 }
