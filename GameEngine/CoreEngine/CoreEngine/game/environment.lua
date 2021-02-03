@@ -63,13 +63,12 @@ return {
       CreateText = function(contents)
         local transform = GameObject("DeviceTransform")
         transform.Parent = screen
-		transform.Size = DeviceVector(0, 250, 0, 200)
 
         local canvas = GameObject("ScreenCanvas")
         canvas.Name = "Canvas"
         canvas.Parent = transform
 		
-		local text = GameObject.Text.Create(ruiFont, canvas, "Text", contents)
+		    local text = GameObject.Text.Create(ruiFont, canvas, "Text", contents)
 
         return transform
       end
