@@ -48,7 +48,7 @@ namespace GraphicsEngine
 		CharacterMap Characters;
 		std::weak_ptr<Texture> Glyphs;
 
-		Character Nope = Character(0, 1, Vector3(), Vector3(), 0, 0);
+		Character Nope = Character(0, 1, Vector3(), Vector3(), 0, 0, 0);
 
 		Instantiable;
 
