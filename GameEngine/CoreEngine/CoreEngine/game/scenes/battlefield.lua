@@ -207,7 +207,12 @@ local Initialize = function()
 end
 
 local PlayerTurn = function(character)
-  local input = userInput:GetInput(Enum.InputCode.Enter)
+  local input1 = userInput:GetInput(Enum.InputCode.One)
+  local input2 = userInput:GetInput(Enum.InputCode.Two)
+  local input3 = userInput:GetInput(Enum.InputCode.Three)
+  local input4 = userInput:GetInput(Enum.InputCode.Four)
+  local input5 = userInput:GetInput(Enum.InputCode.Five)
+  local endTurn = userInput:GetInput(Enum.InputCode.Enter)
 
   energyBar.MaxEnergy = character.Stars
   energyBar.Energy = character.Stars
@@ -218,11 +223,34 @@ local PlayerTurn = function(character)
 
   while energyBar.Energy > 0 do
 
-    while not input:GetState() do 
-      wait()
+    local selectedCard
+    local selectedIndex
+
+    if input1:GetState() and hand[1] ~= nil then
+      selectedCard = hand[1]
+      selectedIndex = 1
+    elseif input2:GetState() and hand[2] ~= nil then
+      selectedCard = hand[2]
+      selectedIndex = 2
+    elseif input3:GetState() and hand[3] ~= nil then
+      selectedCard = hand[3]
+      selectedIndex = 3
+    elseif input4:GetState() and hand[4] ~= nil then
+      selectedCard = hand[4]
+      selectedIndex = 4
+    elseif input5:GetState() and hand[5] ~= nil then
+      selectedCard = hand[5]
+      selectedIndex = 5
     end
 
-    energyBar.Energy = energyBar.Energy - 1
+    if selectedCard ~= nil and selectedCard.Cost <= energyBar.Energy then
+      energyBar.Energy = energyBar.Energy - selectedCard.Cost
+      table.insert(character.DiscardPile, table.remove(hand, selectedIndex))
+    end
+
+    if endTurn:GetState() then
+      break
+    end
 
     wait(0.1)
 
