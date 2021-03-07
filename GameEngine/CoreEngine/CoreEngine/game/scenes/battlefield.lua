@@ -81,6 +81,13 @@ local energyBar = {
   MaxEnergy = 0,
 }
 
+local DisplayBackground = function()
+
+  local background = scene.CreateSprite("Background-Forest-0")
+  background.AnchorPoint = DeviceVector(0,0,0,0)
+
+end
+
 local DisplayEnergyBar = function()
 
   local stars = {}
@@ -191,6 +198,7 @@ local DrawCard = function(character)
 end
 
 local Initialize = function()
+  DisplayBackground()
   coroutine.wrap(DisplayEnergyBar)()
   coroutine.wrap(DisplayHand)()
   for position, character in ipairs(characters) do
