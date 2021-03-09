@@ -188,29 +188,31 @@ namespace GraphicsEngine
 
 		if (parent != nullptr)
 		{
+			parent->UpdateTransformation();
+
 			parentSize = parent->GetAbsoluteSize();
 			parentTransformation = parent->GetTransformation();
 		}
+		else
+			parentSize.Set(float(FrameBuffer::WindowSize.Width), float(FrameBuffer::WindowSize.Height));
 
 		AbsoluteSize = Vector3(
 			parentSize.X * Size.X.Scale + Size.X.Offset,
 			parentSize.Y * Size.Y.Scale + Size.Y.Offset
 		);
 
-		Vector3 scale = AbsoluteSize;
+		Vector3 offset = 2 * AnchorPoint.Calculate(Vector3(), AbsoluteSize).Scale(1, 1, 1);
+		Vector3 rotationOffset = 2 * RotationAnchor.Calculate(Vector3(), AbsoluteSize).Scale(1, 1, 1);
+
+		Vector3 scale = AbsoluteSize + Vector3(0, 0, 1);
 		Vector3 translation = Vector3(
-			2 * Position.X.Offset,
-			2 * Position.Y.Offset
-		) - (parentSize - AbsoluteSize);
+			2 * (Position.X.Offset + parentSize.X * Position.X.Scale),
+			2 * (Position.Y.Offset + parentSize.Y * Position.Y.Scale)
+		) - (parentSize - AbsoluteSize) + offset;
 
 		translation = translation.Scale(1, -1, 1);
 
-		if (parent == nullptr)
-			parentSize = AbsoluteSize;
-
 		Vector3 scaling(1, 1, 1);
-
-		translation += Vector3(parentSize.X * (Position.X.Scale - 0.5f), parentSize.Y * (-Position.Y.Scale + 0.5f));
 
 		if (parentSize.X != 0)
 			scaling.X = 1 / parentSize.X;
@@ -218,10 +220,7 @@ namespace GraphicsEngine
 		if (parentSize.Y != 0)
 			scaling.Y = 1 / parentSize.Y;
 
-		Vector3 offset = -2 * AnchorPoint.Calculate(Vector3(), AbsoluteSize).Scale(1, -1, 1);
-		Vector3 rotationOffset = -2 * RotationAnchor.Calculate(Vector3(), AbsoluteSize).Scale(1, -1, 1);
-
-		Transformation = Matrix3().Scale(scaling) * Matrix3(translation) * Matrix3(offset - rotationOffset) * Matrix3().RotateRoll(Rotation) * Matrix3(rotationOffset) * Matrix3().Scale(scale);
+		Transformation = Matrix3().Scale(scaling) * Matrix3(translation + rotationOffset - offset) * Matrix3().RotateRoll(Rotation) * Matrix3(-rotationOffset) * Matrix3().Scale(scale);
 
 		if (parent != nullptr)
 			Transformation = parent->GetTransformation() * Transformation;

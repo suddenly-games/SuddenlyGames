@@ -5,6 +5,34 @@ bool InputObject::GetState() const
 	return IsDown;
 }
 
+Enum::InputState InputObject::GetStateEnum(Enum::InputCode code) const
+{
+	if (Type == Enum::InputType::Button)
+	{
+		if (StateChanged)
+		{
+			if (IsDown)
+				return Enum::InputState::Began;
+			else
+				return Enum::InputState::Ended;
+		}
+		else
+		{
+			if (IsDown)
+				return Enum::InputState::Active;
+			else
+				return Enum::InputState::Idle;
+		}
+	}
+	else
+	{
+		if (StateChanged)
+			return Enum::InputState::Changed;
+		else
+			return Enum::InputState::Idle;
+	}
+}
+
 bool InputObject::GetStateChanged() const
 {
 	return StateChanged;
@@ -35,6 +63,11 @@ std::string InputObject::GetName() const
 	return Name;
 }
 
+Enum::BoundDevice InputObject::GetDevice() const
+{
+	return Device;
+}
+
 bool InputHandler::GetState(Enum::InputCode code) const
 {
 	return Inputs[code].IsDown;
@@ -43,6 +76,34 @@ bool InputHandler::GetState(Enum::InputCode code) const
 bool InputHandler::GetStateChanged(Enum::InputCode code) const
 {
 	return Inputs[code].StateChanged;
+}
+
+Enum::InputState InputHandler::GetStateEnum(Enum::InputCode code) const
+{
+	if (Inputs[code].Type == Enum::InputType::Button)
+	{
+		if (Inputs[code].StateChanged)
+		{
+			if (Inputs[code].IsDown)
+				return Enum::InputState::Began;
+			else
+				return Enum::InputState::Ended;
+		}
+		else
+		{
+			if (Inputs[code].IsDown)
+				return Enum::InputState::Active;
+			else
+				return Enum::InputState::Idle;
+		}
+	}
+	else
+	{
+		if (Inputs[code].StateChanged)
+			return Enum::InputState::Changed;
+		else
+			return Enum::InputState::Idle;
+	}
 }
 
 const Vector3& InputHandler::GetPosition(Enum::InputCode code) const
@@ -75,6 +136,11 @@ const InputObject& InputHandler::GetInput(Enum::InputCode code) const
 	return Inputs[code];
 }
 
+Enum::BoundDevice InputHandler::GetDevice(Enum::InputCode code) const
+{
+	return Inputs[code].Device;
+}
+
 void InputHandler::EventHandler::ProcessEvent(SDL_Event& event)
 {
 	Target->ProcessEvent(event);
@@ -100,6 +166,7 @@ InputHandler::InputHandler(EventHandler& eventHandler)
 		Inputs[i].Type = inputTypes[i];
 		Inputs[i].Code = Enum::InputCode(i);
 		Inputs[i].Name = inputNames[i];
+		Inputs[i].Device = inputDevices[i];
 	}
 }
 
@@ -237,14 +304,17 @@ void InputHandler::FlushQueue()
 		{
 		case Enum::InputState::Began:
 			Inputs[EventQueue[i].Code].Began.Fire(&Inputs[EventQueue[i].Code]);
+			InputBegan.Fire(&Inputs[EventQueue[i].Code]);
 
 			break;
 		case Enum::InputState::Changed:
 			Inputs[EventQueue[i].Code].Changed.Fire(&Inputs[EventQueue[i].Code]);
+			InputChanged.Fire(&Inputs[EventQueue[i].Code]);
 
 			break;
 		case Enum::InputState::Ended:
 			Inputs[EventQueue[i].Code].Ended.Fire(&Inputs[EventQueue[i].Code]);
+			InputEnded.Fire(&Inputs[EventQueue[i].Code]);
 		}
 	}
 
@@ -254,5 +324,8 @@ void InputHandler::FlushQueue()
 void InputHandler::ResetDeltas()
 {
 	for (int i = 0; i < Enum::InputCode::Codes; ++i)
+	{
 		Inputs[i].Delta.Set();
+		Inputs[i].StateChanged = false;
+	}
 }

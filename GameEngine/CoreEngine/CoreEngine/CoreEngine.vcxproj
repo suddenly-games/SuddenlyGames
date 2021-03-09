@@ -160,6 +160,8 @@
     <ClCompile Include="src\BoundingSphere.cpp" />
     <ClCompile Include="src\BoundingSphere.meta.cpp" />
     <ClCompile Include="src\BoundingVolume.cpp" />
+    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\Button.meta.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Camera.meta.cpp" />
     <ClCompile Include="src\CanvasStencil.cpp" />
@@ -219,8 +221,6 @@
     <ClCompile Include="src\InputEnums.cpp" />
     <ClCompile Include="src\InputEnums.meta.cpp" />
     <ClCompile Include="src\InputEvent.cpp" />
-    <ClCompile Include="src\InputInterface.cpp" />
-    <ClCompile Include="src\InputInterface.meta.cpp" />
     <ClCompile Include="src\InputSubscriber.cpp" />
     <ClCompile Include="src\InputSubscriber.meta.cpp" />
     <ClCompile Include="src\InterfaceDrawOperation.cpp" />
@@ -340,6 +340,7 @@
     <ClInclude Include="src\Alignment.h" />
     <ClInclude Include="src\Appearance.h" />
     <ClInclude Include="src\BoundingSphere.h" />
+    <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\CanvasStencil.h" />
     <ClInclude Include="src\CellData.h" />
     <ClInclude Include="src\Chunk.h" />
@@ -388,7 +389,6 @@
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\InputEnums.h" />
     <ClInclude Include="src\InputEvent.h" />
-    <ClInclude Include="src\InputInterface.h" />
     <ClInclude Include="src\InterfaceDrawOperation.h" />
     <ClInclude Include="src\JsonParser.h" />
     <ClInclude Include="src\Light.h" />

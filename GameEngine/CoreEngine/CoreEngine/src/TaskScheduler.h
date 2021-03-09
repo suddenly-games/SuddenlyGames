@@ -200,6 +200,9 @@ void Event<Args...>::Fire(Args&&... args)
 				Connections.Release(i);
 			else if (!node.UsesConnection && node.ConnectorObject.expired())
 				Connections.Release(i);
+
+			if (!node.Callback(std::forward<Args>(args)...))
+				Connections.Release(i);
 		}
 		else
 			if (!node.Callback(std::forward<Args>(args)...))

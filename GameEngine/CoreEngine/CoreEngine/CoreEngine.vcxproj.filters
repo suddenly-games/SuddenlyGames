@@ -522,12 +522,6 @@
     <ClCompile Include="src\CanvasStencil.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
-    <ClCompile Include="src\InputInterface.cpp">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InputInterface.meta.cpp">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="src\CanvasStencil.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
@@ -691,6 +685,12 @@
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
     <ClCompile Include="src\InputSubscriber.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -959,9 +959,6 @@
     <ClInclude Include="src\CanvasStencil.h">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="src\InputInterface.h">
-      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="src\BoundingSphere.h">
       <Filter>Source Files\Source\Engine\Types</Filter>
     </ClInclude>
@@ -1063,6 +1060,9 @@
     </ClInclude>
     <ClInclude Include="src\Alignment.h">
       <Filter>Source Files\Source\Graphics\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
