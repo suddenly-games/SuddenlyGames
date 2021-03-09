@@ -3,26 +3,16 @@
 #include "Matrix3.h"
 #include "Object.h"
 #include "DeviceVector.h"
+#include "Alignment.h"
 
 namespace GraphicsEngine
 {
 	class DeviceTransform : public Engine::Object
 	{
 	public:
-		struct AlignmentEnum
-		{
-			enum Alignment
-			{
-				Minimum,
-				Center,
-				Maximum
-			};
-		};
-
-		typedef AlignmentEnum::Alignment Alignment;
-
 		bool Enabled = true;
 		bool Visible = true;
+		bool InheritTransformation = true;
 		float AspectRatio = 0;
 		float Rotation = 0;
 		//Alignment AlignX = Alignment::Minimum;
@@ -88,16 +78,4 @@ namespace GraphicsEngine
 
 		Reflected(DeviceTransform);
 	};
-}
-
-namespace Enum
-{
-	typedef GraphicsEngine::DeviceTransform::Alignment Alignment;
-}
-
-namespace Engine
-{
-	//Class_Inherits(GraphicsEngine::DeviceTransform, Object);
-
-	Declare_Enum(Alignment);
 }

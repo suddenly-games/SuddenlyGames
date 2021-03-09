@@ -16,12 +16,16 @@ namespace GraphicsEngine
 		class Character
 		{
 		public:
-			char Value;
+			char Value = 0;
+			float AspectRatio = 1;
+			float KerningLeft = 0;
+			float KerningRight = 0;
+			float VerticalOffset = 0;
 			Vector3 TextOffset;
 			Vector3 TextScale;
 
 			Character();
-			Character(char character, const Vector3& textOffset, const Vector3& textScale);
+			Character(char character, float aspectRatio, const Vector3& textOffset, const Vector3& textScale, float kerningLeft, float kerningRight, float verticalOffset);
 
 			Base_Class;
 
@@ -44,7 +48,7 @@ namespace GraphicsEngine
 		CharacterMap Characters;
 		std::weak_ptr<Texture> Glyphs;
 
-		Character Nope = Character(0, Vector3(), Vector3());
+		Character Nope = Character(0, 1, Vector3(), Vector3(), 0, 0, 0);
 
 		Instantiable;
 

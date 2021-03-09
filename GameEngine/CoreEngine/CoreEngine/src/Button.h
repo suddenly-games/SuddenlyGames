@@ -1,12 +1,33 @@
 #pragma once
 
-#include "Frame.h"
+#include "Object.h"
+#include "InputEnums.h"
 
-class Button : public Frame
+namespace GraphicsEngine
 {
-public:
-	AppearanceData HoverAppearance;
-	AppearanceData ClickAppearance;
+	class Appearance;
+	class InputSubscription;
 
-	const AppearanceData* GetCurrentAppearance() const;
-};
+	class Button : public Engine::Object
+	{
+	public:
+		std::weak_ptr<Appearance> Hover;
+		std::weak_ptr<Appearance> Pressed;
+		std::weak_ptr<Appearance> Idle;
+
+		std::weak_ptr<InputSubscription> Binding;
+
+		Enum::BoundDevice Device = Enum::BoundDevice::Any;
+
+		void Initialize() {}
+		void Update(float);
+
+	private:
+
+		Instantiable;
+
+		Inherits_Class(Object);
+
+		Reflected(Button);
+	};
+}

@@ -42,15 +42,27 @@ namespace GraphicsEngine
 				(
 					Document("");
 					Function_Parameter(char, character);
+
+					Document("");
+					Function_Parameter(float, aspectRatio);
 					
 					Document("");
 					Function_Parameter(Vector3, textOffset);
 					
 					Document("");
 					Function_Parameter(Vector3, textScale);
+
+					Document("");
+					Function_Parameter(float, kerningLeft);
+
+					Document("");
+					Function_Parameter(float, kerningRight);
+
+					Document("");
+					Function_Parameter(float, verticalOffset);
 				);
 			
-				Bind_Constructor(character, textOffset, textScale);
+				Bind_Constructor(character, aspectRatio, textOffset, textScale, kerningLeft, kerningRight, verticalOffset);
 			);
 		);
 	);

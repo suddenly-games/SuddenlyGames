@@ -224,6 +224,7 @@ local Initialize = function()
   for position, character in ipairs(characters) do
     coroutine.wrap(DisplayActionBar)(character, position)
   end
+
 end
 
 local EnemyTurn = function(character)

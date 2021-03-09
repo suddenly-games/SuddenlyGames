@@ -8,6 +8,9 @@ struct InputStateEnum
 		Changed,
 		Ended,
 
+		Idle,
+		Active,
+
 		None
 	};
 };
@@ -17,7 +20,11 @@ struct InputTypeEnum
 	enum InputType
 	{
 		Button,
-		Point
+		Point,
+
+		Custom,
+
+		None
 	};
 };
 
@@ -138,7 +145,22 @@ struct InputCodeEnum
 		Y = 'y',
 		Z = 'z',
 
+		Custom,
+
+		None,
 		Codes
+	};
+};
+
+struct BoundDeviceEnum
+{
+	enum BoundDevice
+	{
+		Any,
+		Mouse1,
+		Input1,
+
+		Count
 	};
 };
 
@@ -147,7 +169,9 @@ namespace Enum
 	typedef InputStateEnum::InputState InputState;
 	typedef InputTypeEnum::InputType InputType;
 	typedef InputCodeEnum::InputCode InputCode;
+	typedef BoundDeviceEnum::BoundDevice BoundDevice;
 }
 
 extern const Enum::InputType inputTypes[Enum::InputCode::Codes];
 extern const char* inputNames[Enum::InputCode::Codes];
+extern const Enum::BoundDevice inputDevices[Enum::InputCode::Codes];

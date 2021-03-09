@@ -1,13 +1,28 @@
 #include "Button.h"
 
-const AppearanceData* Button::GetCurrentAppearance() const
-{
-	bool mouseDown = Mouse.Left.IsDown || Mouse.Wheel.IsDown || Mouse.Right.IsDown;
+#include "InputSubscriber.h"
+#include "Appearance.h"
+#include "ScreenCanvas.h"
 
-	if (mouseDown)
-		return &ClickAppearance;
-	else if (MouseHovering)
-		return &HoverAppearance;
-	else
-		return &Appearance;
+namespace GraphicsEngine
+{
+	void Button::Update(float)
+	{
+		std::shared_ptr<ScreenCanvas> canvas = GetComponent<ScreenCanvas>();
+
+		if (canvas == nullptr)
+			return;
+
+		std::shared_ptr<InputSubscription> input = Binding.lock();
+
+		if (input == nullptr)
+			return;
+
+		if (input->GetState())
+			canvas->Appearance = Pressed.lock();
+		else if (input->HasFocus(Device))
+			canvas->Appearance = Hover.lock();
+		else
+			canvas->Appearance = Idle.lock();
+	}
 }

@@ -3,12 +3,13 @@
 #include <fstream>
 
 #include "Textures.h"
+#include "Texture.h"
 
 namespace GraphicsEngine
 {
 	Font::Character::Character() : Value(0), TextOffset(), TextScale() {}
 
-	Font::Character::Character(char character, const Vector3& textOffset, const Vector3& textScale) : Value(character), TextOffset(textOffset), TextScale(textScale) {}
+	Font::Character::Character(char character, float aspectRatio, const Vector3& textOffset, const Vector3& textScale, float kerningLeft, float kerningRight, float verticalOffset) : Value(character), AspectRatio(aspectRatio), TextOffset(textOffset), TextScale(textScale), KerningLeft(kerningLeft), KerningRight(kerningRight), VerticalOffset(verticalOffset) {}
 
 
 	void Font::Load(const std::string& filePath, const std::string& textureName)
@@ -23,29 +24,58 @@ namespace GraphicsEngine
 
 		std::getline(file, texturePath);
 
-		std::shared_ptr<Texture> texture;
+		std::shared_ptr<Texture> texture = Textures::Create(texturePath, Enum::SampleType::Linear);
+
+		texture->Name = textureName;
+		texture->SetParent(This.lock());
 
 		// readd find texture
 
 		Glyphs = texture;
 
 		Vector3 resolution;
+		std::string flipTextureFlag;
+		std::string flipCharacterFlag;
 
-		file >> resolution.X >> resolution.Y;
+		file >> resolution.X >> resolution.Y >> flipTextureFlag >> flipCharacterFlag;
+
+		bool flipY = flipTextureFlag == "true";
+		bool flipCharacterY = flipCharacterFlag == "true";
 
 		while (!file.eof())
 		{
 			Vector3 scale, offset;
 			char character;
+			float kerningLeft = 0;
+			float kerningRight = 0;
+			float verticalOffset = 0;
 
-			file >> character >> scale.X >> scale.Y >> offset.X >> offset.Y;
+			file >> character >> scale.X >> scale.Y >> offset.X >> offset.Y >> kerningLeft >> kerningRight >> verticalOffset;
+
+			float aspectRatio = scale.X / scale.Y;
+
+			kerningLeft /= scale.Y;
+			kerningRight /= scale.Y;
+			verticalOffset /= scale.Y;
 
 			scale.X /= resolution.X;
 			scale.Y /= resolution.Y;
 			offset.X /= resolution.X;
 			offset.Y /= resolution.Y;
 
-			Characters[character] = Character(character, offset, scale);
+			if (flipY)
+			{
+				scale.Y *= -1;
+				offset.Y = 1 - offset.Y;
+			}
+
+			if (flipCharacterY)
+			{
+				offset.Y += scale.Y;
+				scale.Y *= -1;
+			}
+
+			Characters[character] = Character(character, aspectRatio, offset, scale, kerningLeft, kerningRight, verticalOffset);
 		}
 
 		file.close();

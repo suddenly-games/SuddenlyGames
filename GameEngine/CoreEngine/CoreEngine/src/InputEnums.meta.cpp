@@ -136,5 +136,20 @@ namespace Engine
 		Enum_Item(Began);
 		Enum_Item(Changed);
 		Enum_Item(Ended);
+
+		Enum_Item(Idle);
+		Enum_Item(Active);
+
+		Enum_Item(None);
+	);
+
+	Enum_Definition(BoundDevice,
+		Document_Enum("");
+		
+		Enum_Item(Any);
+
+		Enum_Item(Mouse1);
+
+		Enum_Item(Input1);
 	);
 }

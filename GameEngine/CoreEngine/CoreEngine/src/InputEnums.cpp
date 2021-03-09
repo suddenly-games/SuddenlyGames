@@ -274,3 +274,140 @@ const char* inputNames[Enum::InputCode::Codes] = {
 	"Y", // y = 'y',
 	"Z" // z = 'z',
 };
+
+const Enum::BoundDevice inputDevices[Enum::InputCode::Codes] = {
+	Enum::BoundDevice::Mouse1, // mouseLeft,
+	Enum::BoundDevice::Mouse1, // mouseRight,
+	Enum::BoundDevice::Mouse1, // mouseMiddle,
+	Enum::BoundDevice::Mouse1, // mouseWheel,
+	Enum::BoundDevice::Mouse1, // mousePosition,
+	
+	Enum::BoundDevice::Input1, // numpadZero,
+	Enum::BoundDevice::Input1, // numpadOne,
+	Enum::BoundDevice::Input1, // numpadTwo,
+	Enum::BoundDevice::Input1, // numpadThree,
+	Enum::BoundDevice::Input1, // numpadFour,
+	Enum::BoundDevice::Input1, // numpadFive,
+	Enum::BoundDevice::Input1, // numpadSix,
+	Enum::BoundDevice::Input1, // numpadSeven,
+	Enum::BoundDevice::Input1, // numpadEight,
+	Enum::BoundDevice::Input1, // numpadNine,
+	
+	Enum::BoundDevice::Input1, // numpadSlash,
+	Enum::BoundDevice::Input1, // numpadAstrisk,
+	Enum::BoundDevice::Input1, // numpadHyphen,
+	Enum::BoundDevice::Input1, // numpadPlus,
+	Enum::BoundDevice::Input1, // numpadEnter,
+	Enum::BoundDevice::Input1, // numpadDelete,
+	
+	Enum::BoundDevice::Input1, // bracketOpen,
+	Enum::BoundDevice::Input1, // bracketClose,
+	Enum::BoundDevice::Input1, // backslash,
+	Enum::BoundDevice::Input1, // semicolon,
+	Enum::BoundDevice::Input1, // apostrophe,
+	Enum::BoundDevice::Input1, // comma,
+	Enum::BoundDevice::Input1, // period,
+	Enum::BoundDevice::Input1, // slash,
+	Enum::BoundDevice::Input1, // graveAccent,
+	Enum::BoundDevice::Input1, // hyphen,
+	Enum::BoundDevice::Input1, // equals,
+	
+	Enum::BoundDevice::Input1, // space = ' ',
+					  
+	Enum::BoundDevice::Input1, // f1,
+	Enum::BoundDevice::Input1, // f2,
+	Enum::BoundDevice::Input1, // f3,
+	Enum::BoundDevice::Input1, // f4,
+	Enum::BoundDevice::Input1, // f5,
+	Enum::BoundDevice::Input1, // f6,
+	Enum::BoundDevice::Input1, // f7,
+	Enum::BoundDevice::Input1, // f8,
+	Enum::BoundDevice::Input1, // f9,
+	Enum::BoundDevice::Input1, // f10,
+	Enum::BoundDevice::Input1, // f11,
+	Enum::BoundDevice::Input1, // f12,
+	
+	Enum::BoundDevice::Any, // [45]
+	Enum::BoundDevice::Any, // [46]
+	Enum::BoundDevice::Any, // [47]
+	
+	Enum::BoundDevice::Input1, // zero = '0',
+	Enum::BoundDevice::Input1, // one = '1',
+	Enum::BoundDevice::Input1, // two = '2',
+	Enum::BoundDevice::Input1, // three = '3',
+	Enum::BoundDevice::Input1, // four = '4',
+	Enum::BoundDevice::Input1, // five = '5',
+	Enum::BoundDevice::Input1, // six = '6',
+	Enum::BoundDevice::Input1, // seven = '7',
+	Enum::BoundDevice::Input1, // eight = '8',
+	Enum::BoundDevice::Input1, // nine = '9',
+	
+	Enum::BoundDevice::Input1, // escape,
+	Enum::BoundDevice::Input1, // tab,
+	Enum::BoundDevice::Input1, // capsLock,
+	Enum::BoundDevice::Input1, // leftShift,
+	Enum::BoundDevice::Input1, // rightShift,
+	Enum::BoundDevice::Input1, // leftControl,
+	Enum::BoundDevice::Input1, // rightControl,
+	Enum::BoundDevice::Input1, // leftAlt,
+	Enum::BoundDevice::Input1, // rightAlt,
+	Enum::BoundDevice::Input1, // enter,
+	Enum::BoundDevice::Input1, // backspace,
+	Enum::BoundDevice::Input1, // insert,
+	Enum::BoundDevice::Input1, // deleteButton,
+	Enum::BoundDevice::Input1, // home,
+	Enum::BoundDevice::Input1, // end,
+	Enum::BoundDevice::Input1, // pageUp,
+	Enum::BoundDevice::Input1, // pageDown,
+	Enum::BoundDevice::Input1, // numLock,
+	
+	Enum::BoundDevice::Input1, // upArrow,
+	Enum::BoundDevice::Input1, // downArrow,
+	Enum::BoundDevice::Input1, // leftArrow,
+	Enum::BoundDevice::Input1, // rightArrow,
+	
+	Enum::BoundDevice::Any, // [80]
+	Enum::BoundDevice::Any, // [81]
+	Enum::BoundDevice::Any, // [82]
+	Enum::BoundDevice::Any, // [83]
+	Enum::BoundDevice::Any, // [84]
+	Enum::BoundDevice::Any, // [85]
+	Enum::BoundDevice::Any, // [86]
+	Enum::BoundDevice::Any, // [87]
+	Enum::BoundDevice::Any, // [88]
+	Enum::BoundDevice::Any, // [89]
+	Enum::BoundDevice::Any, // [90]
+	Enum::BoundDevice::Any, // [91]
+	Enum::BoundDevice::Any, // [92]
+	Enum::BoundDevice::Any, // [93]
+	Enum::BoundDevice::Any, // [94]
+	Enum::BoundDevice::Any, // [95]
+	Enum::BoundDevice::Any, // [96]
+	
+	Enum::BoundDevice::Input1, // a = 'a',
+	Enum::BoundDevice::Input1, // b = 'b',
+	Enum::BoundDevice::Input1, // c = 'c',
+	Enum::BoundDevice::Input1, // d = 'd',
+	Enum::BoundDevice::Input1, // e = 'e',
+	Enum::BoundDevice::Input1, // f = 'f',
+	Enum::BoundDevice::Input1, // g = 'g',
+	Enum::BoundDevice::Input1, // h = 'h',
+	Enum::BoundDevice::Input1, // i = 'i',
+	Enum::BoundDevice::Input1, // j = 'j',
+	Enum::BoundDevice::Input1, // k = 'k',
+	Enum::BoundDevice::Input1, // l = 'l',
+	Enum::BoundDevice::Input1, // m = 'm',
+	Enum::BoundDevice::Input1, // n = 'n',
+	Enum::BoundDevice::Input1, // o = 'o',
+	Enum::BoundDevice::Input1, // p = 'p',
+	Enum::BoundDevice::Input1, // q = 'q',
+	Enum::BoundDevice::Input1, // r = 'r',
+	Enum::BoundDevice::Input1, // s = 's',
+	Enum::BoundDevice::Input1, // t = 't',
+	Enum::BoundDevice::Input1, // u = 'u',
+	Enum::BoundDevice::Input1, // v = 'v',
+	Enum::BoundDevice::Input1, // w = 'w',
+	Enum::BoundDevice::Input1, // x = 'x',
+	Enum::BoundDevice::Input1, // y = 'y',
+	Enum::BoundDevice::Input1 // z = 'z',
+};

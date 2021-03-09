@@ -19,12 +19,14 @@ public:
 	Event<InputObject*> Ended;
 
 	bool GetState() const;
+	Enum::InputState GetStateEnum(Enum::InputCode code) const;
 	bool GetStateChanged() const;
 	const Vector3& GetPosition() const;
 	const Vector3& GetDelta() const;
 	Enum::InputType GetType() const;
 	Enum::InputCode GetCode() const;
 	std::string GetName() const;
+	Enum::BoundDevice GetDevice() const;
 
 	friend class InputHandler;
 
@@ -35,7 +37,8 @@ private:
 	Vector3 Delta;
 	Enum::InputType Type;
 	Enum::InputCode Code;
-	const char* Name;
+	Enum::BoundDevice Device;
+	const char* Name = nullptr;
 };
 
 class MouseInput
@@ -67,12 +70,18 @@ class InputHandler
 public:
 	bool GetState(Enum::InputCode code) const;
 	bool GetStateChanged(Enum::InputCode code) const;
+	Enum::InputState GetStateEnum(Enum::InputCode code) const;
 	const Vector3& GetPosition(Enum::InputCode code) const;
 	const Vector3& GetDelta(Enum::InputCode code) const;
 	Enum::InputType GetType(Enum::InputCode code) const;
 	const char* GetName(Enum::InputCode code) const;
 	InputObject& GetInput(Enum::InputCode code);
 	const InputObject& GetInput(Enum::InputCode code) const;
+	Enum::BoundDevice GetDevice(Enum::InputCode code) const;
+
+	Event<InputObject*> InputBegan;
+	Event<InputObject*> InputChanged;
+	Event<InputObject*> InputEnded;
 
 	class EventHandler
 	{
