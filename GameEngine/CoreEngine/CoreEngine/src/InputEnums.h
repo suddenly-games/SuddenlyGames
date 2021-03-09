@@ -8,6 +8,9 @@ struct InputStateEnum
 		Changed,
 		Ended,
 
+		Idle,
+		Active,
+
 		None
 	};
 };

@@ -136,5 +136,10 @@ namespace Engine
 		Enum_Item(Began);
 		Enum_Item(Changed);
 		Enum_Item(Ended);
+
+		Enum_Item(Idle);
+		Enum_Item(Active);
+
+		Enum_Item(None);
 	);
 }

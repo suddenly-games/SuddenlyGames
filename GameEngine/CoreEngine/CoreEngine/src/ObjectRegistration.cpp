@@ -53,7 +53,7 @@
 #include "RigidBody.h"
 #include "PhysicsEnvironment.h"
 #include "CollisionGroup.h"
-#include "TextCanvas.h"
+#include "Text.h"
 
 #include "Lua.h"
 #include "PageAllocator.h"
@@ -168,7 +168,7 @@ namespace Engine
 		Register_Class(GraphicsEngine::InputInterface);
 		Register_Class(GraphicsEngine::CanvasStencil);
 		Register_Class(GraphicsEngine::InterfaceDrawOperation);
-		Register_Class(GraphicsEngine::TextCanvas);
+		Register_Class(GraphicsEngine::Text);
 
 		Register_Type(VectorGenerator);
 		Register_Type(NumberRange);

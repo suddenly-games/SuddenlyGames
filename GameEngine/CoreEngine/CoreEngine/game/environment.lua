@@ -6,6 +6,19 @@ textures.Parent = env
 
 textures:LoadDirectory("./assets/images/")
 
+local fonts = GameObject("Fonts")
+fonts.Parent = env
+
+local sans = GameObject("Font")
+sans.Name = "Sans"
+sans:Load("./assets/fonts/Sans", "Sans")
+sans.Parent = fonts
+
+local ruiFont = GameObject("Font")
+ruiFont.Name = "Sans"
+ruiFont:Load("./assets/fonts/Rui", "Rui")
+ruiFont.Parent = fonts
+
 --
 -- Scene
 return {
@@ -23,9 +36,7 @@ return {
     ui.CurrentScreen = screen
     ui.RenderAutomatically = true
     ui.Parent = screen
-    
-    --
-    -- Sprite
+
     return {
       CreateSprite = function(texture)
         local sprite = GameObject("DeviceTransform")
@@ -48,7 +59,19 @@ return {
         canvas.Parent = sprite
 
         return sprite
-      end --CreateSprite
+      end, --CreateSprite
+      CreateText = function(contents)
+        local transform = GameObject("DeviceTransform")
+        transform.Parent = screen
+
+        local canvas = GameObject("ScreenCanvas")
+        canvas.Name = "Canvas"
+        canvas.Parent = transform
+		
+		    local text = GameObject.Text.Create(ruiFont, canvas, "Text", contents)
+
+        return transform
+      end
     }
   end --NewScene
 }

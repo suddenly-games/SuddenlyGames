@@ -213,12 +213,16 @@
     <ClCompile Include="src\HalfBoundingVolume.cpp" />
     <ClCompile Include="src\InheritedTemplate.meta.cpp" />
     <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\InputContext.cpp" />
+    <ClCompile Include="src\InputContext.meta.cpp" />
     <ClCompile Include="src\InputData.meta.cpp" />
     <ClCompile Include="src\InputEnums.cpp" />
     <ClCompile Include="src\InputEnums.meta.cpp" />
     <ClCompile Include="src\InputEvent.cpp" />
     <ClCompile Include="src\InputInterface.cpp" />
     <ClCompile Include="src\InputInterface.meta.cpp" />
+    <ClCompile Include="src\InputSubscriber.cpp" />
+    <ClCompile Include="src\InputSubscriber.meta.cpp" />
     <ClCompile Include="src\InterfaceDrawOperation.cpp" />
     <ClCompile Include="src\InterfaceDrawOperation.meta.cpp" />
     <ClCompile Include="src\JsonParser.cpp" />
@@ -307,8 +311,8 @@
     <ClCompile Include="src\TerrainMaterial.cpp" />
     <ClCompile Include="src\TerrainMaterial.meta.cpp" />
     <ClCompile Include="src\TerrainTypes.cpp" />
-    <ClCompile Include="src\TextCanvas.cpp" />
-    <ClCompile Include="src\TextCanvas.meta.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+    <ClCompile Include="src\Text.meta.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Texture.meta.cpp" />
     <ClCompile Include="src\TextureEnums.meta.cpp" />
@@ -333,6 +337,7 @@
   <ItemGroup>
     <ClInclude Include="src\Aabb.h" />
     <ClInclude Include="src\AabbTree.h" />
+    <ClInclude Include="src\Alignment.h" />
     <ClInclude Include="src\Appearance.h" />
     <ClInclude Include="src\BoundingSphere.h" />
     <ClInclude Include="src\CanvasStencil.h" />
@@ -341,6 +346,8 @@
     <ClInclude Include="src\ChunkLoader.h" />
     <ClInclude Include="src\ChunkLoaderShapeEnum.h" />
     <ClInclude Include="src\Dimensions.h" />
+    <ClInclude Include="src\InputContext.h" />
+    <ClInclude Include="src\InputSubscriber.h" />
     <ClInclude Include="src\LightBuffer.h" />
     <ClInclude Include="src\Terrain2DCollider.h" />
     <ClInclude Include="src\TerrainTypes.h" />
@@ -440,7 +447,7 @@
     <ClInclude Include="src\TaskScheduler.h" />
     <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\TerrainMaterial.h" />
-    <ClInclude Include="src\TextCanvas.h" />
+    <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Textures.h" />
     <ClInclude Include="src\Transform.h" />
