@@ -6,9 +6,16 @@ local scene = env.NewScene()
 
 local characters = {
   { 
+    {
+      Empty = true
+    },
+    isEnemy = false,
+    Name = "Rin",
+    Sprite = "Character-Sprite-Rin",
     SPD = 100,
     ATB = 0,
     Stars = 3,
+    Hand = {},
     DiscardPile = {
       { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
       { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
@@ -17,59 +24,31 @@ local characters = {
     Deck = {},
   },
   {
-    SPD = 146,
-    ATB = 0,
-    Stars = 4,
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
+    Empty = true
   },
   {
-    SPD = 173,
+    isEnemy = true,
+    SPD = 100,
     ATB = 0,
-    Stars = 5,
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
+    HP = 99999,
+    Name = "Target Dummy",
+    Sprite = "Enemy-Sprite-TargetDummy"
   },
   {
-    SPD = 82,
+    isEnemy = true,
+    SPD = 100,
     ATB = 0,
-    Stars = 3,
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
+    HP = 99999,
+    Name = "Target Dummy",
+    Sprite = "Enemy-Sprite-TargetDummy"
   },
   {
-    SPD = 97,
+    isEnemy = true,
+    SPD = 100,
     ATB = 0,
-    Stars = 4,
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
-  },
-  {
-    SPD = 123,
-    ATB = 0,
-    Stars = 5,
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
+    HP = 99999,
+    Name = "Target Dummy",
+    Sprite = "Enemy-Sprite-TargetDummy"
   },
 }
 
@@ -126,9 +105,13 @@ end
 
 local DisplayActionBar = function(character, position)
 
+  if character.Empty then
+    return
+  end
+
   local actionBar = scene.CreateSprite("UI-ActionBar")
 
-  if position > 3 then
+  if character.isEnemy then
     actionBar.AnchorPoint = DeviceVector(1,0,0,0)
     actionBar.Position = DeviceVector(0, resolution.Width - 20, 0, (position - 3) * 100)
   else
@@ -206,18 +189,26 @@ local Initialize = function()
   end
 end
 
+local EnemyTurn = function(character)
+  print("Restored HP")
+  character.HP = 99999
+  wait(0.5)
+end
+
 local PlayerTurn = function(character)
   local input1 = userInput:GetInput(Enum.InputCode.One)
   local input2 = userInput:GetInput(Enum.InputCode.Two)
   local input3 = userInput:GetInput(Enum.InputCode.Three)
   local input4 = userInput:GetInput(Enum.InputCode.Four)
   local input5 = userInput:GetInput(Enum.InputCode.Five)
-  local endTurn = userInput:GetInput(Enum.InputCode.Enter)
+  local endTurn = userInput:GetInput(Enum.InputCode.Space)
 
   energyBar.MaxEnergy = character.Stars
   energyBar.Energy = character.Stars
 
-  for i = 1,5 do
+  hand = character.Hand
+  
+  while #hand < 5 do
     table.insert(hand, DrawCard(character))
   end
 
@@ -256,27 +247,35 @@ local PlayerTurn = function(character)
 
   end
 
-  for _, card in ipairs(hand) do 
-    table.insert(character.DiscardPile, card)
-  end
-
+  character.Hand = hand
   hand = {}
+
   energyBar.MaxEnergy = 0  
 end
 
 local Update = function()
   
   for _, character in ipairs(characters) do
-    character.ATB = character.ATB + character.SPD
-    if character.ATB >= 10000 then
-      table.insert(turnQueue, character)
+
+    if not character.Empty then
+
+      character.ATB = character.ATB + character.SPD
+      if character.ATB >= 10000 then
+        table.insert(turnQueue, character)
+      end
+
     end
+
   end
 
   table.sort(turnQueue, function(a,b) return a.ATB > b.ATB end)
 
   for i, character in ipairs(turnQueue) do
-    PlayerTurn(character)
+    if character.isEnemy then
+      EnemyTurn(character)
+    else
+      PlayerTurn(character)
+    end
     character.ATB = character.ATB - 10000
   end
 
