@@ -53,12 +53,9 @@ end
 local Initialize = function()
 
   for position, character in ipairs(characters) do
-    --coroutine.wrap(DisplayActionBar)(character, position)
+    coroutine.wrap(DisplayActionBar)(character, position)
   end
 
-  hello = scene.CreateText("lynx tuft frogs\n dolphins abduct by proxy the ever awkward klutz\n dud\n dummkopf\n jinx snubnose filmgoer\n orphan sgt\n renfruw grudgek reyfus\n md\n sikh psych if halt tympany jewelry sri heh\n twyer vs jojo pneu fylfot alcaaba son of nonplussed halfbreed bubbly playboy guggenheim daddy coccyx sgraffito effect\n vacuum dirndle impossible attempt to disvalue\n muzzle the afghan czech czar and exninja\n Bob bixby dvorak wood dhurrie savvy\n dizzy eye aeon circumcision uvula scrungy picnic luxurious special type carbohydrate ovoid adzuki kumquat bomb\n afterglows gold girl pygmy gnome lb\n ankhs acme aggroupment akmed brouhha tv wt\n ujjain ms\n oz abacus mnemonics bhikku khaki bwana aorta embolism vivid owls often kvetch otherwise\n wysiwyg densfort wright you’ve absorbed rhythm\n put obstacle kyaks krieg kern wurst subject\n enmity equity coquet quorum pique tzetse hepzibah sulfhydryl briefcase ajax ehler kafka\n fjord elfship halfdressed jugful eggcup hummingbirds swingdevil bagpipe legwork\n reproachful hunchback archknave baghdad wejh rijswijk rajbansi\n rajput ajdir okay weekday obfuscate subpoena liebknecht marcgravia ecbolic\n arcticward dickcissel pincpinc boldface maidkin adjective adcraft adman dwarfness\n applejack darkbrown kiln palzy always farmland flimflam unbossy nonlineal\n stepbrother lapdog stopgap sx countdown basketball beaujolais vb\n flowchart aztec\n lazy bozo syrup tarzan annoying dyke yucky hawg gagzhukz cuzco squire when\n hiho mayhem nietzsche szasz gumdrop milk emplotment ambidextrously\n lacquer byway ecclesiastes stubchen hobgoblins crabmill aqua hawaii blvd\n subquality byzantine empire debt obvious cervantes\n jekabzeel anecdote flicflac mechanicville bedbug couldn’t i’ve it’s they’ll they’d dpt\n headquarter burkhardt xerxes atkins govt\n ebenezer lg\n lhama amtrak amway fixity axmen quumbabda upjohn hrumpf")
-  hello.Canvas.Text.FontSize = DeviceAxis(0, 26)
-  hello.Size = DeviceVector(0, 1920, 0, 1080)
 end
 
 local PlayerTurn = function(character)
