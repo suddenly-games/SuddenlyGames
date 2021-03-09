@@ -5,10 +5,10 @@ local resolution = GameObject.FrameBuffer.WindowSize
 local scene = env.NewScene()
 
 local characters = {
+  {
+    Empty = true
+  },
   { 
-    {
-      Empty = true
-    },
     isEnemy = false,
     Name = "Rin",
     Sprite = "Character-Sprite-Rin",
@@ -161,6 +161,42 @@ local DisplayHand = function()
   end
 end
 
+DisplayCharacters = function()
+  local characterSprites = {}
+
+  for i = 1,6 do
+    local characterSprite = scene.CreateSprite("Enemy-Sprite-TargetDummy")
+    characterSprite.Size = DeviceVector(0, 256, 0, 256)
+    local xPos = 420 + i * 160
+    local yPos = 550 + i * 80
+    if i > 3 then 
+      xPos = xPos - 80
+      yPos = yPos - 440
+    end
+    characterSprite.Position = DeviceVector(0, xPos, 0, yPos)
+    characterSprite.AnchorPoint = DeviceVector(0.5,0,1,0)
+    table.insert(characterSprites, characterSprite)
+  end
+
+  while true do
+  
+    for i, character in ipairs(characters) do
+      if character.Empty then
+        characterSprites[i].Canvas.Visible = false
+
+      else
+        characterSprites[i].Canvas.Visible = true
+        characterSprites[i].Appearance.Texture = env.GetTexture(character.Sprite)
+      end
+
+    end
+  
+    wait()
+
+  end
+
+end
+
 local Shuffle = function(list)
 	for i = #list, 2, -1 do
 		local j = math.random(i)
@@ -184,6 +220,7 @@ local Initialize = function()
   DisplayBackground()
   coroutine.wrap(DisplayEnergyBar)()
   coroutine.wrap(DisplayHand)()
+  coroutine.wrap(DisplayCharacters)()
   for position, character in ipairs(characters) do
     coroutine.wrap(DisplayActionBar)(character, position)
   end
