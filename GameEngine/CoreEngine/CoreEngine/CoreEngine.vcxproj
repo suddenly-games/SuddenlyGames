@@ -160,6 +160,8 @@
     <ClCompile Include="src\BoundingSphere.cpp" />
     <ClCompile Include="src\BoundingSphere.meta.cpp" />
     <ClCompile Include="src\BoundingVolume.cpp" />
+    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\Button.meta.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Camera.meta.cpp" />
     <ClCompile Include="src\CanvasStencil.cpp" />
@@ -338,6 +340,7 @@
     <ClInclude Include="src\Alignment.h" />
     <ClInclude Include="src\Appearance.h" />
     <ClInclude Include="src\BoundingSphere.h" />
+    <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\CanvasStencil.h" />
     <ClInclude Include="src\CellData.h" />
     <ClInclude Include="src\Chunk.h" />

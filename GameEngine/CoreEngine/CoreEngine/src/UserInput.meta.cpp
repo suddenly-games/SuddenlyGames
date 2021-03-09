@@ -119,7 +119,7 @@ namespace Engine
 			Function_Overload
 			(
 				Document("");
-				Overload_Returns(std::shared_ptr<InputData>);
+				Overload_Returns(std::shared_ptr<InputDevice>);
 
 				Overload_Parameters
 				(

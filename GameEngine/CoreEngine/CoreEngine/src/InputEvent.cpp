@@ -63,6 +63,11 @@ std::string InputObject::GetName() const
 	return Name;
 }
 
+Enum::BoundDevice InputObject::GetDevice() const
+{
+	return Device;
+}
+
 bool InputHandler::GetState(Enum::InputCode code) const
 {
 	return Inputs[code].IsDown;
@@ -131,6 +136,11 @@ const InputObject& InputHandler::GetInput(Enum::InputCode code) const
 	return Inputs[code];
 }
 
+Enum::BoundDevice InputHandler::GetDevice(Enum::InputCode code) const
+{
+	return Inputs[code].Device;
+}
+
 void InputHandler::EventHandler::ProcessEvent(SDL_Event& event)
 {
 	Target->ProcessEvent(event);
@@ -156,6 +166,7 @@ InputHandler::InputHandler(EventHandler& eventHandler)
 		Inputs[i].Type = inputTypes[i];
 		Inputs[i].Code = Enum::InputCode(i);
 		Inputs[i].Name = inputNames[i];
+		Inputs[i].Device = inputDevices[i];
 	}
 }
 
@@ -293,14 +304,17 @@ void InputHandler::FlushQueue()
 		{
 		case Enum::InputState::Began:
 			Inputs[EventQueue[i].Code].Began.Fire(&Inputs[EventQueue[i].Code]);
+			InputBegan.Fire(&Inputs[EventQueue[i].Code]);
 
 			break;
 		case Enum::InputState::Changed:
 			Inputs[EventQueue[i].Code].Changed.Fire(&Inputs[EventQueue[i].Code]);
+			InputChanged.Fire(&Inputs[EventQueue[i].Code]);
 
 			break;
 		case Enum::InputState::Ended:
 			Inputs[EventQueue[i].Code].Ended.Fire(&Inputs[EventQueue[i].Code]);
+			InputEnded.Fire(&Inputs[EventQueue[i].Code]);
 		}
 	}
 

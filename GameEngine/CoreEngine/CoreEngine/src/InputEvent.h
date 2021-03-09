@@ -26,6 +26,7 @@ public:
 	Enum::InputType GetType() const;
 	Enum::InputCode GetCode() const;
 	std::string GetName() const;
+	Enum::BoundDevice GetDevice() const;
 
 	friend class InputHandler;
 
@@ -36,6 +37,7 @@ private:
 	Vector3 Delta;
 	Enum::InputType Type;
 	Enum::InputCode Code;
+	Enum::BoundDevice Device;
 	const char* Name = nullptr;
 };
 
@@ -75,6 +77,11 @@ public:
 	const char* GetName(Enum::InputCode code) const;
 	InputObject& GetInput(Enum::InputCode code);
 	const InputObject& GetInput(Enum::InputCode code) const;
+	Enum::BoundDevice GetDevice(Enum::InputCode code) const;
+
+	Event<InputObject*> InputBegan;
+	Event<InputObject*> InputChanged;
+	Event<InputObject*> InputEnded;
 
 	class EventHandler
 	{

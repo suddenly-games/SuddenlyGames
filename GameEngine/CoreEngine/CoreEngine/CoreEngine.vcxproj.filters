@@ -687,6 +687,12 @@
     <ClCompile Include="src\InputSubscriber.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.meta.cpp">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics.h">
@@ -1054,6 +1060,9 @@
     </ClInclude>
     <ClInclude Include="src\Alignment.h">
       <Filter>Source Files\Source\Graphics\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

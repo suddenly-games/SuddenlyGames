@@ -1,5 +1,7 @@
 #include "InputContext.h"
 
+#include "LuaInput.h"
+
 namespace GraphicsEngine
 {
 	Reflect_Inherited(InputContext, Object,
@@ -9,12 +11,9 @@ namespace GraphicsEngine
 		Archivable Class_Member(bool, Enabled);
 
 		Document("");
-		Archivable Class_Member(std::weak_ptr<InputSubscriber>, MouseFocus);
+		Archivable Class_Member(std::weak_ptr<DeviceTransform>, Device);
 
 		Document("");
-		Archivable Class_Member(std::weak_ptr<InputSubscriber>, InputFocus);
-
-		Document("");
-		Archivable Static Class_Member(std::weak_ptr<InputContext>, CurrentContext);
+		Archivable Class_Member(std::weak_ptr<Engine::UserInput>, InputSource);
 	);
 }

@@ -142,4 +142,14 @@ namespace Engine
 
 		Enum_Item(None);
 	);
+
+	Enum_Definition(BoundDevice,
+		Document_Enum("");
+		
+		Enum_Item(Any);
+
+		Enum_Item(Mouse1);
+
+		Enum_Item(Input1);
+	);
 }
