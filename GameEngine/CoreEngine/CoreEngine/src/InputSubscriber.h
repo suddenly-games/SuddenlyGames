@@ -16,6 +16,7 @@ namespace GraphicsEngine
 		void Subscribe(const std::shared_ptr<Engine::InputObject>& input);
 
 	private:
+		bool ChangedThisFrame = false;
 		int BeganConnection = -1;
 		int ChangedConnection = -1;
 		int EndedConnection = -1;

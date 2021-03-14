@@ -29,7 +29,10 @@ namespace GraphicsEngine
 
 	void InputSubscription::Update(float)
 	{
-		//UpdateState();
+		if (!ChangedThisFrame)
+			UpdateState();
+
+		ChangedThisFrame = false;
 	}
 
 	void InputSubscription::Subscribe(const std::shared_ptr<Engine::InputObject>& input)
@@ -93,6 +96,8 @@ namespace GraphicsEngine
 				SetPosition(Input->GetPosition(device), device, !focusedLast);
 			}
 		}
+
+		ChangedThisFrame = true;
 	}
 
 	std::shared_ptr<InputSubscription> InputSubscriber::Subscribe(const std::shared_ptr<Engine::InputObject>& input)
