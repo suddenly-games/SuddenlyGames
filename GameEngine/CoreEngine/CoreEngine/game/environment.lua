@@ -40,6 +40,12 @@ return {
     ui.RenderAutomatically = true
     ui.Parent = screen
 
+    local input = GameObject("InputContext")
+    input.Device = screen
+    input.InputSource = Engine.GameWindow.UserInput
+    input.Parent = screen
+
+
     return {
       CreateSprite = function(texture)
         local sprite = GameObject("DeviceTransform")

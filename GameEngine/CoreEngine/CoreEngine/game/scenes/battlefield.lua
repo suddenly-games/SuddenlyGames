@@ -135,6 +135,24 @@ local DisplayHand = function()
     cardImage.Size = DeviceVector(0, 137, 0, 187)
     cardImage.Position = DeviceVector(0, 500, 0, 500)
     cardImage.AnchorPoint = DeviceVector(0,0,0,0)
+
+    local input = GameObject("InputSubscriber")
+    input.Parent = cardImage
+    local mouseButton = userInput:GetInput(Enum.InputCode.MouseLeft)
+    local boundInput = input:Subscribe(mouseButton)
+
+    local onClick = function()
+      while true do
+        local enum = boundInput:GetStateEnum(Enum.BoundDevice.Mouse1)
+        if enum ~= Enum.InputState.Idle then
+          print(enum)
+        end
+        wait()
+      end
+    end
+
+    coroutine.wrap(onClick)()
+
     table.insert(cardImages, cardImage)
   end
 

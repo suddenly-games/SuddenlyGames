@@ -30,6 +30,7 @@ namespace GraphicsEngine
 	void InputSubscription::Update(float)
 	{
 		UpdateState();
+		std::cout << GetStateEnum(Enum::BoundDevice::Mouse1) << std::endl;
 	}
 
 	void InputSubscription::Subscribe(const std::shared_ptr<Engine::InputObject>& input)
@@ -87,8 +88,8 @@ namespace GraphicsEngine
 			}
 			else
 			{
-				SetState(Input->GetState(device), device, focusedLast);
-				SetPosition(Input->GetPosition(device), device, focusedLast);
+				SetState(Input->GetState(device), device, false);
+				SetPosition(Input->GetPosition(device), device, false);
 			}
 		}
 	}
