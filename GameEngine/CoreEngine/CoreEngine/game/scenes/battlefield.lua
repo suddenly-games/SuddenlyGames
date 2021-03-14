@@ -6,12 +6,16 @@ local scene = env.NewScene()
 
 local characters = {
   {
+    Active = false,
     Empty = true
   },
   { 
+    Active = false,
     isEnemy = false,
     Name = "Rin",
     Sprite = "Character-Sprite-Rin",
+    HP = 200,
+    MaxHP = 200,
     SPD = 100,
     ATB = 0,
     Stars = 3,
@@ -24,29 +28,36 @@ local characters = {
     Deck = {},
   },
   {
+    Active = false,
     Empty = true
   },
   {
+    Active = false,
     isEnemy = true,
     SPD = 100,
     ATB = 0,
     HP = 99999,
+    MaxHP = 99999,
     Name = "Target Dummy",
     Sprite = "Enemy-Sprite-TargetDummy"
   },
   {
+    Active = false,
     isEnemy = true,
     SPD = 100,
     ATB = 0,
     HP = 99999,
+    MaxHP = 99999,
     Name = "Target Dummy",
     Sprite = "Enemy-Sprite-TargetDummy"
   },
   {
+    Active = false,
     isEnemy = true,
     SPD = 100,
     ATB = 0,
     HP = 99999,
+    MaxHP = 99999,
     Name = "Target Dummy",
     Sprite = "Enemy-Sprite-TargetDummy"
   },
@@ -181,16 +192,32 @@ end
 
 DisplayCharacters = function()
   local characterSprites = {}
+  local selectSprites = {}
+  local hpBarSprites = {}
 
   for i = 1,6 do
-    local characterSprite = scene.CreateSprite("Enemy-Sprite-TargetDummy")
-    characterSprite.Size = DeviceVector(0, 256, 0, 256)
+
     local xPos = 420 + i * 160
     local yPos = 550 + i * 80
     if i > 3 then 
       xPos = xPos - 80
       yPos = yPos - 440
     end
+
+    local selectImage = scene.CreateSprite("UI-Select-Circle")
+    selectImage.Size = DeviceVector(0, 170, 0, 50)
+    selectImage.Position = DeviceVector(0, xPos, 0, yPos - 40)
+    selectImage.AnchorPoint = DeviceVector(0.5,0,0.5,0)
+    table.insert(selectSprites, selectImage)
+
+    local hpBarImage = scene.CreateSprite("UI-HP-Bar")
+    hpBarImage.Size = DeviceVector(0, 180, 0, 12)
+    hpBarImage.Position = DeviceVector(0, xPos - 90, 0, yPos - 16)
+    hpBarImage.AnchorPoint = DeviceVector(0,0,0,0)
+    table.insert(hpBarSprites, hpBarImage)
+
+    local characterSprite = scene.CreateSprite("Enemy-Sprite-TargetDummy")
+    characterSprite.Size = DeviceVector(0, 256, 0, 256)
     characterSprite.Position = DeviceVector(0, xPos, 0, yPos)
     characterSprite.AnchorPoint = DeviceVector(0.5,0,1,0)
     table.insert(characterSprites, characterSprite)
@@ -199,12 +226,16 @@ DisplayCharacters = function()
   while true do
   
     for i, character in ipairs(characters) do
+      selectSprites[i].Canvas.Visible = character.Active
+
       if character.Empty then
         characterSprites[i].Canvas.Visible = false
-
+        hpBarSprites[i].Canvas.Visible = false
       else
         characterSprites[i].Canvas.Visible = true
         characterSprites[i].Appearance.Texture = env.GetTexture(character.Sprite)
+        hpBarSprites[i].Canvas.Visible = true
+        hpBarSprites[i].Size = DeviceVector(0, character.HP / character.MaxHP * 170, 0, 12)
       end
 
     end
@@ -246,12 +277,16 @@ local Initialize = function()
 end
 
 local EnemyTurn = function(character)
+  character.Active = true
   print("Restored HP")
   character.HP = 99999
   wait(0.5)
+  character.Active = false
 end
 
 local PlayerTurn = function(character)
+  character.Active = true
+
   local input1 = userInput:GetInput(Enum.InputCode.One)
   local input2 = userInput:GetInput(Enum.InputCode.Two)
   local input3 = userInput:GetInput(Enum.InputCode.Three)
@@ -274,6 +309,7 @@ local PlayerTurn = function(character)
     local selectedIndex
 
     if input1:GetState() and hand[1] ~= nil then
+      print(input1:GetStateChanged())
       selectedCard = hand[1]
       selectedIndex = 1
     elseif input2:GetState() and hand[2] ~= nil then
@@ -292,6 +328,9 @@ local PlayerTurn = function(character)
 
     if selectedCard ~= nil and selectedCard.Cost <= energyBar.Energy then
       energyBar.Energy = energyBar.Energy - selectedCard.Cost
+
+      characters[5].HP = characters[5].HP - 20000
+
       table.insert(character.DiscardPile, table.remove(hand, selectedIndex))
     end
 
@@ -307,6 +346,7 @@ local PlayerTurn = function(character)
   hand = {}
 
   energyBar.MaxEnergy = 0  
+  character.Active = false
 end
 
 local Update = function()
