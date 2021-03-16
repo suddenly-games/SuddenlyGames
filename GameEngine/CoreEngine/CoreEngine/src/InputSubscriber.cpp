@@ -69,6 +69,9 @@ namespace GraphicsEngine
 
 	void InputSubscription::UpdateState()
 	{
+		if (ChangedThisFrame)
+			std::cout << "warning: double input change in '" << Name << "'" << std::endl;
+
 		std::shared_ptr<InputSubscriber> subscriber = GetComponent<InputSubscriber>();
 
 		for (int i = 0; i < Enum::BoundDevice::Count; ++i)
