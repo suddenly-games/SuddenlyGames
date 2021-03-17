@@ -1,66 +1,22 @@
 local env = require("./game/environment")
 local format = require("./game/util/format")
+local characters = require("./game/data/characters")
+local enemies = require("./game/data/enemies")
 local userInput = Engine.GameWindow.UserInput
 local resolution = GameObject.FrameBuffer.WindowSize
 local scene = env.NewScene()
 
-local characters = {
-  {
-    Active = false,
-    Empty = true
-  },
-  { 
-    Active = false,
-    isEnemy = false,
-    Name = "Rin",
-    Sprite = "Character-Sprite-Rin",
-    HP = 200,
-    MaxHP = 200,
-    SPD = 100,
-    ATB = 0,
-    Stars = 3,
-    Hand = {},
-    DiscardPile = {
-      { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, { Cost = 1 }, 
-      { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, { Cost = 2 }, 
-      { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }, { Cost = 3 }
-    },
-    Deck = {},
-  },
-  {
-    Active = false,
-    Empty = true
-  },
-  {
-    Active = false,
-    isEnemy = true,
-    SPD = 100,
-    ATB = 0,
-    HP = 99999,
-    MaxHP = 99999,
-    Name = "Target Dummy",
-    Sprite = "Enemy-Sprite-TargetDummy"
-  },
-  {
-    Active = false,
-    isEnemy = true,
-    SPD = 100,
-    ATB = 0,
-    HP = 99999,
-    MaxHP = 99999,
-    Name = "Target Dummy",
-    Sprite = "Enemy-Sprite-TargetDummy"
-  },
-  {
-    Active = false,
-    isEnemy = true,
-    SPD = 100,
-    ATB = 0,
-    HP = 99999,
-    MaxHP = 99999,
-    Name = "Target Dummy",
-    Sprite = "Enemy-Sprite-TargetDummy"
-  },
+local BLANK = function()
+  return { Active = false, Empty = true }
+end
+
+local battlefield = {
+  BLANK(),
+  characters.Load("RIN"),
+  BLANK(),
+  enemies.Load("TARGET_DUMMY"),
+  enemies.Load("TARGET_DUMMY"),
+  enemies.Load("TARGET_DUMMY")
 }
 
 local turnQueue = {}
@@ -232,7 +188,7 @@ DisplayCharacters = function()
 
   while true do
   
-    for i, character in ipairs(characters) do
+    for i, character in ipairs(battlefield) do
       selectSprites[i].Canvas.Visible = character.Active
 
       if character.Empty then
@@ -277,7 +233,7 @@ local Initialize = function()
   coroutine.wrap(DisplayEnergyBar)()
   coroutine.wrap(DisplayHand)()
   coroutine.wrap(DisplayCharacters)()
-  for position, character in ipairs(characters) do
+  for position, character in ipairs(battlefield) do
     coroutine.wrap(DisplayActionBar)(character, position)
   end
 
@@ -312,7 +268,7 @@ local PlayerTurn = function(character)
       if card.Clicked and card.Cost <= energyBar.Energy then
 
         energyBar.Energy = energyBar.Energy - card.Cost
-        characters[5].HP = characters[5].HP - 20000
+        battlefield[5].HP = battlefield[5].HP - 20000
 
         table.insert(character.DiscardPile, table.remove(hand, i))
       
@@ -333,10 +289,9 @@ end
 
 local Update = function()
   
-  for _, character in ipairs(characters) do
+  for _, character in ipairs(battlefield) do
 
     if not character.Empty then
-
       character.ATB = character.ATB + character.SPD
       if character.ATB >= 10000 then
         table.insert(turnQueue, character)
@@ -367,13 +322,3 @@ Initialize()
 while true do
   Update()
 end
-
-
-
--- Initialize()
--- StartDrawingThreads()
--- while true do
---   CaptureInput()
---   Update()
---   wait()
--- end
