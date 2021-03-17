@@ -140,6 +140,7 @@ end
 local DisplayHand = function()
 
   local cardImages = {}
+  local boundInputs = {}
 
   for i = 1,5 do
     local cardImage = scene.CreateSprite("Card-Test-1")
@@ -151,20 +152,8 @@ local DisplayHand = function()
     input.Parent = cardImage
     local mouseButton = userInput:GetInput(Enum.InputCode.MouseLeft)
     local boundInput = input:Subscribe(mouseButton)
-
-    local onClick = function()
-      while true do
-        local enum = boundInput:GetStateEnum(Enum.BoundDevice.Mouse1)
-        if enum ~= Enum.InputState.Idle then
-          print(enum)
-        end
-        wait()
-      end
-    end
-
-    coroutine.wrap(onClick)()
-
     table.insert(cardImages, cardImage)
+    table.insert(boundInputs, boundInput)
   end
 
   while true do
@@ -179,9 +168,27 @@ local DisplayHand = function()
 
       local cardImage = cardImages[i]
 
+      local yPos = resolution.Height - 210
+
+      if boundInputs[i]:HasFocus(Enum.BoundDevice.Mouse1) then
+        yPos = yPos - 50
+      end
+
       cardImage.Appearance.Texture = env.GetTexture("Card-Test-"..card.Cost)
       cardImage.Canvas.Visible = true
-      cardImage.Position = DeviceVector(0, 400 + i * 160, 0, resolution.Height - 210)
+      cardImage.Position = DeviceVector(0, 400 + i * 160, 0, yPos)
+
+      local state = boundInputs[i]:GetStateEnum(Enum.BoundDevice.Mouse1)
+
+      if state ~= Enum.InputState.Idle then
+        print(state)
+      end
+
+      if state == Enum.InputState.Began then
+        card.Clicked = true
+      else 
+        card.Clicked = false
+      end
 
     end
 
@@ -278,20 +285,15 @@ end
 
 local EnemyTurn = function(character)
   character.Active = true
-  print("Restored HP")
   character.HP = 99999
   wait(0.5)
   character.Active = false
 end
 
 local PlayerTurn = function(character)
+
   character.Active = true
 
-  local input1 = userInput:GetInput(Enum.InputCode.One)
-  local input2 = userInput:GetInput(Enum.InputCode.Two)
-  local input3 = userInput:GetInput(Enum.InputCode.Three)
-  local input4 = userInput:GetInput(Enum.InputCode.Four)
-  local input5 = userInput:GetInput(Enum.InputCode.Five)
   local endTurn = userInput:GetInput(Enum.InputCode.Space)
 
   energyBar.MaxEnergy = character.Stars
@@ -303,42 +305,22 @@ local PlayerTurn = function(character)
     table.insert(hand, DrawCard(character))
   end
 
-  while energyBar.Energy > 0 do
+  while energyBar.Energy > 0 and not endTurn:GetState() do
+    
+    for i, card in ipairs(hand) do
+    
+      if card.Clicked and card.Cost <= energyBar.Energy then
 
-    local selectedCard
-    local selectedIndex
+        energyBar.Energy = energyBar.Energy - card.Cost
+        characters[5].HP = characters[5].HP - 20000
 
-    if input1:GetState() and hand[1] ~= nil then
-      print(input1:GetStateChanged())
-      selectedCard = hand[1]
-      selectedIndex = 1
-    elseif input2:GetState() and hand[2] ~= nil then
-      selectedCard = hand[2]
-      selectedIndex = 2
-    elseif input3:GetState() and hand[3] ~= nil then
-      selectedCard = hand[3]
-      selectedIndex = 3
-    elseif input4:GetState() and hand[4] ~= nil then
-      selectedCard = hand[4]
-      selectedIndex = 4
-    elseif input5:GetState() and hand[5] ~= nil then
-      selectedCard = hand[5]
-      selectedIndex = 5
+        table.insert(character.DiscardPile, table.remove(hand, i))
+      
+      end
+    
     end
 
-    if selectedCard ~= nil and selectedCard.Cost <= energyBar.Energy then
-      energyBar.Energy = energyBar.Energy - selectedCard.Cost
-
-      characters[5].HP = characters[5].HP - 20000
-
-      table.insert(character.DiscardPile, table.remove(hand, selectedIndex))
-    end
-
-    if endTurn:GetState() then
-      break
-    end
-
-    wait(0.1)
+    wait()
 
   end
 
@@ -385,3 +367,13 @@ Initialize()
 while true do
   Update()
 end
+
+
+
+-- Initialize()
+-- StartDrawingThreads()
+-- while true do
+--   CaptureInput()
+--   Update()
+--   wait()
+-- end
