@@ -6,6 +6,17 @@ local userInput = Engine.GameWindow.UserInput
 local resolution = GameObject.FrameBuffer.WindowSize
 local scene = env.NewScene()
 
+function logpcall(func, ...)
+  local success, err = pcall(func, ...)
+  if not success then print(err) end
+end
+
+function pcallspawn(func, ...)
+  coroutine.wrap(function(...)
+    logpcall(func, ...)
+  end)(...)
+end
+
 local BLANK = function()
   return { Active = false, Empty = true }
 end
@@ -136,10 +147,6 @@ local DisplayHand = function()
 
       local state = boundInputs[i]:GetStateEnum(Enum.BoundDevice.Mouse1)
 
-      if state ~= Enum.InputState.Idle then
-        print(state)
-      end
-
       if state == Enum.InputState.Began then
         card.Clicked = true
       else 
@@ -157,6 +164,8 @@ DisplayCharacters = function()
   local characterSprites = {}
   local selectSprites = {}
   local hpBarSprites = {}
+  local boundInputs = {}
+  local tooltip = scene.CreateText("Test")
 
   for i = 1,6 do
 
@@ -184,10 +193,20 @@ DisplayCharacters = function()
     characterSprite.Position = DeviceVector(0, xPos, 0, yPos)
     characterSprite.AnchorPoint = DeviceVector(0.5,0,1,0)
     table.insert(characterSprites, characterSprite)
+
+    local input = GameObject("InputSubscriber")
+    input.Parent = characterSprite
+    local mouseButton = userInput:GetInput(Enum.InputCode.MouseLeft)
+    local boundInput = input:Subscribe(mouseButton)
+    table.insert(boundInputs, boundInput)
   end
 
   while true do
   
+    local tooltipIndex = 0
+    tooltip.Canvas.Visible = false
+    tooltip.Position = DeviceVector(0, 20, 0, 300)
+
     for i, character in ipairs(battlefield) do
       selectSprites[i].Canvas.Visible = character.Active
 
@@ -199,10 +218,35 @@ DisplayCharacters = function()
         characterSprites[i].Appearance.Texture = env.GetTexture(character.Sprite)
         hpBarSprites[i].Canvas.Visible = true
         hpBarSprites[i].Size = DeviceVector(0, character.HP / character.MaxHP * 170, 0, 12)
+
+        if boundInputs[i]:HasFocus(Enum.BoundDevice.Mouse1) then
+          tooltipIndex = i
+        end
       end
 
     end
   
+    if tooltipIndex > 0 then 
+      tooltip.Canvas.Visible = true
+      local hoveredCharacter = battlefield[tooltipIndex]
+
+      local tooltipText = string.format(
+        "%s Lv. %d\nHP: %.0f/%.0f\nATB: %.0f/10000\nATK: %.0f\nMAG: %.0f\nDEF: %.0f\nRES: %.0f\nSPD: %.0f\n",
+        hoveredCharacter.Name,
+        hoveredCharacter.Level,
+        hoveredCharacter.HP,
+        hoveredCharacter.MaxHP,
+        hoveredCharacter.ATB,
+        hoveredCharacter.ATK,
+        hoveredCharacter.MAG,
+        hoveredCharacter.DEF,
+        hoveredCharacter.RES,
+        hoveredCharacter.SPD
+      )
+
+      tooltip.Canvas.Text:SetText(tooltipText)
+    end
+
     wait()
 
   end
@@ -230,11 +274,11 @@ end
 
 local Initialize = function()
   DisplayBackground()
-  coroutine.wrap(DisplayEnergyBar)()
-  coroutine.wrap(DisplayHand)()
-  coroutine.wrap(DisplayCharacters)()
+  pcallspawn(DisplayEnergyBar)
+  pcallspawn(DisplayHand)
+  pcallspawn(DisplayCharacters)
   for position, character in ipairs(battlefield) do
-    coroutine.wrap(DisplayActionBar)(character, position)
+    pcallspawn(DisplayActionBar, character, position)
   end
 
 end
@@ -317,8 +361,8 @@ local Update = function()
   wait()
 end
 
-Initialize()
+logpcall(Initialize)
 
 while true do
-  Update()
+  logpcall(Update)
 end

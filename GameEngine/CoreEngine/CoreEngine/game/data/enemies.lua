@@ -19,6 +19,7 @@ enemies.Load = function(enemyID)
   enemy.Active = false
   enemy.isEnemy = true
   enemy.Name = data.Name
+  enemy.Level = 1
   enemy.Sprite = data.Sprite
   enemy.HP = data.HP
   enemy.MaxHP = data.HP
