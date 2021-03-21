@@ -108,6 +108,7 @@ local DisplayHand = function()
 
   local cardImages = {}
   local boundInputs = {}
+  local tooltip = scene.CreateText("Test")
 
   for i = 1,5 do
     local cardImage = scene.CreateSprite("Card-Test-1")
@@ -124,6 +125,10 @@ local DisplayHand = function()
   end
 
   while true do
+  
+    local tooltipIndex = 0
+    tooltip.Canvas.Visible = false
+    tooltip.Position = DeviceVector(0, 20, 0, 300)
 
     local xOffset = 500
 
@@ -139,6 +144,7 @@ local DisplayHand = function()
 
       if boundInputs[i]:HasFocus(Enum.BoundDevice.Mouse1) then
         yPos = yPos - 50
+        tooltipIndex = i
       end
 
       cardImage.Appearance.Texture = env.GetTexture("Card-Test-"..card.Cost)
@@ -153,6 +159,23 @@ local DisplayHand = function()
         card.Clicked = false
       end
 
+    end
+  
+    if tooltipIndex > 0 then 
+      tooltip.Canvas.Visible = true
+      local hoveredCard = hand[tooltipIndex]
+      local rarity = {"C","U","R","E","L"}
+      local tooltipText = string.format(
+        "%s (%s)\n\nCost: %.0f\nElement: %s\nType: %s\n\n%s",
+        hoveredCard.Name,
+        rarity[hoveredCard.Stars],
+        hoveredCard.Cost,
+        hoveredCard.Element,
+        hoveredCard.Type,
+        hoveredCard.Text
+      )
+
+      tooltip.Canvas.Text:SetText(tooltipText)
     end
 
     wait()
@@ -231,7 +254,7 @@ DisplayCharacters = function()
       local hoveredCharacter = battlefield[tooltipIndex]
 
       local tooltipText = string.format(
-        "%s Lv. %d\nHP: %.0f/%.0f\nATB: %.0f/10000\nATK: %.0f\nMAG: %.0f\nDEF: %.0f\nRES: %.0f\nSPD: %.0f\n",
+        "%s Lv. %d\n\nHP: %.0f/%.0f\nATB: %.0f/10000\nATK: %.0f\nMAG: %.0f\nDEF: %.0f\nRES: %.0f\nSPD: %.0f\n",
         hoveredCharacter.Name,
         hoveredCharacter.Level,
         hoveredCharacter.HP,

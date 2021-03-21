@@ -1,4 +1,5 @@
 local roster = require("./game/account/roster")
+local cards = require("./game/data/cards")
 
 local characters = {}
 
@@ -39,19 +40,15 @@ characters.Load = function(charID)
     character.DEF = character.DEF * (1 + (character.Level - 100) * 0.01)
     character.RES = character.RES * (1 + (character.Level - 100) * 0.01)
   end
-
-  -- character.HP = math.floor(character.HP)
-  -- character.ATK = math.floor(character.ATK)
-  -- character.MAG = math.floor(character.MAG)
-  -- character.DEF = math.floor(character.DEF)
-  -- character.RES = math.floor(character.RES)
-  -- character.SPD = math.floor(character.SPD)
-
+  
   character.MaxHP = character.HP
 
   character.Active = false
   character.isEnemy = false
-  character.DiscardPile = progress.Deck
+  character.DiscardPile = {}
+  for i, cardID in ipairs(progress.Deck) do
+    table.insert(character.DiscardPile, cards.Load(cardID))
+  end
   character.Hand = {}
   character.Deck = {}
   character.ATB = 0
