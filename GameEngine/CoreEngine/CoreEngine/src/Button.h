@@ -23,6 +23,7 @@ namespace GraphicsEngine
 		void Update(float);
 
 	private:
+		bool Down = false;
 
 		Instantiable;
 

@@ -201,14 +201,14 @@ namespace GraphicsEngine
 			parentSize.Y * Size.Y.Scale + Size.Y.Offset
 		);
 
-		Vector3 offset = 2 * AnchorPoint.Calculate(Vector3(), AbsoluteSize).Scale(1, 1, 1);
+		//Vector3 offset = 2 * AnchorPoint.Calculate(Vector3(), AbsoluteSize).Scale(1, 1, 1);
 		Vector3 rotationOffset = 2 * RotationAnchor.Calculate(Vector3(), AbsoluteSize).Scale(1, 1, 1);
 
 		Vector3 scale = AbsoluteSize + Vector3(0, 0, 1);
 		Vector3 translation = Vector3(
-			2 * (Position.X.Offset + parentSize.X * Position.X.Scale),
-			2 * (Position.Y.Offset + parentSize.Y * Position.Y.Scale)
-		) - (parentSize - AbsoluteSize) + offset;
+			2 * (Position.X.Offset + parentSize.X * Position.X.Scale - AnchorPoint.X.Offset - AbsoluteSize.X * AnchorPoint.X.Scale),
+			2 * (Position.Y.Offset + parentSize.Y * Position.Y.Scale - AnchorPoint.Y.Offset - AbsoluteSize.Y * AnchorPoint.Y.Scale)
+		) - (parentSize - AbsoluteSize);// +offset;
 
 		translation = translation.Scale(1, -1, 1);
 
@@ -220,7 +220,7 @@ namespace GraphicsEngine
 		if (parentSize.Y != 0)
 			scaling.Y = 1 / parentSize.Y;
 
-		Transformation = Matrix3().Scale(scaling) * Matrix3(translation + rotationOffset - offset) * Matrix3().RotateRoll(Rotation) * Matrix3(-rotationOffset) * Matrix3().Scale(scale);
+		Transformation = Matrix3().Scale(scaling) * Matrix3(translation + rotationOffset) * Matrix3().RotateRoll(Rotation) * Matrix3(-rotationOffset) * Matrix3().Scale(scale);
 
 		if (parent != nullptr)
 			Transformation = parent->GetTransformation() * Transformation;
@@ -254,9 +254,8 @@ namespace GraphicsEngine
 				{
 					if (!updateStencils && child->GetComponent<DeviceTransform>() == This.lock())
 						child->Cast<ScreenCanvas>()->Draw();
-
-					Draw(child, updateStencils);
 				}
+				Draw(child, updateStencils);
 			}
 			else if (child->IsA<Text>())
 			{

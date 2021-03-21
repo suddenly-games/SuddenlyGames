@@ -22,6 +22,9 @@ ruiFont.Parent = fonts
 --
 -- Scene
 return {
+  GetTexture = function(texture)
+    return textures[texture]
+  end,
   NewScene = function()
     local level = GameObject("Environment")
     level.Parent = env
@@ -37,6 +40,12 @@ return {
     ui.RenderAutomatically = true
     ui.Parent = screen
 
+    local input = GameObject("InputContext")
+    input.Device = screen
+    input.InputSource = Engine.GameWindow.UserInput
+    input.Parent = screen
+
+
     return {
       CreateSprite = function(texture)
         local sprite = GameObject("DeviceTransform")
@@ -45,7 +54,7 @@ return {
         sprite.AnchorPoint = DeviceVector(0.5, 0, 0.5, 0)
 
         local appearance = GameObject("Appearance")
-        appearance.Name = texture
+        appearance.Name = "Appearance"
         appearance.Parent = sprite
         appearance.Color = RGBA(0,0,0,0)
         appearance.Texture = textures[texture]
@@ -56,6 +65,7 @@ return {
 
         local canvas = GameObject("ScreenCanvas")
         canvas.Appearance = appearance
+        canvas.Name = "Canvas"
         canvas.Parent = sprite
 
         return sprite

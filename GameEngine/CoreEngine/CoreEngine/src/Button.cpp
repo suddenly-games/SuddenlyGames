@@ -18,7 +18,11 @@ namespace GraphicsEngine
 		if (input == nullptr)
 			return;
 
-		if (input->GetState())
+		Enum::InputState state = input->GetStateEnum();
+
+		Down = (Down && state != Enum::InputState::Idle && state != Enum::InputState::Ended) || state == Enum::InputState::Began;
+
+		if (Down)
 			canvas->Appearance = Pressed.lock();
 		else if (input->HasFocus(Device))
 			canvas->Appearance = Hover.lock();

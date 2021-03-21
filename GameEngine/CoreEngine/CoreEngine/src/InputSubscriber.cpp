@@ -29,7 +29,10 @@ namespace GraphicsEngine
 
 	void InputSubscription::Update(float)
 	{
-		UpdateState();
+		if (!ChangedThisFrame)
+			UpdateState();
+
+		ChangedThisFrame = false;
 	}
 
 	void InputSubscription::Subscribe(const std::shared_ptr<Engine::InputObject>& input)
@@ -66,6 +69,9 @@ namespace GraphicsEngine
 
 	void InputSubscription::UpdateState()
 	{
+		if (ChangedThisFrame)
+			std::cout << "warning: double input change in '" << Name << "'" << std::endl;
+
 		std::shared_ptr<InputSubscriber> subscriber = GetComponent<InputSubscriber>();
 
 		for (int i = 0; i < Enum::BoundDevice::Count; ++i)
@@ -80,6 +86,8 @@ namespace GraphicsEngine
 				focusedLast = subscriber->FocusedLast[device];
 			}
 
+			bool state = Input->GetState(device);
+
 			if (!hasFocus)
 			{
 				SetState(false, device, true);
@@ -87,10 +95,12 @@ namespace GraphicsEngine
 			}
 			else
 			{
-				SetState(Input->GetState(device), device, focusedLast);
-				SetPosition(Input->GetPosition(device), device, focusedLast);
+				SetState(Input->GetState(device), device, !focusedLast);
+				SetPosition(Input->GetPosition(device), device, !focusedLast);
 			}
 		}
+
+		ChangedThisFrame = true;
 	}
 
 	std::shared_ptr<InputSubscription> InputSubscriber::Subscribe(const std::shared_ptr<Engine::InputObject>& input)

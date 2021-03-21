@@ -23,10 +23,10 @@ Reflect_Type(DeviceAxis,
 			Overload_Parameters
 			(
 				Document("");
-				Function_Parameter(float, scale);
+				Function_Parameter_Default(float, scale, 0);
 			
 				Document("");
-				Function_Parameter(float, offset);
+				Function_Parameter_Default(float, offset, 0);
 			);
 			
 			Bind_Constructor(scale, offset);
@@ -158,16 +158,16 @@ Reflect_Type(DeviceVector,
 			Overload_Parameters
 			(
 				Document("");
-				Function_Parameter(float, scaleX);
+				Function_Parameter_Default(float, scaleX, 0);
 			
 				Document("");
-				Function_Parameter(float, offsetX);
+				Function_Parameter_Default(float, offsetX, 0);
 
 				Document("");
-				Function_Parameter(float, scaleY);
+				Function_Parameter_Default(float, scaleY, 0);
 
 				Document("");
-				Function_Parameter(float, offsetY);
+				Function_Parameter_Default(float, offsetY, 0);
 			);
 			
 			Bind_Constructor(scaleX, offsetX, scaleY, offsetY);
