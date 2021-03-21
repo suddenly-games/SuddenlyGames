@@ -7,12 +7,12 @@ characters.Data = {
   RIN = {
     Name = "Rin",
     Sprite = "Character-Sprite-Rin",
-    HP = 200,
-    ATK = 100,
-    MAG = 100,
-    DEF = 100,
-    RES = 100,
-    SPD = 120
+    HP = 160,
+    ATK = 120,
+    MAG = 120,
+    DEF = 75,
+    RES = 75,
+    SPD = 85
   }
 }
 

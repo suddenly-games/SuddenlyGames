@@ -25,9 +25,9 @@ local battlefield = {
   BLANK(),
   characters.Load("RIN"),
   BLANK(),
-  enemies.Load("TARGET_DUMMY"),
-  enemies.Load("TARGET_DUMMY"),
-  enemies.Load("TARGET_DUMMY")
+  enemies.Load("TARGET_DUMMY", 20),
+  enemies.Load("TARGET_DUMMY", 20),
+  enemies.Load("TARGET_DUMMY", 20)
 }
 
 local turnQueue = {}
@@ -308,7 +308,7 @@ end
 
 local EnemyTurn = function(character)
   character.Active = true
-  character.HP = 99999
+  character.HP = character.MaxHP
   wait(0.5)
   character.Active = false
 end
@@ -335,7 +335,32 @@ local PlayerTurn = function(character)
       if card.Clicked and card.Cost <= energyBar.Energy then
 
         energyBar.Energy = energyBar.Energy - card.Cost
-        battlefield[5].HP = battlefield[5].HP - 20000
+
+        for j, effect in ipairs(card.Effects) do
+          if effect.Action == "DAMAGE" then
+          
+            local targets = {}
+
+            if effect.Target == "ENEMY_ALL" then
+              targets = { battlefield[4], battlefield[5], battlefield[6] }
+            end
+
+            --CalculateDamage(source, targets, effect)
+
+            for k, target in ipairs(targets) do
+
+              local damage = character[effect.Scaling] * effect.Power / target[effect.Defense] + character[effect.Scaling] - target[effect.Defense] 
+              damage = damage * 1.01 ^ (2 * character.Level - target.Level)
+              target.HP = math.max(0, target.HP - damage)
+
+              print("Did " .. damage .. " damage.")
+            end
+            --end --CalculateDamage()
+
+          end
+        end
+
+
 
         table.insert(character.DiscardPile, table.remove(hand, i))
       
