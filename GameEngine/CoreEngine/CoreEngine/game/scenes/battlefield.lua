@@ -340,12 +340,50 @@ local PlayerTurn = function(character)
           if effect.Action == "DAMAGE" then
           
             local targets = {}
+            local targetPositions = {}
 
             if effect.Target == "ENEMY_ALL" then
+              targetPositions = { 4, 5, 6 }
               targets = { battlefield[4], battlefield[5], battlefield[6] }
             end
 
             --CalculateDamage(source, targets, effect)
+
+            local DisplayDamage = function(value, position)
+
+              local damageText = scene.CreateText(string.format("%.0f",value))
+
+              local xPos = 310 + position * 160
+              local yPos = 250 + position * 80
+              if position > 3 then 
+                xPos = xPos - 80
+                yPos = yPos - 440
+              end
+
+              damageText.Position = DeviceVector(0, xPos, 0, yPos)
+              --damageText.AnchorPoint = DeviceVector(0.5, 0, 0.5, 0)
+
+              local size = 180
+
+              for frame = 1,10 do
+                yPos = yPos + 0.05 * size
+                xPos = xPos + 0.05 * size
+                size = size * 0.9
+                yPos = yPos - 0.5
+                damageText.Position = DeviceVector(0, xPos, 0, yPos)
+
+                damageText.Canvas.Text.FontSize = DeviceAxis(0, size)
+                wait()
+              end
+
+              for frame = 1,20 do
+                yPos = yPos - 0.5
+                damageText.Position = DeviceVector(0, xPos, 0, yPos)
+                wait()
+              end
+              damageText.Canvas.Visible = false
+
+            end
 
             for k, target in ipairs(targets) do
 
@@ -353,7 +391,7 @@ local PlayerTurn = function(character)
               damage = damage * 1.01 ^ (2 * character.Level - target.Level)
               target.HP = math.max(0, target.HP - damage)
 
-              print("Did " .. damage .. " damage.")
+              pcallspawn(DisplayDamage, damage, targetPositions[k])
             end
             --end --CalculateDamage()
 

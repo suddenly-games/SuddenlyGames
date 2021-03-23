@@ -255,7 +255,7 @@ namespace GraphicsEngine
 					if (!updateStencils && child->GetComponent<DeviceTransform>() == This.lock())
 						child->Cast<ScreenCanvas>()->Draw();
 				}
-				Draw(child, updateStencils);
+				Draw(child, updateStencils);          
 			}
 			else if (child->IsA<Text>())
 			{
