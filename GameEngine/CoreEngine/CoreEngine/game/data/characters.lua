@@ -42,6 +42,25 @@ characters.Load = function(charID)
   end
   
   character.MaxHP = character.HP
+  character.Armor = 0
+
+  character.Buffs = {
+    ATK = 0,
+    MAG = 0,
+    DEF = 0,
+    RES = 0,
+    SPD = 0,
+    EVA = 0
+  }
+
+  character.NewBuff = {
+    ATK = false,
+    MAG = false,
+    DEF = false,
+    RES = false,
+    SPD = false,
+    EVA = false
+  }
 
   character.Active = false
   character.isEnemy = false

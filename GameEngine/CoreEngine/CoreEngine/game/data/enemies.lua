@@ -30,6 +30,25 @@ enemies.Load = function(enemyID, level)
   enemy.SPD = data.SPD * (1 + enemy.Level * 0.01)
   
   enemy.MaxHP = enemy.HP
+  enemy.Armor = 0
+
+  enemy.Buffs = {
+    ATK = 0,
+    MAG = 0,
+    DEF = 0,
+    RES = 0,
+    SPD = 0,
+    EVA = 0
+  }
+
+  enemy.NewBuff = {
+    ATK = false,
+    MAG = false,
+    DEF = false,
+    RES = false,
+    SPD = false,
+    EVA = false
+  }
 
   enemy.ATB = 0
   return enemy
