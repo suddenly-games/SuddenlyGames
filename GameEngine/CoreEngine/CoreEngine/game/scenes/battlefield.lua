@@ -25,10 +25,14 @@ local battlefield = {
   BLANK(),
   characters.Load("RIN"),
   BLANK(),
-  enemies.Load("TARGET_DUMMY", 20),
-  enemies.Load("TARGET_DUMMY", 20),
-  enemies.Load("TARGET_DUMMY", 20)
+  enemies.Load("TARGET_DUMMY", 40),
+  enemies.Load("TARGET_DUMMY", 40),
+  enemies.Load("TARGET_DUMMY", 40)
 }
+
+for position, character in ipairs(battlefield) do
+  character.Position = position
+end
 
 local turnQueue = {}
 local hand = {}
@@ -340,11 +344,11 @@ local PlayerTurn = function(character)
           if effect.Action == "DAMAGE" then
           
             local targets = {}
-            local targetPositions = {}
 
             if effect.Target == "ENEMY_ALL" then
-              targetPositions = { 4, 5, 6 }
               targets = { battlefield[4], battlefield[5], battlefield[6] }
+            elseif effect.Target == "ENEMY_FRONT" then
+              targets = { battlefield[character.Position + 3] }
             end
 
             --CalculateDamage(source, targets, effect)
@@ -389,12 +393,16 @@ local PlayerTurn = function(character)
 
               local damage = character[effect.Scaling] * effect.Power / target[effect.Defense] + character[effect.Scaling] - target[effect.Defense] 
               damage = damage * 1.01 ^ (2 * character.Level - target.Level)
+              damage = math.max(damage, 0)
+              damage = math.floor(damage)
               target.HP = math.max(0, target.HP - damage)
 
-              pcallspawn(DisplayDamage, damage, targetPositions[k])
+              pcallspawn(DisplayDamage, damage, target.Position)
             end
             --end --CalculateDamage()
 
+          elseif effect.Action == "DRAW" then
+            table.insert(hand, DrawCard(character))
           end
         end
 

@@ -5,11 +5,11 @@ enemies.Data = {
     Name = "Target Dummy",
     Sprite = "Enemy-Sprite-TargetDummy",
     HP = 500,
-    ATK = 0,
-    MAG = 0,
-    DEF = 80,
-    RES = 80,
-    SPD = 80
+    ATK = 100,
+    MAG = 100,
+    DEF = 100,
+    RES = 100,
+    SPD = 100
   }
 }
 

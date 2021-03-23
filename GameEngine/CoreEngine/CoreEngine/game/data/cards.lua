@@ -8,6 +8,26 @@ function clone(obj)
 end
 
 cards.Data = {
+  QUICK_JAB_C = {
+    Name = "Quick Jab",
+    Stars = 1,
+    Cost = 1,
+    Type = "Attack",
+    Element = "Physical",
+    Text = "Deal 80% ATK damage to the enemy in front.\n\nDraw a card.",
+    Effects = {
+      {
+        Action = "DAMAGE",
+        Target = "ENEMY_FRONT",
+        Power = 80,
+        Scaling = "ATK",
+        Defense = "DEF"
+      },
+      {
+        Action = "DRAW"
+      },
+    }
+  },
   METEOR_R = {
     Name = "Meteor",
     Stars = 3,
