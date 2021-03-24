@@ -1,6 +1,7 @@
 #include "LuaBinding.h"
 
 #include <iostream>
+#include <algorithm>
 
 #include "Lua.h"
 #include "Enum.h"
@@ -11,7 +12,6 @@
 #include "Graphics.h"
 #include "LuaJson.h"
 #include "LuaThreadManager.h"
-#include <iostream>
 
 #undef Archivable
 
@@ -162,6 +162,10 @@ namespace Engine
 				lua_pushstring(lua, "IsLibrary");temp = lua_gettop(lua);
 				lua_pushboolean(lua, type->IsLibrary);temp = lua_gettop(lua);
 				lua_settable(lua, typeIndex);temp = lua_gettop(lua);
+
+				lua_pushstring(lua, "IsObject"); temp = lua_gettop(lua);
+				lua_pushboolean(lua, type->Inherits("ObjectBase") || type->Inherits("Object")); temp = lua_gettop(lua);
+				lua_settable(lua, typeIndex); temp = lua_gettop(lua);
 			
 				//lua_pushstring(lua, "IsEnum");temp = lua_gettop(lua);
 				//lua_pushboolean(lua, type->IsEnum);temp = lua_gettop(lua);
@@ -208,6 +212,10 @@ namespace Engine
 					lua_pushstring(lua, "Description");
 					lua_pushstring(lua, member->Description.c_str());
 					lua_settable(lua, memberIndex);
+
+					lua_pushstring(lua, "Parent");
+					lua_pushstring(lua, member->ParentType->Name.c_str());
+					lua_settable(lua, memberIndex);
 					
 					lua_settable(lua, membersIndex);temp = lua_gettop(lua);
 				}
@@ -226,9 +234,9 @@ namespace Engine
 					lua_pushstring(lua, function->Name.c_str());
 					lua_createtable(lua, function->GetOverloads(), 0);
 
-					lua_pushstring(lua, "Parent");
-					lua_pushvalue(lua, typeIndex);
-					lua_settable(lua, functionsIndex);
+					//lua_pushstring(lua, "Parent");
+					//lua_pushvalue(lua, typeIndex);
+					//lua_settable(lua, functionsIndex);
 				
 					int functionIndex = lua_gettop(lua);
 				
@@ -244,9 +252,17 @@ namespace Engine
 						lua_pushstring(lua, "IsStatic");
 						lua_pushboolean(lua, overload->IsStatic);
 						lua_settable(lua, overloadIndex);
-				
+
+						lua_pushstring(lua, "Description");
+						lua_pushstring(lua, overload->Description.c_str());
+						lua_settable(lua, overloadIndex);
+
 						lua_pushstring(lua, "ReturnValueDescription");
 						lua_pushstring(lua, overload->ReturnValueDescription.c_str());
+						lua_settable(lua, overloadIndex);
+
+						lua_pushstring(lua, "ReturnType");
+						lua_pushstring(lua, overload->ReturnTypeName.c_str());
 						lua_settable(lua, overloadIndex);
 				
 						lua_pushstring(lua, "Parameters");
@@ -682,9 +698,14 @@ namespace Engine
 		lua_State* State = nullptr;
 
 		LuaThreadMarker(lua_State* lua, int id) : ID(id), State(lua) {}
+
+		bool operator<(const LuaThreadMarker& other) const
+		{
+			return LuaThread::CompareThreads(State, other.State);
+		}
 	};
 
-	typedef std::vector<int> LuaThreadQueue;
+	typedef std::vector<LuaThreadMarker> LuaThreadQueue;
 	typedef IDHeap<lua_State*> LuaThreadHeap;
 
 	LuaThreadQueue resumedThreads;
@@ -694,25 +715,30 @@ namespace Engine
 	{
 		lua_gc(lua, LUA_GCCOLLECT, 0);
 
-		for (int i = 0; i < int(resumedThreads.size()); ++i)
+		while (resumedThreads.size() > 0)
+		//for (int i = 0; i < int(resumedThreads.size()); ++i)
 		{
 			lua_pushstring(lua, "threads");
 			lua_gettable(lua, LUA_REGISTRYINDEX);
 
 			int threads = lua_gettop(lua);
 
-			lua_pushnumber(lua, lua_Number(resumedThreads[i]));
+			lua_pushnumber(lua, lua_Number(resumedThreads[0].ID));
 			lua_pushnil(lua);
 			lua_settable(lua, threads);
 
 			lua_pop(lua, 1);
 
-			lua_State* thread = luaThreads.GetNode(resumedThreads[i]).GetData();
+			lua_State* thread = luaThreads.GetNode(resumedThreads[0].ID).GetData();
 
-			luaThreads.Release(resumedThreads[i]);
+			luaThreads.Release(resumedThreads[0].ID);
 
 			LuaThread::CoroutineResume(thread);
 			lua_resume(thread, lua, 0);
+
+			std::pop_heap(resumedThreads.begin(), resumedThreads.end());
+
+			resumedThreads.pop_back();
 		}
 
 		resumedThreads.clear();
@@ -736,9 +762,11 @@ namespace Engine
 			lua_pushthread(lua);
 			lua_settable(lua, threads);
 
-			TaskScheduler::Repeat(delay, 1, [id] (float, float, int)
+			TaskScheduler::Repeat(delay, 1, [lua, id] (float, float, int)
 			{
-				resumedThreads.push_back(id);
+				resumedThreads.push_back(LuaThreadMarker(lua, id));
+
+				std::push_heap(resumedThreads.begin(), resumedThreads.end());
 			});
 		}
 		else

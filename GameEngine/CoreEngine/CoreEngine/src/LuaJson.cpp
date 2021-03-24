@@ -155,20 +155,32 @@ namespace Engine
 		{
 			int tableLength = int(lua_rawlen(lua, index));
 
+			if (tableLength == 0)
+			{
+				lua_pushinteger(lua, 0);
+				lua_gettable(lua, index);
+
+				if (lua_isnil(lua, -1))
+					tableLength = -1;
+
+				lua_pop(lua, 1);
+			}
+
 			++StackDepth;
 
-			if (tableLength == 0)
+			if (tableLength == -1)
 				Output << '{';
 			else
 				Output << '[';
 
-			Iterate(index, tableLength != 0);
+			if (tableLength != 0)
+				Iterate(index, tableLength != -1);
 
 			--StackDepth;
 
 			NextLine(false);
 
-			if (tableLength == 0)
+			if (tableLength == -1)
 				Output << '}';
 			else
 				Output << ']';

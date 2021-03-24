@@ -186,7 +186,7 @@ int Lua::Traceback(lua_State* lua)
 	for (int i = start; i < int(StackTraceback.size()); ++i)
 		ErrorMessage += '\t' + StackTraceback[i] + '\n';
 
-	ErrorMessage += "Stack End";
+	ErrorMessage += "Stack End\n";
 
 	lua_pushstring(lua, ErrorMessage.c_str());
 
@@ -287,6 +287,33 @@ int Lua::ToString(lua_State* lua, int index)
 	lua_call(lua, 1, 1);
 
 	return lua_gettop(lua);
+}
+
+bool Lua::RunChunk(lua_State* lua, const char* source, const char* fileName, int lineNumber, int length)
+{
+	for (int i = 0; fileName[i]; ++i)
+	{
+		if (fileName[i] == '\\' || fileName[i] == '/')
+		{
+			fileName += i + 1;
+			i = -1;
+		}
+	}
+
+	if (length == -1)
+		for (length = 0; source[length]; ++length);
+
+	const std::string chunkName = std::string("C++: ") + fileName + "[" + std::to_string(lineNumber) + "]";
+
+	int error = luaL_loadbuffer(lua, source, length, chunkName.c_str());
+
+	if (error)
+	{
+		if (lua_isstring(lua, -1))
+			std::cout << lua_tostring(lua, -1);
+	}
+
+	return error == 0;
 }
 
 bool Lua::TypeMatches(lua_State* lua, int index, const ReflectionData* type)

@@ -56,6 +56,8 @@ public:
 	static void BadComparisonError(lua_State* lua, int index1, int index2);
 	static int ToString(lua_State* lua, int index);
 
+	static bool RunChunk(lua_State* lua, const char* source, const char* fileName, int lineNumber, int length = -1);
+
 	static bool TypeMatches(lua_State* lua, int index, const ReflectionData* type);
 	static const char* GetType(lua_State* lua, int index = -1);
 	static bool ArgumentsMatch(lua_State* lua, const ReflectionData::ParameterVector& parameters, int startIndex = 0);
