@@ -573,7 +573,7 @@ namespace Engine
 			luaL_loadstring(lua,
 				"	return function(queueThread)"
 				"\n		function wait(time)"
-				"\n			time = time or 1/120"
+				"\n			time = time or 1/1000"
 				"\n			if type(time) ~= 'number' then"
 				"\n				error('Expected type \"number\" for argument 1 of \"wait\", got \"' .. type(callback) .. '\"\\\n')"
 				"\n			end"

@@ -168,8 +168,6 @@ local DisplayHand = function()
 
       if state == Enum.InputState.Began then
         card.Clicked = true
-      else 
-        card.Clicked = false
       end
 
     end
@@ -373,6 +371,7 @@ local PlayerTurn = function(character)
     for i, card in ipairs(hand) do
     
       if card.Clicked and card.Cost <= energyBar.Energy then
+        card.Clicked = false
 
         energyBar.Energy = energyBar.Energy - card.Cost
 
