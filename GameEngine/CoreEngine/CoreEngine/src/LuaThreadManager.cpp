@@ -1,6 +1,7 @@
 #include "LuaThreadManager.h"
 
 #include <iostream>
+#include <chrono>
 
 #include "IdentifierHeap.h"
 
@@ -20,6 +21,12 @@ namespace Engine
 			int ID = -1;
 			bool Alive = true;
 			bool Running = false;
+			std::chrono::steady_clock::time_point ThreadStarted;
+
+			Thread()
+			{
+				ThreadStarted = std::chrono::high_resolution_clock::now();
+			}
 		};
 
 		IDHeap<Thread> Threads;
@@ -60,15 +67,15 @@ namespace Engine
 
 			lua_settable(lua, LUA_REGISTRYINDEX);
 
-			luaL_loadstring(lua,
-				"	return function(coroutine, created, resumed, yielded, ended)"
+			const char coroutineWrapper[] =
+				"	return function(coroutine, created, resumed, yielded, ended, traceback, pcallwrap)"
 				"\n		local create = coroutine.create"
 				"\n		local resume = coroutine.resume"
 				"\n		local yield = coroutine.yield"
 				"\n		local wrap = coroutine.wrap"
 				"\n		"
-				"\n		function coroutine.create(...)"
-				"\n			local thread = create(...)"
+				"\n		function coroutine.create(func)"
+				"\n			local thread = create(function(...) return pcallwrap(xpcall(func, traceback, ...)) end)"
 				"\n			"
 				"\n			created(thread)"
 				"\n			"
@@ -106,8 +113,9 @@ namespace Engine
 				"\n		end"
 				"\n		"
 				"\n		return wrapper"
-				"\n end"
-			);
+				"\n end";
+
+			Lua::RunChunk(lua, coroutineWrapper, __FILE__, __LINE__, sizeof(coroutineWrapper) - 1);
 
 			lua_call(lua, 0, 1);
 			lua_getglobal(lua, "coroutine");
@@ -133,7 +141,9 @@ namespace Engine
 
 				return 0;
 			});
-			lua_call(lua, 5, 1);
+			lua_pushcfunction(lua, Lua::Traceback);
+			lua_pushcfunction(lua, &PCall);
+			lua_call(lua, 7, 1);
 
 			lua_setglobal(lua, "coroutine.wrap");
 		}
@@ -213,7 +223,11 @@ namespace Engine
 
 						lua_getglobal(lua, "coroutine.wrap");
 
-						lua_pushvalue(lua, -2);
+						const char threadWrapper[] = "return function(chunk, traceback, pcallwrap) return pcallwrap(xpcall(chunk, traceback)) end";
+
+						Lua::RunChunk(lua, threadWrapper, __FILE__, __LINE__, sizeof(threadWrapper) - 1);
+
+						lua_call(lua, 0, 1);
 
 						lua_call(lua, 1, 1);
 						{
@@ -221,7 +235,11 @@ namespace Engine
 							top += 0;
 						}
 
-						error = lua_pcall(lua, 0, 1, traceback);
+						lua_pushvalue(lua, -2);
+						lua_pushcfunction(lua, Lua::Traceback);
+						lua_pushcfunction(lua, &PCall);
+
+						error = lua_pcall(lua, 3, 1, traceback);
 
 						if (error)
 						{
@@ -258,6 +276,18 @@ namespace Engine
 			lua_pop(lua, 1);
 		}
 
+		int PCall(lua_State* lua)
+		{
+			if (lua_toboolean(lua, 1))
+				return lua_gettop(lua) - 1;
+			else
+			{
+				std::cout << lua_tostring(lua, 2);
+
+				return 0;
+			}
+		}
+
 		int Spawn(const std::string& source, const std::string& name, LuaCallback initializeCallback)
 		{
 			int threadID = Threads.RequestID();
@@ -266,6 +296,7 @@ namespace Engine
 
 			ThreadIDs[thread.State] = threadID;
 
+			thread.Name = name;
 			thread.ID = threadID;
 			thread.Source = source;
 			thread.InitializeCallback = initializeCallback;
@@ -355,6 +386,24 @@ namespace Engine
 			lua_settable(lua, -3);
 
 			return 0;
+		}
+
+		bool CompareThreads(lua_State* thread1, lua_State* thread2)
+		{
+			const auto id1 = ThreadIDs.find(thread1);
+			const auto id2 = ThreadIDs.find(thread2);
+
+			if (id1 == ThreadIDs.end() || id2 == ThreadIDs.end())
+			{
+				std::cout << "warning: untracked thread registered" << std::endl;
+				
+				return false;
+			}
+
+			Thread& threadData1 = Threads.GetNode(id1->second).GetData();
+			Thread& threadData2 = Threads.GetNode(id2->second).GetData();
+
+			return threadData1.ThreadStarted > threadData2.ThreadStarted;
 		}
 
 		int CoroutineResume(lua_State* lua)
