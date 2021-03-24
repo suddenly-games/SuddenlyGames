@@ -34,6 +34,8 @@ namespace GraphicsEngine
 		CharacterTransform = Engine::Create<DeviceTransform>();
 		CharacterTransform->Name = "CharacterTransform";
 		CharacterTransform->SetParent(TextTransform);
+
+		ContentsBuffer->Resize(Dimensions(1, 1));
 	}
 
 	void Text::Draw(const std::shared_ptr<FrameBuffer> output)
@@ -49,6 +51,10 @@ namespace GraphicsEngine
 			return;
 
 		Vector3 absoluteSize = transform->GetAbsoluteSize();
+
+		absoluteSize.X = std::max(absoluteSize.X, 1.f);
+		absoluteSize.Y = std::max(absoluteSize.Y, 1.f);
+
 		float fontSize = FontSize.Calculate(0, absoluteSize.Y);
 		float lineSpacing = LineSpacing.Calculate(0, absoluteSize.Y);
 
@@ -172,11 +178,28 @@ namespace GraphicsEngine
 	{
 		TextChanged = true;
 
+		int lineStart = 0;
+
+		//for (int i = 0; i < int(text.size()); ++i)
+		//{
+		//	if (text[i] == '\r' || text[i] == '\n')
+		//}
+
 		Contents = text;
 	}
 
 	std::string Text::GetText() const
 	{
+		//std::string text;
+		//
+		//text.reserve(TextLength);
+		//
+		//if (Contents.size() > 0)
+		//	text = Contents[0].Text;
+		//
+		//for (int i = 1; i < Contents.size(); ++i)
+		//	text += "\n" + Contents[i].Text;
+
 		return Contents;
 	}
 

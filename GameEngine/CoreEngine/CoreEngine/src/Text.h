@@ -40,11 +40,19 @@ namespace GraphicsEngine
 		static std::shared_ptr<Text> Create(const std::shared_ptr<Font>& font, const std::shared_ptr<ScreenCanvas>& parent, const std::string& name, const std::string& text);
 
 	private:
+		struct TextLine
+		{
+			std::string Text;
+		};
+
+		typedef std::vector<TextLine> LineVector;
+
 		bool TextChanged = false;
 		float LastFontSize = 0;
 		float LastLineSpacing = 0;
-		std::string Contents;
-		Vector3 LastAbsoluteSize;
+		int TextLength = 0;
+		/*LineVector*/ std::string Contents;
+		Vector3 LastAbsoluteSize = Vector3(1, 1);
 		Enum::Alignment LastAlignX = Enum::Alignment::Minimum;
 		Enum::Alignment LastAlignY = Enum::Alignment::Minimum;
 
