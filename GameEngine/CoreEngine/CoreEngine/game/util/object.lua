@@ -12,6 +12,14 @@ function dump(o)
   end
 end
 
+function clone(obj)
+  if type(obj) ~= 'table' then return obj end
+  local res = {}
+  for k, v in pairs(obj) do res[clone(k)] = clone(v) end
+  return res
+end
+
 return {
-  Table = dump
+  Format = dump,
+  Clone = clone
 }

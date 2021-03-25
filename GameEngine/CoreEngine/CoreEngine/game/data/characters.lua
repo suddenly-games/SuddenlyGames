@@ -1,5 +1,6 @@
 local roster = require("./game/account/roster")
 local cards = require("./game/data/cards")
+local object = require("./game/util/object")
 
 local characters = {}
 
@@ -12,7 +13,40 @@ characters.Data = {
     MAG = 120,
     DEF = 75,
     RES = 75,
-    SPD = 85
+    SPD = 85,
+    Skill = {
+      Name = "Impact Gravity",
+      Cost = 80,
+      Element = "Aeternis",
+      Text = "Deal 150% ATK + MAG damage to all enemies.\nEnemies hit are staggered 100% and have their SPD reduced by two levels.",
+      Effects = {
+        {
+          Action = "DAMAGE",
+          Target = "ENEMY_ALL",
+          Power = 150,
+          Scaling = "ATK",
+          Defense = "DEF"
+        },
+        {
+          Action = "DAMAGE",
+          Target = "ENEMY_ALL",
+          Power = 150,
+          Scaling = "MAG",
+          Defense = "RES"
+        },
+        {
+          Action = "STAGGER",
+          Target = "ENEMY_ALL",
+          Amount = 10000
+        },
+        {
+          Action = "BUFF",
+          Target = "ENEMY_ALL",
+          Stat = "SPD",
+          Stacks = -2
+        }
+      }
+    }
   }
 }
 
@@ -61,6 +95,12 @@ characters.Load = function(charID)
     SPD = false,
     EVA = false
   }
+
+
+  character.Skill = object.Clone(data.Skill)
+
+  character.UltGauge = 0
+  character.MaxUltGauge = data.Skill.Cost
 
   character.Active = false
   character.isEnemy = false

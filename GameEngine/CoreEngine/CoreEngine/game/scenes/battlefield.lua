@@ -1,22 +1,10 @@
 local env = require("./game/environment")
-local format = require("./game/util/format")
+local object = require("./game/util/object")
 local characters = require("./game/data/characters")
 local enemies = require("./game/data/enemies")
 local userInput = Engine.GameWindow.UserInput
 local resolution = GameObject.FrameBuffer.WindowSize
 local scene = env.NewScene()
-
-function logpcall(func, ...)
-  local success, err = pcall(func, ...)
-  if not success then print(err) end
-end
-
-function pcallspawn(func, ...)
-  coroutine.wrap(function(...)
-    logpcall(func, ...)
-  end)(...)
-end
-
 local BLANK = function()
   return { Active = false, Empty = true }
 end
@@ -42,10 +30,40 @@ local energyBar = {
   MaxEnergy = 0,
 }
 
+local ultGauge = {
+  Energy = 30,
+  MaxEnergy = 80,
+  Active = true
+}
+
 local DisplayBackground = function()
 
   local background = scene.CreateSprite("Background-Forest-0")
   background.AnchorPoint = DeviceVector(0,0,0,0)
+
+end
+
+local DisplayUltGauge = function()
+
+  local backgroundGauge = scene.CreateSprite("UI-Ult-Gauge")
+  backgroundGauge.Size = DeviceVector(0, 200, 0, 200)
+  backgroundGauge.Position = DeviceVector(0, resolution.Width - 180, 0, resolution.Height - 20)
+  backgroundGauge.AnchorPoint = DeviceVector(0.5,0,1,0)
+
+  local gauge = scene.CreateSprite("UI-Ult-Gauge-Aeternis")
+  gauge.Size = DeviceVector(0, 200, 0, 200)
+  gauge.Position = DeviceVector(0, resolution.Width - 180, 0, resolution.Height - 20)
+  gauge.AnchorPoint = DeviceVector(0.5,0,1,0)
+
+  while true do
+  
+    backgroundGauge.Canvas.Visible = ultGauge.Active
+    gauge.Canvas.Visible = ultGauge.Active
+
+    gauge.Size = DeviceVector(0, 200, 0, ultGauge.Energy/ultGauge.MaxEnergy * 200)
+    gauge.Appearance.UVScale = Vector3(1, ultGauge.Energy/ultGauge.MaxEnergy)
+    wait()
+  end
 
 end
 
@@ -121,9 +139,9 @@ local DisplayHand = function()
     cardImage.AnchorPoint = DeviceVector(0,0,0,0)
     table.insert(cardImages, cardImage) 
 
-    -- local cardName = scene.CreateText("")
-    -- cardName.AnchorPoint = DeviceVector(0,0,0,0)
-    -- table.insert(cardNames, cardName)
+    local cardName = scene.CreateText("")
+    cardName.AnchorPoint = DeviceVector(0,0,0,0)
+    table.insert(cardNames, cardName)
 
     local input = GameObject("InputSubscriber")
     input.Parent = cardImage
@@ -144,12 +162,16 @@ local DisplayHand = function()
       cardImage.Canvas.Visible = false
     end
 
+    for _, cardName in ipairs(cardNames) do
+      cardName.Canvas.Visible = false
+    end
+
     for i, card in ipairs(hand) do
 
       local cardImage = cardImages[i]
-      -- local cardName = cardNames[i]
+      local cardName = cardNames[i]
 
-      local yPos = resolution.Height - 210
+      local yPos = resolution.Height - 220
       local xPos = 400 + i * 160
 
       if boundInputs[i]:HasFocus(Enum.BoundDevice.Mouse1) then
@@ -161,8 +183,9 @@ local DisplayHand = function()
       cardImage.Canvas.Visible = true
       cardImage.Position = DeviceVector(0, xPos, 0, yPos)
 
-      -- cardName.Position = DeviceVector(0, xPos, 0, yPos + 50)
-      -- cardName.Canvas.Text:SetText(card.Text)
+      cardName.Canvas.Visible = true
+      cardName.Position = DeviceVector(0, xPos, 0, yPos - 25)
+      cardName.Canvas.Text:SetText(card.Name)
 
       local state = boundInputs[i]:GetStateEnum(Enum.BoundDevice.Mouse1)
 
@@ -335,11 +358,12 @@ end
 
 local Initialize = function()
   DisplayBackground()
-  pcallspawn(DisplayEnergyBar)
-  pcallspawn(DisplayHand)
-  pcallspawn(DisplayCharacters)
+  coroutine.wrap(DisplayUltGauge)()
+  coroutine.wrap(DisplayEnergyBar)()
+  coroutine.wrap(DisplayHand)()
+  coroutine.wrap(DisplayCharacters)()
   for position, character in ipairs(battlefield) do
-    pcallspawn(DisplayActionBar, character, position)
+    coroutine.wrap(DisplayActionBar)(character, position)
   end
 
 end
@@ -360,6 +384,10 @@ local PlayerTurn = function(character)
   energyBar.MaxEnergy = character.Stars
   energyBar.Energy = character.Stars
 
+  ultGauge.Energy = character.UltGauge
+  ultGauge.MaxEnergy = character.MaxUltGauge
+  ultGauge.Active = true
+
   hand = character.Hand
   
   while #hand < 5 do
@@ -371,9 +399,23 @@ local PlayerTurn = function(character)
     for i, card in ipairs(hand) do
     
       if card.Clicked and card.Cost <= energyBar.Energy then
-        card.Clicked = false
 
         energyBar.Energy = energyBar.Energy - card.Cost
+          
+        for charIndex = 1,3 do
+          if not battlefield[charIndex].Empty then
+          
+            if battlefield[charIndex].Skill.Element == card.Element then
+              battlefield[charIndex].UltGauge = battlefield[charIndex].UltGauge + card.Cost * 3
+            else
+              battlefield[charIndex].UltGauge = battlefield[charIndex].UltGauge + card.Cost * 2
+            end
+          
+            battlefield[charIndex].UltGauge = math.min(battlefield[charIndex].UltGauge,battlefield[charIndex].MaxUltGauge)
+          end
+        end
+
+        ultGauge.Energy = character.UltGauge
 
         for j, effect in ipairs(card.Effects) do
           
@@ -407,7 +449,6 @@ local PlayerTurn = function(character)
               end
 
               damageText.Position = DeviceVector(0, xPos, 0, yPos)
-              --damageText.AnchorPoint = DeviceVector(0.5, 0, 0.5, 0)
 
               local size = 180
 
@@ -422,7 +463,7 @@ local PlayerTurn = function(character)
                 wait()
               end
 
-              for frame = 1,20 do
+              for frame = 1,30 do
                 yPos = yPos - 0.5
                 damageText.Position = DeviceVector(0, xPos, 0, yPos)
                 wait()
@@ -442,7 +483,7 @@ local PlayerTurn = function(character)
               damage = math.floor(damage)
               target.HP = math.max(0, target.HP - damage)
 
-              pcallspawn(DisplayDamage, damage, target.Position)
+              coroutine.wrap(DisplayDamage)(damage, target.Position)
             end
             --end --CalculateDamage()
 
@@ -474,7 +515,7 @@ local PlayerTurn = function(character)
         table.insert(character.DiscardPile, table.remove(hand, i))
       
       end
-    
+      card.Clicked = false
     end
 
     wait()
@@ -497,6 +538,9 @@ local PlayerTurn = function(character)
 
   energyBar.MaxEnergy = 0  
   character.Active = false
+
+  character.UltGauge = ultGauge.Energy
+  ultGauge.Active = false
 end
 
 local Update = function()
@@ -529,8 +573,8 @@ local Update = function()
   wait()
 end
 
-logpcall(Initialize)
+Initialize()
 
 while true do
-  logpcall(Update)
+  Update()
 end

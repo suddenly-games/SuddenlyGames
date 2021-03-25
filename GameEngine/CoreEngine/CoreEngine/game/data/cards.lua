@@ -1,11 +1,6 @@
-local cards = {}
+local object = require("./game/util/object")
 
-function clone(obj)
-  if type(obj) ~= 'table' then return obj end
-  local res = {}
-  for k, v in pairs(obj) do res[clone(k)] = clone(v) end
-  return res
-end
+local cards = {}
 
 cards.Data = {
   DASH_C = {
@@ -43,8 +38,8 @@ cards.Data = {
       },
     }
   },
-  QUICK_JAB_C = {
-    Name = "Quick Jab",
+  SWIFT_JAB_C = {
+    Name = "Swift Jab",
     Stars = 1,
     Cost = 1,
     Type = "Attack",
@@ -69,12 +64,12 @@ cards.Data = {
     Cost = 3,
     Type = "Attack",
     Element = "Aeternis",
-    Text = "Deal 250% MAG damage to all enemies.",
+    Text = "Deal 240% MAG damage to all enemies.",
     Effects = {
       {
         Action = "DAMAGE",
         Target = "ENEMY_ALL",
-        Power = 250,
+        Power = 240,
         Scaling = "MAG",
         Defense = "RES"
       }
@@ -84,7 +79,7 @@ cards.Data = {
 
 
 cards.Load = function(cardID)
-  return clone(cards.Data[cardID])
+  return object.Clone(cards.Data[cardID])
 end
 
 return cards
