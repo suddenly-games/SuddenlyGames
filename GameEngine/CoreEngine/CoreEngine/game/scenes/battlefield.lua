@@ -31,9 +31,10 @@ local energyBar = {
 }
 
 local ultGauge = {
-  Energy = 30,
-  MaxEnergy = 80,
-  Active = true
+  Energy = 0,
+  MaxEnergy = 1,
+  Active = false,
+  Skill = {}
 }
 
 local DisplayBackground = function()
@@ -45,20 +46,58 @@ end
 
 local DisplayUltGauge = function()
 
-  local backgroundGauge = scene.CreateSprite("UI-Ult-Gauge")
-  backgroundGauge.Size = DeviceVector(0, 200, 0, 200)
-  backgroundGauge.Position = DeviceVector(0, resolution.Width - 180, 0, resolution.Height - 20)
-  backgroundGauge.AnchorPoint = DeviceVector(0.5,0,1,0)
-
   local gauge = scene.CreateSprite("UI-Ult-Gauge-Aeternis")
   gauge.Size = DeviceVector(0, 200, 0, 200)
   gauge.Position = DeviceVector(0, resolution.Width - 180, 0, resolution.Height - 20)
   gauge.AnchorPoint = DeviceVector(0.5,0,1,0)
 
+  local backgroundGauge = scene.CreateSprite("UI-Ult-Gauge")
+  backgroundGauge.Size = DeviceVector(0, 200, 0, 200)
+  backgroundGauge.Position = DeviceVector(0, resolution.Width - 180, 0, resolution.Height - 20)
+  backgroundGauge.AnchorPoint = DeviceVector(0.5,0,1,0)
+
+  local tooltip = scene.CreateText("")
+  tooltip.Size = DeviceVector(0, 300, 1, 0)
+  tooltip.Position = DeviceVector(0, 20, 0, 300)
+
+  local input = GameObject("InputSubscriber")
+  input.Parent = backgroundGauge
+  local mouseButton = userInput:GetInput(Enum.InputCode.MouseLeft)
+  local boundInput = input:Subscribe(mouseButton)
+
   while true do
+    tooltip.Canvas.Visible = false
+
+    if boundInput:HasFocus(Enum.BoundDevice.Mouse1) and ultGauge.Active then
+
+      tooltip.Canvas.Visible = true
+      local rarity = {"C","U","R","E","L"}
+      local tooltipText = string.format(
+        "%s \n\nCost: %.0f/%.0f\nElement: %s\n\n%s",
+        ultGauge.Skill.Name,
+        ultGauge.Energy,
+        ultGauge.MaxEnergy,
+        ultGauge.Skill.Element,
+        ultGauge.Skill.Text
+      )
+
+      tooltip.Canvas.Text:SetText(tooltipText)
+
+    end
   
     backgroundGauge.Canvas.Visible = ultGauge.Active
     gauge.Canvas.Visible = ultGauge.Active
+
+    if ultGauge.Active then
+
+      if ultGauge.Energy >= ultGauge.MaxEnergy then
+        backgroundGauge.Appearance.Texture = env.GetTexture("UI-Ult-Gauge-Ready")
+      else
+        backgroundGauge.Appearance.Texture = env.GetTexture("UI-Ult-Gauge")
+      end
+
+      gauge.Appearance.Texture = env.GetTexture("UI-Ult-Gauge-"..ultGauge.Skill.Element)
+    end
 
     gauge.Size = DeviceVector(0, 200, 0, ultGauge.Energy/ultGauge.MaxEnergy * 200)
     gauge.Appearance.UVScale = Vector3(1, ultGauge.Energy/ultGauge.MaxEnergy)
@@ -387,6 +426,7 @@ local PlayerTurn = function(character)
   ultGauge.Energy = character.UltGauge
   ultGauge.MaxEnergy = character.MaxUltGauge
   ultGauge.Active = true
+  ultGauge.Skill = character.Skill
 
   hand = character.Hand
   
