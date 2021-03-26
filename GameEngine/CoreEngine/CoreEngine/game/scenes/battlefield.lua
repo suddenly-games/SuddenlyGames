@@ -34,8 +34,21 @@ local ultGauge = {
   Energy = 0,
   MaxEnergy = 1,
   Active = false,
+  Clicked = true,
   Skill = {}
 }
+
+local CalculateStat = function(character, stat)
+  local value = character[stat]
+  if character.Buffs[stat] > 0 then
+    value = value + value * 0.2 * character.Buffs[stat]
+  end
+  if character.Buffs[stat] < 0 then
+    value = value + value * 0.1 * character.Buffs[stat]
+  end
+
+  return value
+end
 
 local DisplayBackground = function()
 
@@ -97,6 +110,12 @@ local DisplayUltGauge = function()
       end
 
       gauge.Appearance.Texture = env.GetTexture("UI-Ult-Gauge-"..ultGauge.Skill.Element)
+
+      local state = boundInput:GetStateEnum(Enum.BoundDevice.Mouse1)
+
+      if state == Enum.InputState.Began then
+        ultGauge.Clicked = true
+      end
     end
 
     gauge.Size = DeviceVector(0, 200, 0, ultGauge.Energy/ultGauge.MaxEnergy * 200)
@@ -355,15 +374,15 @@ DisplayCharacters = function()
         hoveredCharacter.Armor,
         hoveredCharacter.MaxHP,
         hoveredCharacter.ATB,
-        hoveredCharacter.ATK + hoveredCharacter.ATK * 0.2 * hoveredCharacter.Buffs.ATK,
+        CalculateStat(hoveredCharacter,"ATK"),
         formatStacks(hoveredCharacter.Buffs.ATK),
-        hoveredCharacter.MAG + hoveredCharacter.MAG * 0.2 * hoveredCharacter.Buffs.MAG,
+        CalculateStat(hoveredCharacter,"MAG"),
         formatStacks(hoveredCharacter.Buffs.MAG),
-        hoveredCharacter.DEF + hoveredCharacter.DEF * 0.2 * hoveredCharacter.Buffs.DEF,
+        CalculateStat(hoveredCharacter,"DEF"),
         formatStacks(hoveredCharacter.Buffs.DEF),
-        hoveredCharacter.RES + hoveredCharacter.RES * 0.2 * hoveredCharacter.Buffs.RES,
+        CalculateStat(hoveredCharacter,"RES"),
         formatStacks(hoveredCharacter.Buffs.RES),
-        hoveredCharacter.SPD + hoveredCharacter.SPD * 0.2 * hoveredCharacter.Buffs.SPD,
+        CalculateStat(hoveredCharacter,"SPD"),
         formatStacks(hoveredCharacter.Buffs.SPD)
       )
 
@@ -373,6 +392,41 @@ DisplayCharacters = function()
     wait()
 
   end
+
+end
+
+local DisplayDamage = function(value, position)
+
+  local damageText = scene.CreateText(string.format("%.0f",value))
+
+  local xPos = 310 + position * 160
+  local yPos = 250 + position * 80
+  if position > 3 then 
+    xPos = xPos - 80
+    yPos = yPos - 440
+  end
+
+  damageText.Position = DeviceVector(0, xPos, 0, yPos)
+
+  local size = 180
+
+  for frame = 1,10 do
+    yPos = yPos + 0.05 * size
+    xPos = xPos + 0.05 * size
+    size = size * 0.9
+    yPos = yPos - 0.5
+    damageText.Position = DeviceVector(0, xPos, 0, yPos)
+
+    damageText.Canvas.Text.FontSize = DeviceAxis(0, size)
+    wait()
+  end
+
+  for frame = 1,30 do
+    yPos = yPos - 0.5
+    damageText.Position = DeviceVector(0, xPos, 0, yPos)
+    wait()
+  end
+  damageText.Canvas.Visible = false
 
 end
 
@@ -411,7 +465,103 @@ local EnemyTurn = function(character)
   character.Active = true
   character.HP = character.MaxHP
   wait(0.5)
+
+  for buff, stacks in pairs(character.Buffs) do
+    if character.NewBuff[buff] then
+      character.NewBuff[buff] = false
+    elseif stacks > 0 then
+      character.Buffs[buff] = stacks - 1
+    elseif stacks < 0 then
+      character.Buffs[buff] = stacks + 1
+    end
+  
+  end
+  
   character.Active = false
+end
+
+local ProcessEffects = function(source, effects)
+
+  for _, effect in ipairs(effects) do
+          
+    local targets = {}
+
+    if effect.Target ~= nil then
+      if effect.Target == "ENEMY_ALL" then
+        targets = { battlefield[4], battlefield[5], battlefield[6] }
+      elseif effect.Target == "ENEMY_FRONT" then
+        targets = { battlefield[source.Position + 3] }
+      elseif effect.Target == "ALLY_ALL" then
+        targets = { battlefield[1], battlefield[2], battlefield[3] }
+      elseif effect.Target == "SELF" then
+        targets = { battlefield[source.Position] }
+      end
+    end
+
+    if effect.Action == "DAMAGE" then
+
+      --CalculateDamage(source, targets, effect)
+
+      for _, target in ipairs(targets) do
+
+        local scaledStat = CalculateStat(source, effect.Scaling)
+        local defenseStat = CalculateStat(target, effect.Defense)
+
+        local damage = scaledStat * effect.Power / defenseStat + scaledStat - defenseStat
+        damage = damage * 1.01 ^ (2 * source.Level - target.Level)
+        damage = math.max(damage, 0)
+        damage = math.floor(damage)
+        target.HP = math.max(0, target.HP - damage)
+
+        coroutine.wrap(DisplayDamage)(damage, target.Position)
+      end
+      --end --CalculateDamage()
+
+    elseif effect.Action == "COMPOSITE_DAMAGE" then
+
+      for _, target in ipairs(targets) do
+
+        local scaledStat = CalculateStat(source, "ATK") + CalculateStat(source, "MAG")
+        local defenseStat = CalculateStat(target, "DEF") + CalculateStat(target, "RES")
+
+        local damage = scaledStat * effect.Power / defenseStat + scaledStat - defenseStat
+        damage = damage * 1.01 ^ (2 * source.Level - target.Level)
+        damage = math.max(damage, 0)
+        damage = math.floor(damage)
+        target.HP = math.max(0, target.HP - damage)
+
+        coroutine.wrap(DisplayDamage)(damage, target.Position)
+      end
+
+    elseif effect.Action == "ARMOR" then
+
+      for _, target in ipairs(targets) do
+        local scaledStat = CalculateStat(source, effect.Scaling)
+        local armor = scaledStat * effect.Power / 100
+        target.Armor = math.min(target.MaxHP, target.Armor + armor)
+      end
+
+    elseif effect.Action == "BUFF" then
+
+      for _, target in ipairs(targets) do
+        if target.Buffs[effect.Stat] == 0 then
+          target.NewBuff[effect.Stat] = true
+        end
+        target.Buffs[effect.Stat] = target.Buffs[effect.Stat] + effect.Stacks
+        target.Buffs[effect.Stat] = math.min(target.Buffs[effect.Stat], 5)
+        target.Buffs[effect.Stat] = math.max(target.Buffs[effect.Stat], -5)
+
+      end
+
+    elseif effect.Action == "DRAW" then
+      table.insert(hand, DrawCard(source))
+
+    elseif effect.Action == "STAGGER" then
+      for _, target in ipairs(targets) do
+        target.ATB = math.max(target.ATB - effect.Amount, 0)
+      end
+    end
+  end
 end
 
 local PlayerTurn = function(character)
@@ -434,8 +584,16 @@ local PlayerTurn = function(character)
     table.insert(hand, DrawCard(character))
   end
 
-  while energyBar.Energy > 0 and not endTurn:GetState() do
+  while not endTurn:GetState() do
     
+    if ultGauge.Clicked and ultGauge.Energy >= ultGauge.MaxEnergy then
+      ultGauge.Energy = 0
+      character.UltGauge = 0
+      ProcessEffects(character, ultGauge.Skill.Effects)
+    end
+
+    ultGauge.Clicked = false
+
     for i, card in ipairs(hand) do
     
       if card.Clicked and card.Cost <= energyBar.Energy then
@@ -457,100 +615,7 @@ local PlayerTurn = function(character)
 
         ultGauge.Energy = character.UltGauge
 
-        for j, effect in ipairs(card.Effects) do
-          
-          local targets = {}
-
-          if effect.Target ~= nil then
-            if effect.Target == "ENEMY_ALL" then
-              targets = { battlefield[4], battlefield[5], battlefield[6] }
-            elseif effect.Target == "ENEMY_FRONT" then
-              targets = { battlefield[character.Position + 3] }
-            elseif effect.Target == "ALLY_ALL" then
-              targets = { battlefield[1], battlefield[2], battlefield[3] }
-            elseif effect.Target == "SELF" then
-              targets = { battlefield[character.Position] }
-            end
-          end
-
-          if effect.Action == "DAMAGE" then
-
-            --CalculateDamage(source, targets, effect)
-
-            local DisplayDamage = function(value, position)
-
-              local damageText = scene.CreateText(string.format("%.0f",value))
-
-              local xPos = 310 + position * 160
-              local yPos = 250 + position * 80
-              if position > 3 then 
-                xPos = xPos - 80
-                yPos = yPos - 440
-              end
-
-              damageText.Position = DeviceVector(0, xPos, 0, yPos)
-
-              local size = 180
-
-              for frame = 1,10 do
-                yPos = yPos + 0.05 * size
-                xPos = xPos + 0.05 * size
-                size = size * 0.9
-                yPos = yPos - 0.5
-                damageText.Position = DeviceVector(0, xPos, 0, yPos)
-
-                damageText.Canvas.Text.FontSize = DeviceAxis(0, size)
-                wait()
-              end
-
-              for frame = 1,30 do
-                yPos = yPos - 0.5
-                damageText.Position = DeviceVector(0, xPos, 0, yPos)
-                wait()
-              end
-              damageText.Canvas.Visible = false
-
-            end
-
-            for k, target in ipairs(targets) do
-
-              local scaledStat = character[effect.Scaling] + character[effect.Scaling] * 0.2 * character.Buffs[effect.Scaling]
-              local defenseStat = target[effect.Defense] + target[effect.Defense] * 0.2 * target.Buffs[effect.Defense]
-
-              local damage = scaledStat * effect.Power / defenseStat + scaledStat - defenseStat
-              damage = damage * 1.01 ^ (2 * character.Level - target.Level)
-              damage = math.max(damage, 0)
-              damage = math.floor(damage)
-              target.HP = math.max(0, target.HP - damage)
-
-              coroutine.wrap(DisplayDamage)(damage, target.Position)
-            end
-            --end --CalculateDamage()
-
-          elseif effect.Action == "ARMOR" then
-
-            for k, target in ipairs(targets) do
-              local scaledStat = character[effect.Scaling] + character[effect.Scaling] * 0.2 * character.Buffs[effect.Scaling]
-              local armor = scaledStat * effect.Power / 100
-              target.Armor = math.min(target.MaxHP, target.Armor + armor)
-            end
-
-          elseif effect.Action == "BUFF" then
-
-            for k, target in ipairs(targets) do
-              if target.Buffs[effect.Stat] == 0 then
-                target.NewBuff[effect.Stat] = true
-              end
-              target.Buffs[effect.Stat] = target.Buffs[effect.Stat] + effect.Stacks
-              target.Buffs[effect.Stat] = math.min(target.Buffs[effect.Stat], 5)
-              target.Buffs[effect.Stat] = math.max(target.Buffs[effect.Stat], -5)
-
-            end
-
-          elseif effect.Action == "DRAW" then
-            table.insert(hand, DrawCard(character))
-          end
-        end
+        ProcessEffects(character, card.Effects)
 
         table.insert(character.DiscardPile, table.remove(hand, i))
       
@@ -588,7 +653,7 @@ local Update = function()
   for _, character in ipairs(battlefield) do
 
     if not character.Empty then
-      character.ATB = character.ATB + character.SPD + character.SPD * 0.2 * character.Buffs.SPD
+      character.ATB = character.ATB + CalculateStat(character, "SPD")
       if character.ATB >= 10000 then
         table.insert(turnQueue, character)
       end

@@ -18,21 +18,12 @@ characters.Data = {
       Name = "Impact Gravity",
       Cost = 80,
       Element = "Aeternis",
-      Text = "Deal 150% ATK + MAG damage to all enemies.\nEnemies hit are staggered 100% and have their SPD reduced by two levels.",
+      Text = "Deal 200% composite damage to all enemies.\nEnemies hit are staggered 100% and have their SPD reduced by two levels.",
       Effects = {
         {
-          Action = "DAMAGE",
+          Action = "COMPOSITE_DAMAGE",
           Target = "ENEMY_ALL",
-          Power = 150,
-          Scaling = "ATK",
-          Defense = "DEF"
-        },
-        {
-          Action = "DAMAGE",
-          Target = "ENEMY_ALL",
-          Power = 150,
-          Scaling = "MAG",
-          Defense = "RES"
+          Power = 200
         },
         {
           Action = "STAGGER",
