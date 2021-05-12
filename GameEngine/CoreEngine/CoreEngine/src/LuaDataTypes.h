@@ -18,6 +18,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const T& defaultValue = T()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;
@@ -80,6 +81,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const T& defaultValue = T()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;
@@ -180,6 +182,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const T& defaultValue = T()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;

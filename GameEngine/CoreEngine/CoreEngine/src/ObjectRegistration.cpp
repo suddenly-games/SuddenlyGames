@@ -9,6 +9,7 @@
 
 #include "Object.h"
 #include "GameWindow.h"
+#include "GameEngine.h"
 #include "LuaInput.h"
 #include "Environments.h"
 #include "Environment.h"
@@ -100,6 +101,10 @@ namespace Engine
 
 		Register_Class(ObjectBase);
 		Register_Class(Object);
+
+		Register_Type(ProcessArguments);
+		Register_Class(GameEngine);
+
 		Register_Enum(InputCode);
 		Register_Enum(InputType);
 		Register_Enum(InputMode);

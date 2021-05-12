@@ -133,6 +133,15 @@
     <Filter Include="Source Files\Source\Graphics\Enums">
       <UniqueIdentifier>{58785a19-3434-4ba0-9936-459d0d76bd9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Source\Networking">
+      <UniqueIdentifier>{590e0e73-0d43-45aa-8ee2-ec59a1587467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Networking\Objects">
+      <UniqueIdentifier>{9f827d9e-b6d5-43a1-ad71-7d4c539bf560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Source\Networking\Types">
+      <UniqueIdentifier>{de1cd31d-cfeb-41bb-b4cf-ce19948caf1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -693,6 +702,27 @@
     <ClCompile Include="src\Button.meta.cpp">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine.meta.cpp">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Socket.cpp">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Socket.meta.cpp">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Connection.cpp">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Packet.cpp">
+      <Filter>Source Files\Source\Networking\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Packet.meta.cpp">
+      <Filter>Source Files\Source\Networking\Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics.h">
@@ -1064,6 +1094,18 @@
     <ClInclude Include="src\Button.h">
       <Filter>Source Files\Source\Graphics\Objects\Screen</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine.h">
+      <Filter>Source Files\Source\Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Socket.h">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Connection.h">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Packet.h">
+      <Filter>Source Files\Source\Networking\Types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="game.lua">
@@ -1080,6 +1122,9 @@
     </None>
     <None Include="assets\json\particleEffects\rain.json">
       <Filter>Source Files\Json\ParticleEffects</Filter>
+    </None>
+    <None Include="src\Connection.meta.cpp">
+      <Filter>Source Files\Source\Networking\Objects</Filter>
     </None>
   </ItemGroup>
 </Project>

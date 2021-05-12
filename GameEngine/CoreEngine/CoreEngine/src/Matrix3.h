@@ -125,6 +125,7 @@ namespace Engine
 				}
 			
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;

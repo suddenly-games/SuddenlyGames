@@ -6,6 +6,7 @@ extern "C" {
 }
 
 #include "Object.h"
+#include "GameEngine.h"
 #include "ObjectRegistration.h"
 #include "Lua.h"
 #include "LuaBinding.h"
@@ -34,6 +35,8 @@ int main(int argc, char* argv[])
 		Engine::InitializeObjectTypes();
 		Engine::InitializeEngine();
 		Graphics::Initialize();
+
+		Engine::Root()->Configure(argc, &argv[0]);
 	}
 	catch (std::string& error)
 	{

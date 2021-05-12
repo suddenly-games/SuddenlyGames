@@ -545,6 +545,7 @@ namespace LuaTypes\
 			Converter(int argumentNumber, int& arguments, bool isStatic, const T& defaultValue = T()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}\
 			\
 			lua_State** LuaState = nullptr;\
+			const char* FuncName = "";\
 			int ArgumentNumber = 0;\
 			int& Arguments = ArgumentNumber;\
 			bool HasDefaultValue = false;\
@@ -602,12 +603,12 @@ Define_Type(typeName,\
 					Lua::Error(*LuaState);\
 				}\
 				else if (object->Meta != type)\
-					Lua::BadArgumentError(*LuaState, ArgumentNumber + 1, #typeName, object->Meta->Name.c_str());\
+					Lua::BadArgumentError(*LuaState, ArgumentNumber + 1, #typeName, object->Meta->Name.c_str(), FuncName);\
 				\
 				return *reinterpret_cast<typeName*>(object->Data);/*ObjectReference(object->Reference).GetObjectData<typeName>();*/\
 			}\
 			else\
-				Lua::BadArgumentError(*LuaState, ArgumentNumber + 1, #typeName, Lua::GetType(*LuaState, index));\
+				Lua::BadArgumentError(*LuaState, ArgumentNumber + 1, #typeName, Lua::GetType(*LuaState, index), FuncName);\
 			\
 			throw "shut up, compiler";\
 		}\
@@ -709,7 +710,7 @@ isReadOnly = false;
 			Lua::Error(lua);\
 		}\
 		else\
-			Lua::BadArgumentError(lua, 1, binding.Overloads[0]->Parameters[0].TypeName.c_str(), Lua::GetType(lua, 2));\
+			Lua::BadArgumentError(lua, 1, binding.Overloads[0]->Parameters[0].TypeName.c_str(), Lua::GetType(lua, 2), #funcName);\
 		\
 		return 0;\
 	};\
@@ -771,6 +772,7 @@ documentation = "";
 #define Function_Parameter(type, name)\
 static Engine::CoreTypes<type>::LuaType::Converter<type> name = Engine::CoreTypes<type>::LuaType::Converter<type>(argumentNumber, arguments, isStatic);\
 name.LuaState = &currentLua;\
+name.FuncName = binding.Name.c_str();\
 Parameters.push_back(ParameterData ( documentation, #name, "",Engine:: CoreTypes<type>::GetTypeName(), nullptr, false ));\
 Append_Ref(name).HasDefaultValue = false;\
 ++argumentNumber;\
@@ -785,6 +787,7 @@ documentation = "";
 static Engine::CoreTypes<type>::LuaType::Converter<type> name = Engine::CoreTypes<type>::LuaType::Converter<type>(argumentNumber, arguments, isStatic, value);\
 name.LuaState = &currentLua;\
 name.HasDefaultValue = true;\
+name.FuncName = binding.Name.c_str();\
 Parameters.push_back(ParameterData ( documentation, #name, #value, Engine::CoreTypes<type>::GetTypeName(), nullptr, true ));\
 ++argumentNumber;\
 ++arguments;\

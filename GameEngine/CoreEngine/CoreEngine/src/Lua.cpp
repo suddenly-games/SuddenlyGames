@@ -361,6 +361,9 @@ bool Lua::TypeMatches(lua_State* lua, int index, const ReflectionData* type)
 
 const char* Lua::GetType(lua_State* lua, int index)
 {
+	if (index > lua_gettop(lua))
+		return "nil";
+
 	if (lua_isuserdata(lua, index))
 	{
 		Engine::LuaData* object = (Engine::LuaData*)lua_topointer(lua, index);

@@ -182,6 +182,7 @@
     <ClCompile Include="src\ColliderData.cpp" />
     <ClCompile Include="src\CollisionGroup.cpp" />
     <ClCompile Include="src\CollisionGroup.meta.cpp" />
+    <ClCompile Include="src\Connection.cpp" />
     <ClCompile Include="src\CoreTypeReflection.cpp" />
     <ClCompile Include="src\CubeMap.meta.cpp" />
     <ClCompile Include="src\DebugDraw.cpp" />
@@ -207,6 +208,8 @@
     <ClCompile Include="src\FrameBuffer.meta.cpp" />
     <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\Frustum.cpp" />
+    <ClCompile Include="src\GameEngine.cpp" />
+    <ClCompile Include="src\GameEngine.meta.cpp" />
     <ClCompile Include="src\GameWindow.cpp" />
     <ClCompile Include="src\GameWindow.meta.cpp" />
     <ClCompile Include="src\GlowingSceneOperation.cpp" />
@@ -267,6 +270,8 @@
     <ClCompile Include="src\ObjectTemplate.meta.cpp" />
     <ClCompile Include="src\ObjParser.cpp" />
     <ClCompile Include="src\OcclusionTree.cpp" />
+    <ClCompile Include="src\Packet.cpp" />
+    <ClCompile Include="src\Packet.meta.cpp" />
     <ClCompile Include="src\ParticleEmitter.cpp" />
     <ClCompile Include="src\ParticleEmitter.meta.cpp" />
     <ClCompile Include="src\PCA.cpp" />
@@ -303,6 +308,8 @@
     <ClCompile Include="src\ShadingOperation.meta.cpp" />
     <ClCompile Include="src\Simulation.cpp" />
     <ClCompile Include="src\Simulation.meta.cpp" />
+    <ClCompile Include="src\Socket.cpp" />
+    <ClCompile Include="src\Socket.meta.cpp" />
     <ClCompile Include="src\TaskScheduler.cpp" />
     <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\Terrain.meta.cpp" />
@@ -346,10 +353,14 @@
     <ClInclude Include="src\Chunk.h" />
     <ClInclude Include="src\ChunkLoader.h" />
     <ClInclude Include="src\ChunkLoaderShapeEnum.h" />
+    <ClInclude Include="src\Connection.h" />
     <ClInclude Include="src\Dimensions.h" />
+    <ClInclude Include="src\GameEngine.h" />
     <ClInclude Include="src\InputContext.h" />
     <ClInclude Include="src\InputSubscriber.h" />
     <ClInclude Include="src\LightBuffer.h" />
+    <ClInclude Include="src\Packet.h" />
+    <ClInclude Include="src\Socket.h" />
     <ClInclude Include="src\Terrain2DCollider.h" />
     <ClInclude Include="src\TerrainTypes.h" />
     <ClInclude Include="src\ChunkStatusEnum.h" />
@@ -465,6 +476,7 @@
     <None Include="assets\json\particleEffects\shipEngine.json" />
     <None Include="assets\scripts\particleFactory.lua" />
     <None Include="game.lua" />
+    <None Include="src\Connection.meta.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

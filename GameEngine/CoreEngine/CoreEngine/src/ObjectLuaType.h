@@ -34,6 +34,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const std::shared_ptr<T>& defaultValue = std::shared_ptr<T>()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;
@@ -64,6 +65,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const std::weak_ptr<T>& defaultValue = std::weak_ptr<T>()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;
@@ -135,6 +137,7 @@ namespace Engine
 				Converter(int argumentNumber, int& arguments, bool isStatic, const LuaEnumType& defaultValue = LuaEnumType()) : ArgumentNumber(argumentNumber), Arguments(arguments), IsStatic(isStatic), DefaultValue(defaultValue) {}
 
 				lua_State** LuaState = nullptr;
+				const char* FuncName = "";
 				int ArgumentNumber = 0;
 				int& Arguments = ArgumentNumber;
 				bool HasDefaultValue = false;

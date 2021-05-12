@@ -9,6 +9,7 @@ extern "C" {
 #include "Fonts.h"
 #include "Materials.h"
 #include "Engine.h"
+#include "GameEngine.h"
 #include "CoreMeshes.h"
 #include "ModelAsset.h"
 

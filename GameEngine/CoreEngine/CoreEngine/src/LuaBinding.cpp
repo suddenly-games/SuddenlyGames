@@ -12,6 +12,7 @@
 #include "Graphics.h"
 #include "LuaJson.h"
 #include "LuaThreadManager.h"
+#include "GameEngine.h"
 
 #undef Archivable
 

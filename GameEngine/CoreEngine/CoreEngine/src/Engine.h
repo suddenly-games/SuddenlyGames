@@ -4,9 +4,9 @@
 
 namespace Engine
 {
-	class Object;
+	class GameEngine;
 
-	const std::shared_ptr<Object>& Root();
+	const std::shared_ptr<GameEngine>& Root();
 
 	void InitializeEngine();
 	void CleanEngine();

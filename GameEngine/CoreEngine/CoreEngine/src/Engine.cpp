@@ -1,17 +1,17 @@
 #include "Engine.h"
 
-#include "Object.h"
+#include "GameEngine.h"
 
 namespace Engine
 {
 	struct Initializer
 	{
-		std::shared_ptr<Object> Root;
+		std::shared_ptr<GameEngine> Root;
 	};
 	
 	Initializer* initializer = nullptr;
 
-	const std::shared_ptr<Object>& Root()
+	const std::shared_ptr<GameEngine>& Root()
 	{
 		return initializer->Root;
 	}
@@ -20,9 +20,7 @@ namespace Engine
 	{
 		initializer = new Initializer();
 
-		initializer->Root = Create<Object>();
-
-		initializer->Root->Name = "Engine";
+		initializer->Root = Create<GameEngine>();
 	}
 
 	void CleanEngine()

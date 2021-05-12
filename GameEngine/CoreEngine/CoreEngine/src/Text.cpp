@@ -170,7 +170,7 @@ namespace GraphicsEngine
 
 	void Text::SetText(const std::string& text)
 	{
-		TextChanged = true;
+		TextChanged = text != Contents;
 
 		Contents = text;
 	}
